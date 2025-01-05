@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>사이드바 영역</title>
+</head>
+<body>
+<!-- sidebarFragment 선언 -->
+<th:block th:fragment="sidebarFragment">
+    <div class="sidebar">
+        <nav class="snb">
+            <!-- 검색 입력란 추가 -->
+            <div class="menu-search-container">
+                <!-- 메뉴 검색 입력란 -->
+                <input type="text" id="menuSearch" class="menu-search" placeholder="메뉴를 검색하세요...">
+            </div>
+
+            <!-- 메뉴 항목 -->
+            <ul id="menu">
+                <li><a href="/tab2" class="tab-link" data-tab="tab1">Tab 1</a></li>
+                <li><a href="/tab2" class="tab-link" data-tab="수강신청조회">Tab 2</a></li>
+                <li><a href="/tab2" class="tab-link" data-tab="tab3">Tab 3</a></li>
+                <li><a href="/tab2" class="tab-link" data-tab="course-reg-inq">수강신청조회</a></li>  <!-- 수강신청조회 추가 -->
+            </ul>
+
+        </nav>
+    </div>
+</th:block>
+<!-- sidebarFragment 선언 끝 -->
+
+<!-- 탭 영역 -->
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Nunc tincidunt</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
+    </ul>
+    <div id="tabs-1">
+    </div>
+</div>
+</body>
+</html>
