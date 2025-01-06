@@ -17,10 +17,15 @@ body, html {
 
 
 
+/* Sidebar 스타일 */
 .sidebar {
-    background-color: sandybrown;
-    width: 250px; /* 사이드바의 너비 설정 */
+    width: 250px;
+    background-color: #2f4f4f;
+    color: white;
+    padding: 20px;
+    height: 100vh;
 }
+
 
 #tabs {
     background-color: tomato;

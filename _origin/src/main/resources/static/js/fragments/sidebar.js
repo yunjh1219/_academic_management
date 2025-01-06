@@ -46,9 +46,39 @@ $(function() {
     if (firstTab.length > 0) {
         firstTab.trigger("click");
     }
+});
 
+// DOM이 로드된 후에 실행
+document.addEventListener("DOMContentLoaded", function() {
+    // 모든 tab-link를 선택
+    const tabLinks = document.querySelectorAll('.tab-link');
 
+    // 각 tab-link에 클릭 이벤트 리스너 추가
+    tabLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            // 클릭한 tab-link가 이미 active 상태인지를 확인
+            const activeLink = document.querySelector('.tab-link.active');
+            if (activeLink && activeLink !== link) {
+                activeLink.classList.remove('active');
+                const activeSubMenu = activeLink.nextElementSibling;
+                if (activeSubMenu && activeSubMenu.classList.contains('snb_depth2')) {
+                    activeSubMenu.style.display = 'none';
+                }
+            }
 
+            // 클릭한 링크에 active 클래스 추가
+            link.classList.toggle('active');
 
-
+            // 하위 메뉴를 토글하기
+            const subMenu = link.nextElementSibling;
+            if (subMenu && subMenu.classList.contains('snb_depth2')) {
+                // 하위 메뉴가 보이면 숨기고, 아니면 보이게 처리
+                if (subMenu.style.display === 'block') {
+                    subMenu.style.display = 'none';
+                } else {
+                    subMenu.style.display = 'block';
+                }
+            }
+        });
+    });
 });
