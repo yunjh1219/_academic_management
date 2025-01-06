@@ -5,6 +5,81 @@
     height: 20px;
 }
 
+/* 탭 컨테이너 스타일 */
+#tabs {
+    font-family: Arial, sans-serif;
+    background: white;
+}
+
+
+/* 탭 헤더 스타일 */
+#tabs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    min-height: 46px; /* 최소 높이 유지 */
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #333333;
+
+}
+
+#tabs ul li {
+    padding: 5px 15px;
+    margin-left: 3px;
+    border-bottom: none;
+    cursor: pointer;
+    position: relative;
+    align-self: flex-end; /* li를 ul의 하단으로 배치 */
+    border-top: 5px solid #333333;
+}
+
+#tabs ul li a {
+    text-decoration: none;
+    color: #959595;
+    font-size: 15px;
+}
+
+#tabs ul li.ui-tabs-active {
+    background: white;
+    border-top: 5px solid cadetblue;
+}
+
+#tabs ul li.ui-tabs-active a {
+    color: black;
+    font-weight: bold;
+}
+
+
+
+/* 닫기 버튼(X) 스타일 - 텍스트 제거 및 X 표시 */
+#tabs .ui-icon-close::before {
+    margin-left: 3px;
+    content: "✖"; /* X 아이콘 표시 */
+    font-size: 10px;
+    color: #959595;
+}
+
+/*#menu .snb_depth3 li:first-child {*/
+/*    display: none;  !* 첫 번째 메뉴 항목 숨기기 *!*/
+/*}*/
+
+#deleteAllTabs {
+    margin: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#deleteAllTabs:hover {
+    background-color: #0056b3;
+}
+
+
 /* tabsconfig 전체가 잘리게 설정 */
 .tabsconfig {
     position: relative;

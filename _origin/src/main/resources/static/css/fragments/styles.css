@@ -17,13 +17,20 @@ body, html {
 
 
 
-/* Sidebar 스타일 */
+/* 사이드바 고정 스타일 */
 .sidebar {
-    width: 250px;
-    background-color: #2f4f4f;
-    color: white;
-    padding: 20px;
-    height: 100vh;
+    width: 240px;                  /* 사이드바 너비 */
+
+    color: white;                  /* 글자색 */
+    height: 100vh;                 /* 화면 전체 높이 */
+
+    top: 60px;                     /* 헤더 높이에 맞춰 사이드바 시작 위치 조정 */
+    left: 0;                       /* 화면 왼쪽에 고정 */
+
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;        /* 패딩과 보더가 너비에 포함되도록 */
+    border-right: 1px solid grey;
 }
 
 

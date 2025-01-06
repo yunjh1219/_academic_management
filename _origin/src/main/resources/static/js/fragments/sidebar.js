@@ -1,23 +1,20 @@
 $(function() {
     var tabs = $("#tabs").tabs();
 
-    // 메뉴 항목을 클릭할 때 해당 탭 생성 및 활성화 (snb_depth3 a 요소에만 적용)
+    // 메뉴 항목을 클릭할 때 해당 탭 생성 및 활성화
     $("#menu .snb_depth3 a").on("click", function(event) {
         event.preventDefault();
-        var tabName = $(this).data("tab");  // 클릭한 메뉴 항목의 data-tab 값
-        var tabId = "tabs-" + tabName.replace(/\s+/g, '');  // 공백 제거 후 탭 ID 생성
-        var url = $(this).attr("href");  // 링크의 href 값을 가져옴
+        var tabName = $(this).data("tab");
+        var tabId = "tabs-" + tabName.replace(/\s+/g, '');
+        var url = $(this).attr("href");
 
-        // 이미 존재하는 탭인지 확인
         var existingTab = $("#" + tabId);
 
         if (existingTab.length === 0) {
-            // 새로운 탭 추가
             $("#tabs ul").append("<li><a href='#" + tabId + "'>" + tabName + "</a><span class='ui-icon ui-icon-close' role='presentation'></span></li>");
             $("#tabs").append("<div id='" + tabId + "'><p>로딩 중...</p></div>");
             tabs.tabs("refresh");
 
-            // Ajax로 외부 콘텐츠 로드
             $.ajax({
                 url: url,
                 method: 'GET',
@@ -30,7 +27,6 @@ $(function() {
             });
         }
 
-        // 해당 탭 활성화
         tabs.tabs("option", "active", $("#tabs").find("a[href='#" + tabId + "']").parent().index());
     });
 
@@ -41,44 +37,47 @@ $(function() {
         tabs.tabs("refresh");
     });
 
-    // 페이지 로드 시 첫 번째 탭 자동 클릭
+    // 첫 번째 탭 자동 클릭
     var firstTab = $("#menu .snb_depth3 a").first();
     if (firstTab.length > 0) {
         firstTab.trigger("click");
     }
-});
 
-// DOM이 로드된 후에 실행
-document.addEventListener("DOMContentLoaded", function() {
-    // 모든 tab-link를 선택
-    const tabLinks = document.querySelectorAll('.tab-link');
+    // depth1의 a 태그 클릭 시 depth2 메뉴 토글
+    $(".snb_depth1 li > a").click(function() {
+        var depth2 = $(this).next("ul");
 
-    // 각 tab-link에 클릭 이벤트 리스너 추가
-    tabLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            // 클릭한 tab-link가 이미 active 상태인지를 확인
-            const activeLink = document.querySelector('.tab-link.active');
-            if (activeLink && activeLink !== link) {
-                activeLink.classList.remove('active');
-                const activeSubMenu = activeLink.nextElementSibling;
-                if (activeSubMenu && activeSubMenu.classList.contains('snb_depth2')) {
-                    activeSubMenu.style.display = 'none';
-                }
-            }
+        // depth2 메뉴가 화면상에 보일 때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+        if (depth2.is(":visible")) {
+            depth2.slideUp(100);  // 100ms 동안 슬라이드 업
+            $(this).parent().removeClass("open");
+        } else {
+            depth2.slideDown(100);  // 100ms 동안 슬라이드 다운
+            $(this).parent().addClass("open");
+        }
 
-            // 클릭한 링크에 active 클래스 추가
-            link.classList.toggle('active');
+        // 모든 다른 li 요소에서 active 클래스 제거
+        $(".snb_depth1 li").removeClass("active");
+        // 클릭된 요소에 active 클래스 추가
+        $(this).parent().addClass("active");
 
-            // 하위 메뉴를 토글하기
-            const subMenu = link.nextElementSibling;
-            if (subMenu && subMenu.classList.contains('snb_depth2')) {
-                // 하위 메뉴가 보이면 숨기고, 아니면 보이게 처리
-                if (subMenu.style.display === 'block') {
-                    subMenu.style.display = 'none';
-                } else {
-                    subMenu.style.display = 'block';
-                }
-            }
-        });
+        // 활성화된 메뉴를 sessionStorage에 저장
+        sessionStorage.setItem('activeDepth1', $(this).parent()[0].outerHTML);
+
+    });
+
+    // depth2의 a 태그 클릭 시, 페이지 이동 전에 상태 유지
+    $(".snb_depth2 li > a").click(function() {
+        var depth1 = $(this).closest(".snb_depth1 > li");
+        // 클릭된 depth1 항목에 active 클래스 유지
+        depth1.addClass("active");
+
+        // 이동 시에도 sessionStorage에 저장
+        sessionStorage.setItem('activeDepth1', depth1[0].outerHTML);
+    });
+
+    // depth3의 a 태그 클릭 시 페이지 이동 허용
+    $(".snb_depth3 li > a").click(function() {
+        return true; // 페이지 이동을 허용
     });
 });
