@@ -22,6 +22,10 @@ public class MainController {
     @GetMapping("/cour-ent")
     public String courent() {return "pages/student/courseenrollment/course-timetable-management";}
 
+    @GetMapping("/cour-ion")
+    public String courion() {return "pages/student/courseenrollment/course-registration";}
+
+
     //출석
     @GetMapping("/atten-iry")
     public String attiry() {return "pages/student/attendance/attendance-inquiry";}

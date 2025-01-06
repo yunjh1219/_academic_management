@@ -15,26 +15,21 @@ body, html {
     height: 60px; /* 헤더의 높이를 설정 */
 }
 
-
-
-/* 사이드바 고정 스타일 */
-.sidebar {
-    width: 240px;                  /* 사이드바 너비 */
-
-    color: white;                  /* 글자색 */
-    height: 100vh;                 /* 화면 전체 높이 */
-
-    top: 60px;                     /* 헤더 높이에 맞춰 사이드바 시작 위치 조정 */
-    left: 0;                       /* 화면 왼쪽에 고정 */
-
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;        /* 패딩과 보더가 너비에 포함되도록 */
-    border-right: 1px solid grey;
-}
-
-
 #tabs {
     background-color: tomato;
     flex: 1; /* 콘텐츠 영역이 남은 공간을 차지하도록 설정 */
+
+}
+
+/* 테이블 컨테이너 */
+.table-container {
+    width: 100%;
+    overflow-x: auto;  /* 화면이 좁아지면 가로 스크롤을 추가 */
+}
+
+/* 테이블 자체 */
+table {
+    width: 100%;
+    table-layout: auto; /* 테이블의 너비가 자동으로 조정되도록 설정 */
+    border-collapse: collapse; /* 테이블 경계선이 겹치지 않게 설정 */
 }

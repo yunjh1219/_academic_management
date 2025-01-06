@@ -7,6 +7,22 @@ ul, li, a {
 }
 
 
+/* 사이드바 고정 스타일 */
+.sidebar {
+    width: 240px;                  /* 사이드바 너비 */
+    min-width: 240px;
+    color: white;                  /* 글자색 */
+
+
+    top: 60px;                     /* 헤더 높이에 맞춰 사이드바 시작 위치 조정 */
+    left: 0;                       /* 화면 왼쪽에 고정 */
+    z-index: 999;                  /* 사이드바는 헤더 아래로 설정 */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;        /* 패딩과 보더가 너비에 포함되도록 */
+    border-right: 1px solid grey;
+}
+
 
 /* 사이드바 내 snb 영역 */
 .snb {
@@ -119,10 +135,9 @@ ul, li, a {
 .snb_depth1 > li > a::after {
     content: ' ▼';
     font-size: 12px;
-    position: absolute;   /* 절대 위치로 설정 */
-    right: 10px;          /* 오른쪽 끝에 위치 */
-    color: #030063;
+    right: 50px;          /* 오른쪽 끝에 위치 */
 
+    color: #030063;
 }
 
 /* 클릭 시 180도 회전: 위로 */
@@ -130,4 +145,3 @@ ul, li, a {
     content: '▲';
     color: white;
 }
-
