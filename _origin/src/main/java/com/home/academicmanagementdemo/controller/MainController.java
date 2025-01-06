@@ -10,12 +10,9 @@ public class MainController {
 
 
     @GetMapping("/")
-<<<<<<< HEAD
     public String index() {return "pages/student/default";}
 
     @GetMapping("/notice")
-=======
->>>>>>> 4ffc76e604a8992a9816348f4f511b87ab5687ab
     public String notice() {return "pages/student/notice";}
 
     //수강

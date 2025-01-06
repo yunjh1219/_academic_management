@@ -40,7 +40,6 @@ $(function() {
         $("#" + panelId).remove();
         tabs.tabs("refresh");
     });
-<<<<<<< HEAD
 
     // 페이지 로드 시 첫 번째 탭 자동 클릭
     var firstTab = $("#menu .snb_depth3 a").first();
@@ -52,6 +51,4 @@ $(function() {
 
 
 
-=======
->>>>>>> 4ffc76e604a8992a9816348f4f511b87ab5687ab
 });

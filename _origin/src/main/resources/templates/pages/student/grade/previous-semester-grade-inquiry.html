@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-    <title>금학기 성적 조회:current-semester-grade-inquiry</title>
-    <link rel="stylesheet" href="/css/student/grade/current-semester-grade-inquiry.css">
+    <title>기이수 성적 조회:previous-semester-grade-inquiry</title>
+    <link rel="stylesheet" href="/css/student/grade/previous-semester-grade-inquiry.css">
 </head>
 <body>
 <div class="tabsconfig">
-    <div class="H1depth0401">
-        <div class="content-title">
-            <h5>성적 > 성적처리 > 금학기 성적 조회</h5>
-        </div>
+<div class="H1depth0402">
+    <div class="content-title">
+        <h5>성적 > 성적처리 > 기이수성적조회</h5>
+    </div>
         <div class="content-top-box">
             <table class="box-info">
                 <tbody>
                 <tr>
+                    <th>학번</th>
+                    <td>2470046</td>
                     <th>학년도</th>
                     <td>
-                        <select disabled>
+                        <select>
                             <option value="2024">2024학년도</option>
                             <option value="2023">2023학년도</option>
                             <option value="2022">2022학년도</option>
@@ -27,7 +28,7 @@
                     </td>
                     <th>학기</th>
                     <td>
-                        <select disabled>
+                        <select>
                             <option value="1">1학기</option>
                             <option value="2">2학기</option>
                             <option value="summer">여름학기</option>
@@ -35,8 +36,6 @@
                             <!-- 필요에 따라 다른 학기 추가 -->
                         </select>
                     </td>
-                    <th>학번</th>
-                    <td>2470046</td>
                 </tr>
                 </tbody>
             </table>
@@ -51,6 +50,9 @@
                     <div class="img"> <h1>프사</h1></div>
                 </div>
 
+                <div class="student-status">
+                    <h1>재직중</h1>
+                </div>
 
                 <table class="Profile-Info">
 
@@ -77,10 +79,6 @@
                 </table>
 
                 </table>
-
-                <div class="student-status">
-                    <h1>재직중</h1>
-                </div>
             </div>
 
             <!-- 성적내역 -->
@@ -96,25 +94,26 @@
                         <thead class="table-light">
                         <tr>
                             <th>No</th>
+                            <th>학년도</th>
+                            <th>학기</th>
                             <th>교과목코드</th>
                             <th>교과목명</th>
-                            <th>분반</th>
                             <th>이수구분</th>
-                            <th>학점</th>
-                            <th>담당교수</th>
+                            <th>신청학점</th>
+                            <th>취득학점</th>
                             <th>등급</th>
                             <th>평점</th>
                             <th>재수강학년도</th>
                             <th>재수강학기</th>
-                            <th>재수강과목명</th>
+                            <th>재수강교과목명</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>1</td>
+                            <td>2018학년도</td>
+                            <td>1학기</td>
                             <td>00040</td>
-                            <td>웹디자인기초</td>
-                            <td>xb</td>
                             <td>웹디자인기초</td>
                             <td>전공선택</td>
                             <td>2</td>
@@ -123,7 +122,53 @@
                             <td>4</td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                        </tr>
 
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 학기별내역 -->
+            <!-- 학기별내역 -->
+            <div class="Semester-breakdown">
+
+                <div class="table-top">
+                    <h5>학기별 내역</h5>
+                    <h5>[3]</h5>
+                </div>
+                <!-- 성적 테이블 추가 -->
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>학년도</th>
+                            <th>학기</th>
+                            <th>신청학점</th>
+                            <th>취득학점</th>
+                            <th>신청과목수</th>
+                            <th>취득과목수</th>
+                            <th>합계평점</th>
+                            <th>평점평균</th>
+                            <th>백분율</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2018학년도</td>
+                            <td>1학기</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>9</td>
+                            <td>9</td>
+                            <td>65.5</td>
+                            <td>3.28</td>
+                            <td>84.3</td>
                         </tr>
                         </tbody>
                     </table>
@@ -131,17 +176,8 @@
             </div>
 
 
-
-
         </div>
     </div>
 </div>
-
-=======
-    <title>Title</title>
-</head>
-<body>
-<h1>current-semester-grade-inquiry</h1>
->>>>>>> 4ffc76e604a8992a9816348f4f511b87ab5687ab
 </body>
 </html>
