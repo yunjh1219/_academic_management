@@ -8,10 +8,24 @@ public class MainController {
 
 
 
-
+    //첫 페이지 로그인 화면
     @GetMapping("/")
-    public String index() {return "pages/student/default";}
+    public String index() {return "pages/login";}
 
+
+    @GetMapping("/mainpage")
+    public String mainpage() {return "pages/main/main";}
+
+    //학생 바로가기
+    @GetMapping("/student")
+    public String student() {return "pages/student/default";}
+
+    //관리자 바로가기
+    @GetMapping("/administrator")
+    public String administrator() {return "pages/administrator/default";}
+
+    // 학생
+    //============================================================================================
     @GetMapping("/notice")
     public String notice() {return "pages/student/notice";}
 
@@ -63,5 +77,16 @@ public class MainController {
     //장학
     @GetMapping("/schol-sdc")
     public String scholsdc() {return "pages/student/scholarship/scholarship-details-confirmation";}
+    //============================================================================================
 
+    // 관리자
+    //============================================================================================
+
+    //사용자 관리
+    @GetMapping("/user-sgi") //학생 성적 조회
+    public String usersgi() {return  "pages/administrator/user-management/student-grade-inquiry";}
+
+    @GetMapping("/user-sm") //학생 관리
+    public String usersm() {return  "pages/administrator/user-management/student-management";}
+    //============================================================================================
 }

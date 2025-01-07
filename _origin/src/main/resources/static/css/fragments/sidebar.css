@@ -88,7 +88,7 @@ ul, li, a {
 /* snb_depth2 스타일 */
 .snb_depth2 {
     position: relative;
-    display: none;                /* 기본적으로 숨겨둠 */
+    /*display: none;                !* 기본적으로 숨겨둠 *!*/
     border-bottom: 1px solid grey;
 }
 
@@ -110,7 +110,7 @@ ul, li, a {
 /* snb_depth3 스타일 */
 .snb_depth3 {
     position: relative;
-    display: none;
+    /*display: none;*/
 }
 
 .snb_depth3 > li {

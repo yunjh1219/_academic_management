@@ -1,20 +1,7 @@
-.content-title{
-    margin-bottom: 20px;
-    padding: 0;
-    border-bottom: 1px solid grey;
-    height: 20px;
-}
-
-/* 탭 컨테이너 스타일 */
-#tabs {
-    font-family: Arial, sans-serif;
-    background: white;
-}
-
-
 /* 탭 헤더 스타일 */
 #tabs ul {
     list-style: none;
+    width: 100%;
     padding: 0;
     margin: 0;
     display: flex;
@@ -49,34 +36,6 @@
 #tabs ul li.ui-tabs-active a {
     color: black;
     font-weight: bold;
-}
-
-
-
-/* 닫기 버튼(X) 스타일 - 텍스트 제거 및 X 표시 */
-#tabs .ui-icon-close::before {
-    margin-left: 3px;
-    content: "✖"; /* X 아이콘 표시 */
-    font-size: 10px;
-    color: #959595;
-}
-
-/*#menu .snb_depth3 li:first-child {*/
-/*    display: none;  !* 첫 번째 메뉴 항목 숨기기 *!*/
-/*}*/
-
-#deleteAllTabs {
-    margin: 10px;
-    padding: 5px 10px;
-    font-size: 14px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#deleteAllTabs:hover {
-    background-color: #0056b3;
 }
 
 

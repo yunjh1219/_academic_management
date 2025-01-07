@@ -15,13 +15,11 @@
   <!-- sidebar fragment 사용 -->
   <th:block th:replace="~{fragments/sidebar :: sidebarFragment}"></th:block>
   <!-- 탭 영역 -->
-  <div id="tabs">
-    <ul></ul>
-    <div id="tabs-1"></div>
-
+  <div id="tabs"><ul></ul></div>
+  <div class="content">
+    <!-- content fragment 사용 -->
+    <th:block layout:fragment="content"></th:block>
   </div>
-
-  <div class="content"></div>
 </div>
 </body>
 </html>

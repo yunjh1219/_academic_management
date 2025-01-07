@@ -16,7 +16,7 @@
 
             <!-- 메뉴 항목 -->
             <ul class="snb_depth1" id="menu">
-                <li>
+                <li class="student">
                     <a>수강</a>
                     <ul class="snb_depth2">
                         <li>
@@ -29,7 +29,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="student">
                     <a>출석</a>
                     <ul class="snb_depth2">
                         <li>
@@ -41,7 +41,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="student">
                     <a>과제</a>
                     <ul class="snb_depth2">
                         <li>
@@ -53,7 +53,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="student">
                     <a>성적</a>
                     <ul class="snb_depth2">
                         <li>
@@ -66,7 +66,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="student">
                     <a>등록</a>
                     <ul class="snb_depth2">
                         <li>
@@ -87,18 +87,60 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="student">
                     <a>장학</a>
                     <ul class="snb_depth2">
                         <li>
                             <a>조회</a>
-
                             <ul class="snb_depth3">
                                 <li><a href="/schol-sdc" data-tab="장학내역확인">장학내역확인</a></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
+
+                <!-- 관리자 모드 항목 -->
+                <li class="admin">
+                    <a>사용자관리</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>학생</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/user-sm" data-tab="학생관리">학생 관리</a></li>
+                                <li><a href="/user-sgi" data-tab="학생성적조회">학생 성적 조회</a></li>
+                            </ul>
+                            <a>교수</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/admin-student" data-tab="교수관리">교수 관리</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="admin">
+                    <a>행정관리</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>공지사항</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/admin-settings" data-tab="공지사항">공지사항</a></li>
+                            </ul>
+                            <a>일정</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/admin-settings" data-tab="학사일정">학사일정</a></li>
+                            </ul>
+                            <a>등록금납부관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/admin-settings" data-tab="등록금납부관리">등록금납부관리</a></li>
+                            </ul>
+                            <a>장학금관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/admin-settings" data-tab="장학금관리">장학금관리</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+
             </ul>
 
         </nav>
@@ -109,7 +151,7 @@
 <!-- 탭 영역 -->
 <div id="tabs">
     <ul></ul>
-    <div id="tabs-1"></div>
+
 </div>
 
 </body>
