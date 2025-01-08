@@ -180,7 +180,7 @@ body {
     margin:20px;
 }
 
-.prop-schedule {
+.prof-schedule {
     margin: 0 auto; /* 중앙 정렬 */
     background-color: white;
     color: black;
@@ -193,7 +193,7 @@ body {
     margin: 20px auto;
 }
 
-.prop-schedule .date {
+.prof-schedule .date {
     font-size: 1em;
     margin-bottom: 10px;
 }
