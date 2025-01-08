@@ -1,0 +1,247 @@
+/* 전체 페이지 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+    overflow: hidden; /* 페이지에서 스크롤이 생기지 않도록 설정 */
+}
+
+/* 부모 컨테이너 */
+.login-container {
+    background: url("/img/login/uni_background.jpg") center/cover no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    display: flex; /* 플렉스를 사용하여 자식 요소 중앙 정렬 */
+    justify-content: right; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
+    width: 100%; /* 화면 전체 너비를 차지하도록 설정 */
+    filter: brightness(1.2) saturate(1.5); /* 배경 이미지 밝기 및 채도 조정 */
+}
+
+/* 로그인 박스 상단 */
+.login-box-top {
+    position: absolute; /* 절대 위치 설정 */
+    top: 0; /* 부모 컨테이너의 위쪽에 붙도록 설정 */
+    right: 190px; /* 오른쪽에 붙게 설정 */
+    transform: translateX(0); /* 정확히 오른쪽에 배치 */
+    display: flex;
+    background-color: rgba(65, 105, 225, 0.9); /* 파란색 배경 (투명도 85%) */
+    justify-content: center;
+    width: 360px;
+    height: 450px;
+    border-bottom-left-radius: 45px; /* 왼쪽 아래 모서리 둥글게 */
+    border-bottom-right-radius: 45px; /* 오른쪽 아래 모서리 둥글게 */
+
+
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+}
+
+
+/* 로그인 박스 제목 스타일 */
+.login-box-title {
+    padding-top: 80px;
+    position: relative;
+
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 100%;
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+/* 이미지 컨테이너 */
+.image-container {
+    display: flex;
+    justify-content: center; /*수평중앙*/
+
+}
+
+.image-container img {
+    width: 160px;
+}
+
+
+/* h1과 a 태그는 수직 중앙 정렬 */
+.text-container {
+    padding-top: 75px;
+    display: flex;
+    flex-direction: column; /* 수직 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    text-align: center;
+}
+
+/* 제목 스타일 */
+.login-box-title h1 {
+
+    font-size: 30px;
+    color: white;
+    margin: 0;
+}
+
+.login-box-title a {
+    min-width: 210px;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 3px;
+    color: rgba(65, 105, 225);
+    text-decoration: none;
+    background-color: white;
+    margin: 0;
+}
+
+/*----- 중앙 부분 -----*/
+/*-------------------------------------------------------------*/
+/* 중앙 부분 (login-box-middle) */
+.login-box-middle {
+
+    background-attachment: fixed; /* 배경 고정 */
+    position: relative;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    height: 300px; /* 높이를 필요에 따라 조정 */
+    width: 100%; /* 화면 너비 차지 */
+
+}
+
+/* 로그인 폼 스타일 */
+.login-form {
+    position: relative;
+    margin-top: 260px;
+    margin-right: 235px;
+    padding: 30px;
+    border-radius: 8px;
+
+    width: 100%;
+    max-width: 400px; /* 최대 너비 설정 */
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+    box-shadow: 0 0 7px rgba(0, 123, 255, 0.8); /* 중앙에서 퍼지는 그림자 효과 */
+}
+
+/* 입력 필드 스타일 */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* 레이블과 입력 필드 간 간격 */
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: 100%; /* 너비 100%로 설정 */
+    background-color: #d0d0d0;
+    border: 1px solid gray;
+    box-sizing: border-box; /* 테두리와 패딩을 포함하여 너비 계산 */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 포커스 시 그림자 효과 */
+}
+
+
+
+/* 버튼 스타일 */
+button[type="submit"] {
+    background-color: #007bff; /* 파란색 버튼 */
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* 버튼 호버 시 효과 */
+    width: 100%; /* 버튼 너비 100% */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* 버튼 호버 시 색상 변경 */
+}
+
+/* 아이디 찾기, 비밀번호 찾기 링크 스타일 */
+.login-links {
+    display: flex;
+    justify-content: space-between; /* 링크를 양쪽에 배치 */
+    margin: 0;
+    padding: 0px 15px;
+
+}
+
+.forgot-link {
+    margin: 0;
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+
+}
+
+.forgot-link:hover {
+
+}
+
+/*------------------------------------------------------*/
+/*------------------------------------------------------*/
+
+
+/* 로그인 박스 */
+.login-box-bottom {
+    position: absolute; /* 절대 위치 설정 */
+    bottom: 0; /* 화면 하단에 붙도록 설정 */
+    right: 190px; /* 오른쪽에 붙게 설정 */
+    transform: translateX(0); /* 정확히 오른쪽에 배치 */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(65, 105, 225, 0.9); /* 파란색 배경 (투명도 85%) */
+    width: 360px;
+    height: 200px;
+
+    border-top-left-radius: 45px; /* 왼쪽 아래 모서리 둥글게 */
+    border-top-right-radius: 45px; /* 오른쪽 아래 모서리 둥글게 */
+}
+
+/* 로그인 박스 제목 스타일 */
+.login-box-title {
+    position: relative;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 100%;
+}
+
+
+/* h1과 a 태그는 수직 중앙 정렬 */
+.text-container {
+    display: flex;
+    flex-direction: column; /* 수직 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    text-align: center;
+}
+
+/* 제목 스타일 */
+.login-box-title h1 {
+
+    font-size: 30px;
+    color: white;
+    margin: 0;
+}
+
+.login-box-title a {
+    min-width: 210px;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 3px;
+    color: rgba(65, 105, 225);
+    text-decoration: none;
+    background-color: white;
+    margin: 0;
+}
