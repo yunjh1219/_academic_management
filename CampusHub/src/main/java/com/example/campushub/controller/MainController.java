@@ -1,4 +1,4 @@
-package com.home.academicmanagementdemo.controller;
+package com.example.campushub.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-
-
     //첫 페이지 로그인 화면
     @GetMapping("/")
     public String index() {return "pages/login";}
 
-
+    //학생 메인 페이지
     @GetMapping("/mainpage")
     public String mainpage() {return "pages/main/main";}
 
+    //교수 메인 페이지
     @GetMapping("/propmain")
     public String propmain() {return "pages/main/propmain";}
 
+    //관리자 메인 페이지
     @GetMapping("/adminmain")
     public String adminmain() {return "pages/main/adminmain";}
 

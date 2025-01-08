@@ -1,0 +1,39 @@
+.application-period {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.application-period h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.application-period p {
+    font-size: 16px;
+    color: #555;
+}
+
+.apply-button {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-apply {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-apply:hover {
+    background-color: #45a049;
+}
