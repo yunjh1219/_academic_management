@@ -49,3 +49,15 @@
     max-width: 100%;          /* 부모 요소를 넘지 않도록 제한 */
     box-sizing: border-box;   /* 패딩과 border를 포함한 크기 계산 */
 }
+
+/* 닫기 버튼(X) 스타일 - 텍스트 제거 및 X 표시 */
+#tabs .ui-icon-close::before {
+    color: grey;
+    margin-left: 4px;
+    content: "✖"; /* X 아이콘 표시 */
+}
+
+/* 활성 탭의 닫기 버튼(X) 색상 변경 */
+#tabs .ui-tabs-active .ui-icon-close::before {
+    color: black;
+}
