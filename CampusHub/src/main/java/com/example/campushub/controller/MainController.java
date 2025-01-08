@@ -16,7 +16,7 @@ public class MainController {
 
     //교수 메인 페이지
     @GetMapping("/propmain")
-    public String propmain() {return "pages/main/propmain";}
+    public String propmain() {return "promain";}
 
     //관리자 메인 페이지
     @GetMapping("/adminmain")
