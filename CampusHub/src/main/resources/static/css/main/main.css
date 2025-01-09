@@ -160,9 +160,9 @@ body {
     text-align: center; /* 텍스트 중앙 정렬 */
     border-radius: 20px; /* 둥근 테두리 */
     border: 1px solid #ddd; /* 테두리 */
-    width: 100%; /* 부모 컨테이너에 맞게 */
-    max-width: 400px; /* 항목의 최대 너비 제한 */
+    width: 90%; /* 부모 컨테이너에 맞게 */
     margin: 10px auto; /* 상하 여백 및 가운데 정렬 */
+    text-decoration: none;
 }
 
 .service-item img {
@@ -180,6 +180,10 @@ body {
     font-weight: bold; /* 텍스트 굵기 */
     color: #333; /* 텍스트 색상 */
     text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.service-item:hover {
+    background-color: #f0f0f0;
 }
 
 .status-container {

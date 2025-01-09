@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>장학금 관리: scholarship-management</title>
+    <link rel="stylesheet" th:href="@{/css/admin/user-management/student-management.css}">
+    <script th:inline="javascript" type="text/javascript" th:src="@{/js/admin/user-management/student-grade-inquiry.js}"></script>
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>행정관리 > 장학금 > 장학금 관리</h5>
+        </div>
+
+
+
+        <div class="content-box">
+            <div class="select-container">
+
+
+                <!-- 학과명 선택 -->
+                <div class="select-section">
+                    <select id="department" name="department">
+                        <!-- 기본값으로 '학과' 텍스트가 보이도록 설정 -->
+                        <option value="">학과</option>
+                        <option value="computer-science">컴퓨터공학과</option>
+                        <option value="business">경영학과</option>
+                        <option value="english">영어영문학과</option>
+                        <option value="design">디자인학과</option>
+                    </select>
+                </div>
+
+                <!-- 교수명 검색 -->
+                <div class="select-section">
+                    <input type="text" id="professor-name" name="professor-name" placeholder="이름/학번">
+                    <button id="search-btn">검색</button>
+                </div>
+
+            </div>
+
+            <div class="config-table">
+                <div class="table-top">
+                    <h5>장학금 목록</h5>
+                </div>
+                <!-- 성적 테이블 추가 -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                        <tr>
+                            <th>이름</th>
+                            <th>학번</th>
+                            <th>학과</th>
+                            <th>학년도</th>
+                            <th>학기</th>
+                            <th>장학금명</th>
+                            <th>지급구분</th>
+                            <th>장학금액</th>
+                            <th>확정일자</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 신규등록 및 신청수락 버튼 -->
+            <div class="button-container">
+                <button id="add-btn">등록</button>
+            </div>
+            <div class="button-container">
+                <button id="del-btn">삭제</button>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</th:block>
+</html>

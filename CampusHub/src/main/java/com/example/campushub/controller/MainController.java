@@ -85,6 +85,13 @@ public class MainController {
     public String scholsdc() {return "pages/student/scholarship/scholarship-details-confirmation";}
     //============================================================================================
 
+    //교수
+    //============================================================================================
+
+    //출석
+    @GetMapping("/atten-daily")
+    public String attendaily() {return "pages/professor/attendance/daily-attendance";}
+
     // 관리자
     //============================================================================================
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <title>Thymeleaf Layout</title>
+
+  <!-- config fragment 사용 -->
+  <th:block th:replace="~{fragments/config :: configFragment}"></th:block>
+  <!-- header fragment 사용 -->
+  <th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- sidebar fragment 사용 -->
+  <th:block th:replace="~{fragments/sidebar :: sidebarFragment}"></th:block>
+  <!-- 탭 영역 -->
+  <div id="tabs"><ul></ul></div>
+  </div>
+</div>
+</body>
+</html>
