@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<!--Thymeleaf, ConfigFragment 선언-->
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="configFragment">
+<head>
+  <meta charset="UTF-8" />
+
+
+
+ <!-- fragments CSS -->
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/fragments/config.css}">
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/fragments/header.css}">
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/fragments/sidebar.css}">
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/fragments/tabs.css}">
+
+  <!-- 공통으로 쓰이는 JAVA SCRIPTS 작성 -->
+  <script th:inline="javascript" type="text/javascript" th:src="@{/js/jquery-3.7.1.min.js}"></script>
+
+  <!-- sidebar -->
+  <script th:inline="javascript" type="text/javascript" th:src="@{/js/fragments/sidebar.js}"></script>
+  <script th:inline="javascript" type="text/javascript" th:src="@{/js/fragments/tabs.js}"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+
+  <!-- 페이지 공통 css -->
+  <link rel="stylesheet" th:href="@{/css/common/common.css}">
+
+
+</head>
+</html>
