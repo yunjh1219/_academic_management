@@ -116,4 +116,8 @@ public class MainController {
     @GetMapping("/atten-tot")
     public String attentot() {return "pages/professor/attendance/attendance-total";}
 
+    //강의 수강 등록
+    @GetMapping("/course-regist")
+    public String courseregist() {return "pages/professor/course/prof-course-registration";}
+
 }

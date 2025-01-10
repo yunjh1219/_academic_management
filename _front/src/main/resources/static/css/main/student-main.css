@@ -163,6 +163,7 @@ body {
     width: 100%; /* 부모 컨테이너에 맞게 */
     max-width: 400px; /* 항목의 최대 너비 제한 */
     margin: 10px auto; /* 상하 여백 및 가운데 정렬 */
+    text-decoration: none;
 }
 
 .service-item img {
@@ -180,6 +181,10 @@ body {
     font-weight: bold; /* 텍스트 굵기 */
     color: #333; /* 텍스트 색상 */
     text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.service-item:hover {
+    background-color: #f0f0f0;
 }
 
 .status-container {

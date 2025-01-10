@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>금일 출석관리</title>
+  <title>출석 통계</title>
   <link rel="stylesheet" th:inline="css" th:href="@{/css/professor/attendance/attendance-total.css}">
 </head>
 <body>
 <div class="tabsconfig">
-  <div class="title">금일 출석관리</div>
+  <div class="content-title">
+    <h5>출석 > 출석 통계</h5>
+  </div>
   <div class="controls">
     <select>
       <option>강의명</option>
@@ -18,7 +23,7 @@
     </select>
   </div>
   <div class="table-container">
-    <table class="attendance-table">
+    <table class="attendance-tot-table">
       <thead>
       <tr>
         <th>이름</th>
@@ -113,7 +118,6 @@
       </tbody>
     </table>
   </div>
-  <button class="save-button">저장</button>
 </div>
 </body>
 </html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교수 : 강의 수강 등록</title>
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/professor/course/prof-course-registration.css}">
+</head>
+<body>
+<div class="tabsconfig">
+  <div class="content-title">
+    <h5>수강 > 수강 관리 > 강의 수강 등록</h5>
+  </div>
+  <div class="open-period">
+    <div class="subtitle">강의 개설 기간 : 20XX/XX/XX ~ 20XX/XX/XX 까지</div>
+  </div>
+  <div class="table-section">
+    <h3>강의 목록</h3>
+    <div class="table-container">
+      <table class="lecture-table">
+        <thead>
+        <tr>
+          <th>NO</th>
+          <th>학년</th>
+          <th>강의명</th>
+          <th>이수구분</th>
+          <th>학점</th>
+          <th>교수</th>
+          <th>강의실</th>
+          <th>요일</th>
+          <th>시간</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>고급모바일프로그래밍</td>
+          <td>전공선택</td>
+          <td>3</td>
+          <td>조민양</td>
+          <td>1307</td>
+          <td>수</td>
+          <td>2,3,4</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>머신러닝</td>
+          <td>전공선택</td>
+          <td>3</td>
+          <td>문혜경</td>
+          <td>1305</td>
+          <td>금</td>
+          <td>1,2,3</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="button-container">
+      <a href="#" class="register-button">등록</a>
+    </div>
+  </div>
+  <div class="table-section">
+    <h3>수강등록현황</h3>
+    <div class="table-container">
+      <table class="lecture-table">
+        <thead>
+        <tr>
+          <th>NO</th>
+          <th>학년</th>
+          <th>강의명</th>
+          <th>이수구분</th>
+          <th>학점</th>
+          <th>교수</th>
+          <th>강의실</th>
+          <th>요일</th>
+          <th>시간</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>고급모바일프로그래밍</td>
+          <td>전공선택</td>
+          <td>3</td>
+          <td>조민양</td>
+          <td>1307</td>
+          <td>수</td>
+          <td>2,3,4</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>머신러닝</td>
+          <td>전공선택</td>
+          <td>3</td>
+          <td>문혜경</td>
+          <td>1305</td>
+          <td>금</td>
+          <td>1,2,3</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="button-container">
+      <button class="modify-button">수정</button>
+      <button class="delete-button">삭제</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
