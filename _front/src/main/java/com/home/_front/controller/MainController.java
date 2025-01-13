@@ -110,18 +110,25 @@ public class MainController {
 
     //금일 출석관리
     @GetMapping("/atten-daily")
-    public String attendaily() {return "pages/professor/attendance/daily-attendance";}
+    public String attenDaily() {return "pages/professor/attendance/daily-attendance";}
 
     //출석 통계
     @GetMapping("/atten-tot")
-    public String attentot() {return "pages/professor/attendance/attendance-total";}
+    public String attenTot() {return "pages/professor/attendance/attendance-total";}
 
     //강의 수강 등록
     @GetMapping("/course-regist")
-    public String courseregist() {return "pages/professor/course/prof-course-registration";}
+    public String courseRegist() {return "pages/professor/course/prof-course-registration";}
 
     //강의 수강 등록 세부 페이지
     @GetMapping("/course-regist-detail")
-    public String courseregistdetail() {return "pages/professor/course/prof-course-registration-detail";}
+    public String courseRegistDetail() {return "pages/professor/course/prof-course-registration-detail";}
 
+    //성적 기입
+    @GetMapping("/enter-grade")
+    public String enterGrade() {return "pages/professor/grade/enter-grade";}
+
+    //성적 처리
+    @GetMapping("/grade-processing")
+    public String gradeProcessing() {return "pages/professor/grade/grade-processing";}
 }

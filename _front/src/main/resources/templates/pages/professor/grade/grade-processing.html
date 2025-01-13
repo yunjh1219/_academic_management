@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강의 등록</title>
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/professor/grade/enter-grade.css}">
+</head>
+<body>
+<div class="tabsconfig">
+  <div class="content-title">
+    <h5>성적 > 성적 관리 > 성적 처리</h5>
+  </div>
+  <div class="container">
+    <div class="sub-header">
+      <div class="controls">
+        <select>
+          <option>강의명</option>
+          <option>수학</option>
+          <option>영어</option>
+          <option>프로그래밍</option>
+        </select>
+      </div>
+      <div class="semester">2024 학년도 2학기</div>
+    </div>
+
+    <div class="table-container">
+      <table class="score-table">
+        <thead>
+        <tr>
+          <th>NO</th>
+          <th>이름</th>
+          <th>학번</th>
+          <th>학과</th>
+          <th>출석</th>
+          <th>과제</th>
+          <th>시험 점수</th>
+          <th>총 점수</th>
+          <th>등급</th>
+          <th>학점</th>
+          <th>백분율</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>홍길동</td>
+          <td>2470046</td>
+          <td>컴퓨터소프트웨어</td>
+          <td>점수</td>
+          <td>점수</td>
+          <td>점수</td>
+          <td>계산</td>
+          <td><input type="text" class="score-input" placeholder="기입"></td>
+          <td><input type="text" class="score-input" placeholder="자동 계산" readonly></td>
+          <td><input type="text" class="score-input" placeholder="자동 계산" readonly></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
