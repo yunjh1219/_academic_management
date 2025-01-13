@@ -135,4 +135,8 @@ public class MainController {
     //과제 등록
     @GetMapping("/assignment-registration")
     public String assignmentRegistration() {return "pages/professor/assignment/assignment-registration";}
+
+    //과제 점수 관리
+    @GetMapping("/assignment-total")
+    public String assignmentTotal() {return "pages/professor/assignment/assignment-total";}
 }

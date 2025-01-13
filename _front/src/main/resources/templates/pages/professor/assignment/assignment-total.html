@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>출석 통계</title>
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/professor/assignment/assignment-total.css}">
+</head>
+<body>
+<div class="tabsconfig">
+  <div class="content-title">
+    <h5>과제 > 과제 관리 > 과제 점수 관리</h5>
+  </div>
+  <div class="assignment-top-container">
+    <div class="controls">
+      <select>
+        <option>강의명</option>
+        <option>수학</option>
+        <option>영어</option>
+        <option>프로그래밍</option>
+      </select>
+      <input type="text" class="search-input" placeholder="이름/학번">
+      <button class="search-button">검색</button>
+    </div>
+  </div>
+  <div class="table-container">
+    <table class="assignment-tot-table">
+      <thead>
+      <tr>
+        <th>이름</th>
+        <th>학번</th>
+        <th>1주차</th>
+        <th>2주차</th>
+        <th>3주차</th>
+        <th>4주차</th>
+        <th>5주차</th>
+        <th>6주차</th>
+        <th>7주차</th>
+        <th>8주차</th>
+        <th>9주차</th>
+        <th>10주차</th>
+        <th>11주차</th>
+        <th>12주차</th>
+        <th>13주차</th>
+        <th>14주차</th>
+        <th>15주차</th>
+        <th>16주차</th>
+        <th>총 점수</th>
+        <th>평균</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>홍길동</td>
+        <td>2470046</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>김영희</td>
+        <td>2470047</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>이철수</td>
+        <td>2470048</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
