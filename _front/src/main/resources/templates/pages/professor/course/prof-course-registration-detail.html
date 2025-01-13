@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의 등록</title>
+    <link rel="stylesheet" th:inline="css" th:href="@{/css/professor/course/prof-course-registration-detail.css}">
+</head>
+<body>
+<div class="form-container">
+    <div class="logo">
+        <img src="/img/main/logo.png">
+        <h1>복정대학교</h1>
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="lecture-name">강의명</label>
+            <input type="text" id="lecture-name" placeholder="강의명을 입력하세요">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="year">학년</label>
+                <select id="year">
+                    <option>선택</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="credits">학점</label>
+                <input type="number" id="credits" min="0" max="6" value="0">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="room">강의실</label>
+                <input type="text" id="room" placeholder="강의실 번호 입력">
+            </div>
+            <div class="form-group time-group">
+                <label>시간(교시)</label>
+                <div>
+                    <select>
+                        <option>1교시</option>
+                        <option>2교시</option>
+                        <option>3교시</option>
+                        <option>4교시</option>
+                        <option>5교시</option>
+                        <option>6교시</option>
+                        <option>7교시</option>
+                        <option>8교시</option>
+                        <option>9교시</option>
+                    </select>
+                    ~
+                    <select>
+                        <option>1교시</option>
+                        <option>1교시</option>
+                        <option>2교시</option>
+                        <option>3교시</option>
+                        <option>4교시</option>
+                        <option>5교시</option>
+                        <option>6교시</option>
+                        <option>7교시</option>
+                        <option>8교시</option>
+                        <option>9교시</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="category">이수구분</label>
+                <select id="category">
+                    <option>전공필수</option>
+                    <option>전공선택</option>
+                    <option>교양</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="day">요일</label>
+                <select id="day">
+                    <option>월요일</option>
+                    <option>화요일</option>
+                    <option>수요일</option>
+                    <option>목요일</option>
+                    <option>금요일</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="register-button">등록</button>
+            <button type="button" class="cancel-button">취소</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

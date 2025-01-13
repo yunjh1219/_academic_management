@@ -120,4 +120,8 @@ public class MainController {
     @GetMapping("/course-regist")
     public String courseregist() {return "pages/professor/course/prof-course-registration";}
 
+    //강의 수강 등록 세부 페이지
+    @GetMapping("/course-regist-detail")
+    public String courseregistdetail() {return "pages/professor/course/prof-course-registration-detail";}
+
 }
