@@ -67,6 +67,7 @@ body {
     cursor: pointer;
     font-weight: bold;
     float: right;
+    text-decoration: none;
 }
 
 .register-button:hover {
@@ -88,6 +89,7 @@ body {
     cursor: pointer;
     font-weight: bold;
     margin-right: 10px; /* 수정 버튼과 삭제 버튼 사이 간격 */
+    text-decoration: none;
 }
 
 .modify-button:hover {
@@ -102,6 +104,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .delete-button:hover {
