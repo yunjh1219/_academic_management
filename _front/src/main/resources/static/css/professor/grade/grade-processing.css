@@ -71,20 +71,23 @@ body {
     background-color: #f1f1f1;
 }
 
-/* Buttons */
-.modify-button, .complete-button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* 버튼들을 오른쪽에 정렬 */
+    margin-top: 20px;
 }
 
-.complete-button {
+.confirm-button {
     background-color: #28a745;
     color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-.complete-button:hover {
+.confirm-button:hover {
     background-color: #218838;
 }
