@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>과제등록</title>
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/professor/assignment/assignment-registration.css}">
+</head>
+<body>
+<div class="tabsconfig">
+  <div class="content-title">
+    <h5>과제 > 과제 관리 > 과제 등록</h5>
+  </div>
+  <div class="form-container">
+    <div class="form-group">
+      <div class="controls">
+        <select>
+          <option>1주차</option>
+          <option>2주차</option>
+          <option>3주차</option>
+          <option>4주차</option>
+        </select>
+        <select>
+          <option>강의명</option>
+          <option>수학</option>
+          <option>영어</option>
+          <option>프로그래밍</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">과제 설명</label>
+      <textarea id="description" rows="5"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>첨부파일 추가</label>
+      <input type="file" class="upload-button">
+    </div>
+
+    <div class="form-group deadline">
+      <label for="deadline">제출기한</label>
+      <input type="date" id="deadline">
+      <span>까지</span>
+    </div>
+
+    <div class="form-group">
+      <button class="submit-button">등록</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -131,4 +131,8 @@ public class MainController {
     //성적 처리
     @GetMapping("/grade-processing")
     public String gradeProcessing() {return "pages/professor/grade/grade-processing";}
+
+    //과제 등록
+    @GetMapping("/assignment-registration")
+    public String assignmentRegistration() {return "pages/professor/assignment/assignment-registration";}
 }
