@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>과제 등록 : assignment-registration</title>
+
+    <link rel="stylesheet" th:href="@{/css/professor/common.css}">
+    <link rel="stylesheet" th:href="@{/css/professor/assignment/assignment-registration.css}">
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>과제 > 과제관리 > 과제등록</h5>
+        </div>
+        <div class="search-select-container">
+            <div class="select-container">
+                <div class="select-box">
+                    <select>
+                        <option>강의1</option>
+                        <option>강의2</option>
+                    </select>
+                </div>
+                <div class="select-box">
+                    <select>
+                        <option>1주차</option>
+                        <option>2주차</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="input-container">
+            <textarea placeholder="내용을 입력하세요..."></textarea>
+        </div>
+        <div class="input-container">
+            <label>첨부파일 추가</label>
+            <input type="file" class="upload-button">
+        </div>
+        <div class="input-container">
+            <label for="deadline">제출기한</label>
+            <input type="date" id="deadline">
+            <span>까지</span>
+        </div>
+
+    </div>
+</th:block>
+</html>

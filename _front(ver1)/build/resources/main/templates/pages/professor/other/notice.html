@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교수-공지사항 : notice</title>
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/professor/common.css}">
+</head>
+<th:block layout:fragment="content">
+
+  <div class="content">
+
+    <div class="content-title">
+      <h5>기타 > 기타관리 > 공지사항</h5>
+    </div>
+    <div class="search-select-container">
+      <div class="select-container">
+        <div class="select-box">
+          <select>
+            <option>제목/작성자</option>
+            <option>제목</option>
+            <option>작성자</option>
+          </select>
+        </div>
+      </div>
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" class="search-input" placeholder="검색창">
+        </div>
+        <button>검색</button>
+      </div>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th>NO</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성 일자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>2학기 기말 시험범위 안내</td>
+          <td>염세훈</td>
+          <td>2024-12-10</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>휴강 안내</td>
+          <td>문혜경</td>
+          <td>2024-12-10</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button id="form-btn">작성</button>
+  </div>
+</div>
+</th:block>
+</html>

@@ -1,0 +1,28 @@
+/* ================= H2depth0101 ================== */
+/* 테이블 스타일 */
+.H2depth0101 table {
+    width: 100%;
+    border-collapse: collapse; /* 경계를 붙여서 표시 */
+}
+
+/* 제목 및 서브 제목 스타일 */
+.H2depth0101 .title h1, .H2depth0101 .sub-title h2 {
+    text-align: center;
+    font-size: 35px;
+}
+
+.H2depth0101 th, .H2depth0101 td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc; /* 표의 각 셀에 경계 추가 */
+}
+
+.H2depth0101 th {
+    background-color: #f2f2f2;
+}
+
+
+
+
+
+/* ================================== */

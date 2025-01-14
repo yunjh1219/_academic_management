@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>등록금 납부관리: tuition-payment-management</title>
+    <link rel="stylesheet" th:href="@{/css/admin/user-management/student-management.css}">
+    <script th:inline="javascript" type="text/javascript" th:src="@{/js/admin/user-management/student-grade-inquiry.js}"></script>
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>행정관리 > 등록금 > 등록금 납부 관리</h5>
+        </div>
+
+
+
+        <div class="content-box">
+            <div class="select-container">
+
+                <!-- 휴학대기/복학대기 선택 (하나만 선택 가능) -->
+                <div class="select-section">
+                    <div>
+                        <label for="leave-waiting">미납</label>
+                        <input type="checkbox" id="leave-waiting" name="status" value="leave-waiting" class="square-checkbox">
+                    </div>
+                    <div>
+                        <label for="re-enrollment-waiting">수락대기</label>
+                        <input type="checkbox" id="re-enrollment-waiting" name="status" value="re-enrollment-waiting" class="square-checkbox">
+                    </div>
+                </div>
+
+                <!-- 학과명 선택 -->
+                <div class="select-section">
+                    <select id="department" name="department">
+                        <!-- 기본값으로 '학과' 텍스트가 보이도록 설정 -->
+                        <option value="">학과</option>
+                        <option value="computer-science">컴퓨터공학과</option>
+                        <option value="business">경영학과</option>
+                        <option value="english">영어영문학과</option>
+                        <option value="design">디자인학과</option>
+                    </select>
+                </div>
+
+                <!-- 교수명 검색 -->
+                <div class="select-section">
+                    <input type="text" id="professor-name" name="professor-name" placeholder="이름/학번">
+                    <button id="search-btn">검색</button>
+                </div>
+
+            </div>
+
+            <!-- 성적내역 -->
+            <!-- 성적내역 -->
+            <div class="config-table">
+                <div class="table-top">
+                    <h5>학생목록</h5>
+                    <h5>[34]</h5>
+                </div>
+                <!-- 성적 테이블 추가 -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                        <tr>
+                            <th>수락</th>
+                            <th>이름</th>
+                            <th>학번</th>
+                            <th>학과</th>
+                            <th>사용자</th>
+                            <th>납부여부</th>
+                            <th>납부날짜</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                       <!-- -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 신규등록 및 신청수락 버튼 -->
+            <div class="button-container">
+                <button id="accept-btn">신청수락</button>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

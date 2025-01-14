@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>성적 처리 : grade-processing</title>
+    <link rel="stylesheet" th:href="@{/css/professor/common.css}">
+
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>성적 > 성적관리 > 성적처리</h5>
+        </div>
+        <div class="search-select-container">
+            <div class="select-container">
+                <div class="select-box">
+                    <select>
+                        <option>강의1</option>
+                        <option>강의2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>no</th>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>학과</th>
+                    <th>출석</th>
+                    <th>과제</th>
+                    <th>시험점수</th>
+                    <th>총점수</th>
+                    <th>등급</th>
+                    <th>학점</th>
+                    <th>백분율</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block>
+                    <tr>
+                        <td>1</td>
+                        <td>홍길동</td>
+                        <td>20123456</td>
+                        <td>컴퓨터공학</td>
+                        <td>90%</td>
+                        <td>85%</td>
+                        <td>80%</td>
+                        <td>85%</td>
+                        <td>A</td>
+                        <td>4.0</td>
+                        <td>89%</td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</th:block>
+</html>
