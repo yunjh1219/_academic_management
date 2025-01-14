@@ -1,0 +1,19 @@
+/* tabsconfig 전체가 잘리게 설정 */
+.content {
+    position: relative;
+    background-color: white;
+    padding: 5px 20px;
+    overflow: hidden;         /* 넘치는 부분 숨김 */
+    white-space: nowrap;      /* 줄바꿈 방지 */
+    max-width: 100%;          /* 부모 요소를 넘지 않도록 제한 */
+    box-sizing: border-box;   /* 패딩과 border를 포함한 크기 계산 */
+}
+
+.content-title{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 0;
+    border-bottom: 1px solid grey;
+    height: 20px;
+}
+

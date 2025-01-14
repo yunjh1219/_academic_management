@@ -6,113 +6,107 @@
 <head>
     <meta charset="UTF-8">
     <title>공지사항 : notice</title>
-    <link rel="stylesheet" th:href="@{/css/admin/user-management/student-management.css}"> <!--학생관리 : student-management-->
-    <script th:inline="javascript" type="text/javascript" th:src="@{/js/admin/user-management/student-grade-inquiry.js}"></script> <!---->
+    <link rel="stylesheet" th:href="@{/css/admin/common.css}">
+    <script th:src="@{/js/admin/administrative-management/notice.js}"></script>
+
 </head>
 <th:block layout:fragment="content">
 
     <div class="content">
 
         <div class="content-title">
-            <h5>행정관리 > 공지사항 > 공지사항</h5>
+            <h5>행정관리 > 공지 > 공지사항</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="searchBtn">조회</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="deleteBtn">삭제</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
+            </div>
         </div>
 
-
-
-        <div class="content-box">
-            <div class="select-container">
-
-                <!-- 학과명 선택 -->
-                <div class="select-section">
-                    <select id="department" name="department">
-                        <!-- 기본값으로 '학과' 텍스트가 보이도록 설정 -->
-                        <option value="">학과</option>
-                        <option value="computer-science">컴퓨터공학과</option>
-                        <option value="business">경영학과</option>
-                        <option value="english">영어영문학과</option>
-                        <option value="design">디자인학과</option>
+        <!-- 검색 및 필터 부분은 그대로 유지 -->
+        <div class="search-select-container">
+            <div class="search-container">
+                <div class="searchf-box">
+                    <select>
+                        <option>제목</option>
+                        <option>작성자</option>
                     </select>
                 </div>
-
-                <!-- 교수명 검색 -->
-                <div class="select-section">
-                    <input type="text" id="professor-name" name="professor-name" placeholder="제목/작성자">
-                    <button id="search-btn">검색</button>
+                <div class="search-box">
+                    <!-- 이름 검색 입력란 -->
+                    <input type="text" placeholder="내용입력" />
                 </div>
-
-            </div>
-
-            <!-- 성적내역 -->
-            <!-- 성적내역 -->
-            <div class="config-table">
-                <div class="table-top">
-                    <h5>공지사항</h5>
-
-                </div>
-                <!-- 성적 테이블 추가 -->
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead class="table-light">
-                        <tr>
-                            <th>NO</th>
-                            <th>작성자</th>
-                            <th>작성일자</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- 여기에 출력하면 됨 -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 신규등록 및 신청수락 버튼 -->
-            <div class="button-container">
-                <button id="new-register-btn">신규등록</button>
-            </div>
-
-            <!-- 신규등록 모달 창 -->
-            <div id="new-register-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close" id="close-modal">&times;</span>
-                    <h3>신규등록</h3>
-                    <form>
-                        <label for="student-name">이름:</label>
-                        <input type="text" id="student-name" name="student-name" placeholder="학생 이름"><br><br>
-
-                        <label for="birthdate">생년월일:</label>
-                        <input type="date" id="birthdate" name="birthdate"><br><br>
-
-                        <label for="modal-department">학과:</label>
-                        <select id="modal-department" name="department">
-                            <option value="">학과</option>
-                            <option value="computer-science">컴퓨터공학과</option>
-                            <option value="business">경영학과</option>
-                            <option value="english">영어영문학과</option>
-                            <option value="design">디자인학과</option>
-                        </select><br><br>
-
-                        <label for="email">이메일:</label>
-                        <input type="email" id="email" name="email" placeholder="이메일 주소"><br><br>
-
-                        <label for="phone">연락처:</label>
-                        <input type="tel" id="phone" name="phone" placeholder="연락처"><br><br>
-
-                        <label for="address">주소:</label>
-                        <input type="text" id="address" name="address" placeholder="주소"><br><br>
-
-                        <label for="student-id">학번:</label>
-                        <input type="text" id="student-id" name="student-id" placeholder="학생 학번"><br><br>
-
-                        <label for="password">비밀번호:</label>
-                        <input type="password" id="password" name="password" placeholder="비밀번호"><br><br>
-
-                        <button type="submit">제출</button>
-                    </form>
-                </div>
+                <button>검색</button>
             </div>
         </div>
+
+        <!-- 공지사항 목록 테이블 -->
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일자</th>
+                </tr>
+                </thead>
+                <tbody id="noticeTableBody">
+                <!-- 공지사항 목록이 여기에 동적으로 삽입됩니다 -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 항상 보이는 edit-container -->
+        <div class="edit-container" id="editContainer">
+            <form action="#" method="post" id="editNoticeForm">
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="title">제목</label>
+                        <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="content">내용</label>
+                        <textarea id="content" name="content" class="form-control" placeholder="내용을 입력하세요" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="file">파일첨부</label>
+                        <input type="text" id="file" name="file" class="form-control" placeholder="파일을 첨부하세요">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="createdate">작성일시</label>
+                        <input type="text" id="createdate" name="createdate" class="form-control" placeholder="작성일시" readonly> <!-- 수정 불가 -->
+                    </div>
+                    <div class="form-item">
+                        <label for="updatedate">수정일시</label>
+                        <input type="text" id="updatedate" name="updatedate" class="form-control" placeholder="수정일시" readonly> <!-- 수정 불가 -->
+                    </div>
+                    <div class="form-item">
+                        <label for="author">작성자</label>
+                        <input type="text" id="author" name="author" class="form-control" placeholder="작성자" readonly> <!-- 수정 불가 -->
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 </th:block>
 </html>

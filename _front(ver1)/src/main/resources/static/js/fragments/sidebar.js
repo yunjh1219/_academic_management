@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 기본 메뉴(학생모드) 표시
     menuItems.forEach(function(menu) {
-        if (menu.getAttribute('data-menu') === 'prof') {
+        if (menu.getAttribute('data-menu') === 'admin') {
             menu.classList.add('selected');
         }
     });
 
     sidebarItems.forEach(function(sidebarItem) {
-        if (sidebarItem.classList.contains('prof')) {
+        if (sidebarItem.classList.contains('admin')) {
             sidebarItem.style.display = 'block';  // 기본 메뉴(학생모드)만 보이기
         } else {
             sidebarItem.style.display = 'none';   // 나머지 항목 숨기기

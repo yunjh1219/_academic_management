@@ -41,15 +41,7 @@ body, html {
 
 
 
-.content {
-    position: relative;
-    background-color: white;
-    padding: 5px 20px;
-    overflow: auto;  /* 캘린더를 위해 auto로 변경 */
-    white-space: normal;  /* 줄바꿈 방지 제거 */
-    max-width: 100%;
-    box-sizing: border-box;
-}
+
 
 .content-title{
     margin-bottom: 20px;
