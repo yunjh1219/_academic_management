@@ -1,13 +1,6 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f9f9f9;
-}
-
 .enter-grade-container {
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
 }
 
 .semester {
