@@ -10,16 +10,17 @@ $(function() {
 
         var existingTab = $("#" + tabId);
 
+        // 🔥 최대 8개 탭 제한 추가
+        if ($("#tabs ul li").length >= 8) {
+            alert("최대 8개의 탭만 열 수 있습니다.");
+            return;  // 탭 추가 방지
+        }
+
         if (existingTab.length === 0) {
-            $("#tabs ul").append("<li><a href='#" + tabId + "'>" + tabName + "</a><span class='ui-icon ui-icon-close' role='presentation'></span></li> <span class=\"close-btn\">X</span>");
+            $("#tabs ul").append("<li><a href='#" + tabId + "'>" + tabName + "</a><span class='ui-icon ui-icon-close' role='presentation'></span></li>");
+
             $("#tabs").append("<div id='" + tabId + "'><p>로딩 중...</p></div>");
             tabs.tabs("refresh");
-
-            // 🔥 탭이 하나만 있을 경우 자동으로 활성화
-            if ($("#tabs ul li").length === 1) {
-                tabs.tabs("option", "active", 0);
-            }
-
 
             $.ajax({
                 url: url,
@@ -36,13 +37,6 @@ $(function() {
         tabs.tabs("option", "active", $("#tabs").find("a[href='#" + tabId + "']").parent().index());
     });
 
-    // 닫기 아이콘 클릭 시 탭 삭제
-    tabs.on("click", "span.ui-icon-close", function() {
-        var panelId = $(this).closest("li").remove().attr("aria-controls");
-        $("#" + panelId).remove();
-        tabs.tabs("refresh");
-    });
-
     // ❗️ X 버튼 클릭 시 모든 탭 삭제 기능 추가
     $("#tabs").on("click", ".close-btn", function () {
         $("#tabs ul li").remove();  // 모든 탭 제목 삭제
@@ -50,11 +44,25 @@ $(function() {
         tabs.tabs("refresh");       // 탭 UI 갱신
     });
 
-    // 첫 번째 탭 자동 클릭
-    var firstTab = $("#menu .snb_depth3 a").first();
-    if (firstTab.length > 0) {
-        firstTab.trigger("click");
+    // 닫기 아이콘 클릭 시 탭 삭제
+    tabs.on("click", "span.ui-icon-close", function() {
+        var panelId = $(this).closest("li").remove().attr("aria-controls");
+        $("#" + panelId).remove();
+        tabs.tabs("refresh");
+    });
+
+    // 예를 들어, 'course2'라는 탭을 자동으로 클릭하고 싶을 때
+    var tabToActivate = $("#menu .snb_depth3 a[data-tab='출석통계']");
+
+    if (tabToActivate.length > 0) {
+        tabToActivate.trigger("click");
     }
+
+    // 첫 번째 탭 자동 클릭
+    // var firstTab = $("#menu .snb_depth3 a").first();
+    // if (firstTab.length > 0) {
+    //     firstTab.trigger("click");
+    // }
 
     // depth1의 a 태그 클릭 시 depth2 메뉴 토글
     $(".snb_depth1 li > a").click(function() {

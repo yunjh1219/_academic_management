@@ -20,7 +20,7 @@
     background-color: #333333;
 }
 
-#tabs ul .close-btn {
+.close-btn {
     position: absolute;  /* X 버튼을 ul의 우측 끝으로 고정 */
     right: 10px;
     padding: 10px;
@@ -78,3 +78,4 @@
 #tabs .ui-tabs-active .ui-icon-close::before {
     color: black;
 }
+

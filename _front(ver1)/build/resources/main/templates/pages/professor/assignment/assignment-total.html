@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>과제 점수 관리 : assignment-total</title>
+    <link rel="stylesheet" th:href="@{/css/professor/common.css}">
+    <link rel="stylesheet" th:href="@{/css/professor/assignment/assignment-total.css}">
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>과제 > 과제관리 > 과제점수관리</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn">제출</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn">미제출</button>
+            </div>
+        </div>
+
+        <div class="search-select-container">
+            <div class="select-container">
+                <div class="select-box">
+                    <select>
+                        <option>강의1</option>
+                        <option>강의2</option>
+                    </select>
+                </div>
+                <div class="select-box">
+                    <select>
+                        <option>1주차</option>
+                        <option>2주차</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <!-- 이름 검색 입력란 -->
+                    <input type="text" placeholder="이름을 입력하세요" />
+                </div>
+                <button>검색</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>1주차</th>
+                    <th>2주차</th>
+                    <th>3주차</th>
+                    <th>4주차</th>
+                    <th>5주차</th>
+                    <th>6주차</th>
+                    <th>7주차</th>
+                    <th>8주차</th>
+                    <th>9주차</th>
+                    <th>10주차</th>
+                    <th>11주차</th>
+                    <th>12주차</th>
+                    <th>13주차</th>
+                    <th>14주차</th>
+                    <th>15주차</th>
+                    <th>16주차</th>
+                    <th>총점수</th>
+                    <th>평균</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block>
+                    <tr>
+                        <td>홍길동</td>
+                        <td>20123456</td>
+                        <td>90</td>
+                        <td>85</td>
+                        <td>88</td>
+                        <td>93</td>
+                        <td>80</td>
+                        <td>92</td>
+                        <td>87</td>
+                        <td>84</td>
+                        <td>90</td>
+                        <td>85</td>
+                        <td>88</td>
+                        <td>93</td>
+                        <td>82</td>
+                        <td>91</td>
+                        <td>91</td>
+                        <td>91</td>
+                        <td>1745</td> <!-- 총점수 -->
+                        <td>89.2</td> <!-- 평균 -->
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</th:block>
+</html>

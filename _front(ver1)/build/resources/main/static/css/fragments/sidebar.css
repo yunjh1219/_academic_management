@@ -31,12 +31,13 @@
 
 /* snb_depth1 내 각 li 요소 */
 .snb_depth1 > li {
+    position: relative;
     background-color: white;
     padding: 0px 0px;            /* 항목 안쪽 여백 */
 }
 
 .snb_depth1 > li:hover {
-    background-color: #030063;
+    background-color: #1E3A8A;
 }
 
 .snb_depth1 > li:hover > a {
@@ -44,7 +45,7 @@
 }
 
 .snb_depth1 > li.active {
-    background-color: #030063;
+    background-color: #1E3A8A;
 }
 .snb_depth1 > li.active > a {
     color: white;
@@ -54,7 +55,7 @@
 .snb_depth1 > li > a {
     color: black;                /* 글자 색 */
     font-weight: bold;
-    display: block;                /* 링크를 블록 요소로 설정하여 클릭 영역 확대 */
+    display: flex;
     padding: 10px 20px;            /* 링크 안쪽 여백 */
     border-bottom: 1px solid grey;
 }
@@ -104,13 +105,13 @@
     color: #0d10ae;
 }
 
+
 /*-----[ 메뉴 옆에 이모티콘 ]-----*/
 /*--------------------------------------------------------------*/
 .snb_depth1 > li > a::after {
     content: ' ▼';
     font-size: 12px;
-    right: 50px;          /* 오른쪽 끝에 위치 */
-
+    margin-left: auto;
     color: #030063;
 }
 
@@ -119,3 +120,9 @@
     content: '▲';
     color: white;
 }
+
+.snb_depth1 > li.active > a::after,
+.snb_depth1 > li:hover > a::after {
+    color: white;
+}
+

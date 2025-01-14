@@ -10,7 +10,7 @@
 .logo {
     font-size: 24px; /* 글꼴 크기 설정 */
     font-weight: bold; /* 글꼴 두께 설정 */
-    color: white;
+    color: #1E3A8A;
     text-decoration: none; /* 링크 밑줄 제거 */
     z-index: 999;
     margin-left: 20px; /* 왼쪽 여백 설정 */
@@ -41,7 +41,7 @@
 /* 메인메뉴 링크 */
 .gnb_depth1 a {
     font-weight: bold; /* 폰트 두께를 굵게 설정 */
-    color: white;
+    color: #2C2C2C;
     position: relative; /* 후속 가상 요소의 위치를 위해 relative 설정 */
     display: inline-block; /* 인라인 블록으로 설정하여 너비 조정 가능 */
     text-decoration: none; /* 밑줄 제거 */
