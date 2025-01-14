@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교수-공지사항 : notice</title>
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/professor/other/notice.css}">
+</head>
+<body>
+<div class="tabsconfig">
+  <div class="notice-container">
+    <div class="search-bar">
+      <select>
+        <option>제목/작성자</option>
+        <option>제목</option>
+        <option>작성자</option>
+      </select>
+      <input type="text" class="search-input" placeholder="검색창">
+      <button class="search-button">검색</button>
+    </div>
+
+    <table class="notice-table">
+      <thead>
+      <tr>
+        <th>NO</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성 일자</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>2학기 기말 시험범위 안내</td>
+        <td>염세훈</td>
+        <td>2024-12-10</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>휴강 안내</td>
+        <td>문혜경</td>
+        <td>2024-12-10</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button>&lt;</button>
+      <button class="page-number">1</button>
+      <button class="page-number">2</button>
+      <button class="page-number">3</button>
+      <button class="page-number">4</button>
+      <button class="page-number">5</button>
+      <button class="page-number">6</button>
+      <button class="page-number">7</button>
+      <button class="page-number">8</button>
+      <button class="page-number">9</button>
+      <button class="page-number">10</button>
+      <button>&gt;</button>
+    </div>
+
+    <a href="professor-write-notice" class="create-button">작성</a>
+  </div>
+</div>
+
+<script>
+  // 테이블 행 클릭 이벤트 추가
+  document.querySelectorAll(".notice-table tbody tr").forEach(row => {
+    row.addEventListener("click", function () {
+      // 지정된 경로로 이동
+      window.location.href = "/professor-notice-detail";
+    });
+  });
+</script>
+
+</body>
+</html>

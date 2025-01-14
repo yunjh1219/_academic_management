@@ -139,4 +139,16 @@ public class MainController {
     //과제 점수 관리
     @GetMapping("/assignment-total")
     public String assignmentTotal() {return "pages/professor/assignment/assignment-total";}
+
+    //공지사항 작성
+    @GetMapping("professor-notice")
+    public String professorNotice() {return "pages/professor/other/notice";}
+
+    //공지사항 작성
+    @GetMapping("professor-notice-detail")
+    public String professorNoticeDetail() {return "pages/professor/other/notice-detail";}
+
+    //공지사항 작성
+    @GetMapping("professor-write-notice")
+    public String professorWriteNotice() {return "pages/professor/other/write-notice";}
 }

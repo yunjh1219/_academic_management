@@ -5,18 +5,9 @@ body {
     background-color: #f9f9f9;
 }
 
-.container {
+.grade-processing-container {
     width: 90%;
     margin: 0 auto;
-}
-
-.title {
-    font-size: 24px;
-    font-weight: bold;
-    padding: 10px;
-    background-color: #f1f1f1;
-    display: inline-block;
-    border-radius: 5px;
 }
 
 .sub-header {
@@ -43,31 +34,31 @@ body {
     font-size: 16px;
 }
 
-.table-container {
+.grade-table-container {
     overflow-x: auto;
 }
 
-.score-table {
+.grade-table {
     width: 100%;
     border-collapse: collapse;
     text-align: center;
     background-color: white;
 }
 
-.score-table th, .score-table td {
+.grade-table th, .grade-table td {
     border: 1px solid #ddd;
     padding: 10px;
 }
 
-.score-table th {
+.grade-table th {
     background-color: #f4f4f4;
 }
 
-.score-table tbody tr:nth-child(even) {
+.grade-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.score-table tbody tr:hover {
+.grade-table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
