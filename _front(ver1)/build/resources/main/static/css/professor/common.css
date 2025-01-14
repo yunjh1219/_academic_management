@@ -112,7 +112,7 @@
 /* ============================================================= */
 .input-container {
     position: relative;
-    max-width: 800px; /* 원하는 최대 너비 설정 */
+    width: 100%;/* 원하는 최대 너비 설정 */
     margin-top: 10px;
 }
 
@@ -209,4 +209,8 @@ td a:hover {
     display: inline-block; /* 버튼을 인라인 블록으로 표시 */
     float: right; /* 오른쪽 정렬 */
     text-decoration: none; /* <a>태그로 버튼 사용 시 밑 줄 제거 */
+}
+
+#form-btn:hover {
+    background-color: #0056b3;
 }

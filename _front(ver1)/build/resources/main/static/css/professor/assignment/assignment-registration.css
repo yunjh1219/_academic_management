@@ -1,0 +1,29 @@
+.upload-button {
+    display: block;
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.upload-button:hover {
+    background-color: #b3b3b3;
+}
+
+.deadline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+span {
+    font-weight: bold;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* 버튼들을 오른쪽에 정렬 */
+    margin-top: 20px;
+}

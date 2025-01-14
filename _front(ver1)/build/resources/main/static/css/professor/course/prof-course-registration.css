@@ -1,0 +1,71 @@
+.prof-course-registration-container{
+    width: 100%;
+    margin: 20px;
+}
+
+.table-section {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.table-section h3 {
+    text-align: left;
+}
+
+.table-section .table-container {
+    max-height: 300px;
+}
+
+.button-container {
+    display: flex; /* Flexbox 활성화 */
+    justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
+    margin-top: 20px; /* 위쪽 여백 추가 (필요 시) */
+}
+
+.course-register-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    float: right;
+    text-decoration: none;
+}
+
+.register-button:hover {
+    background-color: #218838;
+}
+
+.course-modify-button {
+    background-color: #ffc107;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px; /* 수정 버튼과 삭제 버튼 사이 간격 */
+    text-decoration: none;
+}
+
+.modify-button:hover {
+    background-color: #e0a800;
+}
+
+.course-delete-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
