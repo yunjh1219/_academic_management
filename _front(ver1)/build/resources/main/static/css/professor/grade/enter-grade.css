@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.enter-grade-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.semester {
+    font-size: 16px;
+}
+
+/* Buttons */
+.modify-button, .complete-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modify-button {
+    background-color: #ffc107;
+    color: black;
+}
+
+.modify-button:hover {
+    background-color: #e0a800;
+}
+
+.complete-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.complete-button:hover {
+    background-color: #218838;
+}

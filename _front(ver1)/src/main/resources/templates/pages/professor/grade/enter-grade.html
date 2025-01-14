@@ -7,18 +7,72 @@
     <meta charset="UTF-8">
     <title>점수 기입 : enter-grade</title>
     <link rel="stylesheet" th:href="@{/css/professor/common.css}">
+    <link rel="stylesheet" th:href="@{/css/professor/grade/enter-grade.css}">
 </head>
 <th:block layout:fragment="content">
 
     <div class="content">
-
         <div class="content-title">
             <h5>성적 > 성적관리 > 점수기입</h5>
         </div>
+        <div class="enter-grade-container">
+            <div class="search-select-container">
+                <div class="select-container">
+                    <div class="select-box">
+                        <select>
+                            <option>강의명</option>
+                            <option>수학</option>
+                            <option>영어</option>
+                            <option>프로그래밍</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-container">
+                    <div class="search-box">
+                        <div>2024 학년도 2학기</div>
+                    </div>
+                </div>
+            </div>
 
-
-
-
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>이름</th>
+                        <th>학번</th>
+                        <th>학과</th>
+                        <th>중간</th>
+                        <th>기말</th>
+                        <th>총점수</th>
+                        <th>수정</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>홍길동</td>
+                        <td>2470046</td>
+                        <td>컴퓨터소프트웨어</td>
+                        <td><input type="text" class="score-input" placeholder="점수 입력"></td>
+                        <td><input type="text" class="score-input" placeholder="점수 입력"></td>
+                        <td><input type="text" class="score-input" placeholder="자동 계산" readonly></td>
+                        <td><button class="modify-button">수정</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>홍길동</td>
+                        <td>2470046</td>
+                        <td>컴퓨터소프트웨어</td>
+                        <td><input type="text" class="score-input" placeholder="점수 입력"></td>
+                        <td><input type="text" class="score-input" placeholder="점수 입력"></td>
+                        <td><input type="text" class="score-input" placeholder="자동 계산" readonly></td>
+                        <td><button class="complete-button">완료</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </th:block>
 </html>
