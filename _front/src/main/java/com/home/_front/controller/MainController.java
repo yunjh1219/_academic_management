@@ -140,11 +140,11 @@ public class MainController {
     @GetMapping("/assignment-total")
     public String assignmentTotal() {return "pages/professor/assignment/assignment-total";}
 
-    //공지사항 작성
+    //공지사항
     @GetMapping("professor-notice")
     public String professorNotice() {return "pages/professor/other/notice";}
 
-    //공지사항 작성
+    //공지사항 세부
     @GetMapping("professor-notice-detail")
     public String professorNoticeDetail() {return "pages/professor/other/notice-detail";}
 
