@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>출석 통계 : attendance-total</title>
+    <link rel="stylesheet" th:href="@{/css/professor/common.css}">
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>출석 > 출석 관리 > 출석 통계</h5>
+        </div>
+        <!-- 검색 및 필터 부분은 그대로 유지 -->
+        <div class="search-select-container">
+            <div class="search-container">
+                <div class="searchf-box">
+                    <select>
+                        <option>강의1</option>
+                        <option>강의2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>학번</th>
+                        <th>1주차</th>
+                        <th>2주차</th>
+                        <th>3주차</th>
+                        <th>4주차</th>
+                        <th>5주차</th>
+                        <th>6주차</th>
+                        <th>7주차</th>
+                        <th>8주차</th>
+                        <th>9주차</th>
+                        <th>10주차</th>
+                        <th>11주차</th>
+                        <th>12주차</th>
+                        <th>13주차</th>
+                        <th>14주차</th>
+                        <th>15주차</th>
+                        <th>16주차</th>
+                        <th>총결석일수</th>
+                        <th>출석점수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block>
+                        <tr>
+                            <td>홍길동</td>
+                            <td>20123456</td>
+                            <td>0</td>
+                            <td>0.5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0.5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0.5</td>
+                            <td>0</td>
+                            <td>0.5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0.5</td>
+                            <td>0</td>
+                            <td>0.5</td>
+                            <td>2</td>
+                            <td>14</td>
+                            <td>30</td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+    </div>
+</th:block>
+</html>

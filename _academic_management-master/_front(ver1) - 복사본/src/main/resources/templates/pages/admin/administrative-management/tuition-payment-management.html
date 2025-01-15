@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>등록금 납부관리: tuition-payment-management</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common.css}">
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>행정관리 > 등록금 > 등록금 납부 관리</h5>
+        </div>
+        <div class="query-container">
+            <div class="check-box">
+                <label>
+                    <input type="checkbox" name="status" value="미납">
+                    미납
+                </label>
+            </div>
+            <div class="check-box">
+                <label>
+                    <input type="checkbox" name="status" value="수락대기">
+                    수락대기
+                </label>
+            </div>
+        </div>
+
+        <div class="search-select-container">
+
+
+            <div class="search-container">
+                <div class="searchf-box">
+                    <select>
+                        <option>학과</option>
+                        <option>학번</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <!-- 이름 검색 입력란 -->
+                    <input type="text" placeholder="내용입력" />
+                </div>
+                <button>검색</button>
+            </div>
+        </div>
+        <!-- 폼 시작 -->
+        <form th:action="@{/attendance/save}" method="post">
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>체크</th>
+                        <th>이름</th>
+                        <th>학번</th>
+                        <th>학과</th>
+                        <th>사용자</th>
+                        <th>납부여부</th>
+                        <th>납부날짜</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block>
+                        <td><input type="checkbox" name="selectRow"></td>
+                        <td>홍길동</td>
+                        <td>20230001</td>
+                        <td>컴퓨터공학과</td>
+                        <td>학생</td>
+                        <td>재학중</td>
+                        <td>2024-12-19</td>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>  <!-- 제출 버튼 -->
+            <button type="submit" id="form-btn">신청수락</button>
+        </form>
+        <!-- 폼 끝 -->
+
+
+
+    </div>
+</th:block>
+</html>
