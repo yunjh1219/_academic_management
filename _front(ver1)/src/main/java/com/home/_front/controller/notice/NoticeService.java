@@ -35,4 +35,17 @@ public class NoticeService {
         noticeRepository.save(notice);  // JPA가 변경사항을 자동으로 감지하여 업데이트함
     }
 
+    public void createNotice(NoticeDto noticeDto) {
+        // NoticeDto를 Notice 엔티티로 변환하여 저장
+        Notice notice = new Notice();
+        notice.setTitle(noticeDto.getTitle());
+        notice.setContent(noticeDto.getContent());
+        notice.setAuthor(noticeDto.getAuthor());
+        notice.setCreatedDate(LocalDateTime.now());  // 작성일자 설정 (현재 시간)
+
+        // 저장
+        noticeRepository.save(notice);
+    }
+
+
 }

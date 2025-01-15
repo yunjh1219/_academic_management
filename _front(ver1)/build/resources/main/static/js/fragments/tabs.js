@@ -37,17 +37,7 @@ $(function() {
         tabs.tabs("option", "active", $("#tabs").find("a[href='#" + tabId + "']").parent().index());
     });
 
-    // 공지사항 데이터를 테이블 형식으로 변환하는 함수
-    function generateNoticeTable(notices) {
-        var tableHtml = "<table><tr><th>제목</th><th>작성일</th><th>내용</th></tr>";
 
-        notices.forEach(function(notice) {
-            tableHtml += "<tr><td>" + notice.title + "</td><td>" + notice.content + "</td></tr>";
-        });
-
-        tableHtml += "</table>";
-        return tableHtml;
-    }
 
     // ❗️ X 버튼 클릭 시 모든 탭 삭제 기능 추가
     $("#tabs").on("click", ".close-btn", function () {
@@ -64,7 +54,7 @@ $(function() {
     });
 
     // 예를 들어, 'course2'라는 탭을 자동으로 클릭하고 싶을 때
-    var tabToActivate = $("#menu .snb_depth3 a[data-tab='기이수성적조회']");
+    var tabToActivate = $("#menu .snb_depth3 a[data-tab='공지사항']");
 
     if (tabToActivate.length > 0) {
         tabToActivate.trigger("click");

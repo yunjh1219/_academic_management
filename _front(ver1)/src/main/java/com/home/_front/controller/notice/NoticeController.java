@@ -49,4 +49,15 @@ public class NoticeController {
     }
 
 
+    @PostMapping
+    public ResponseEntity<String> createNotice(@RequestBody NoticeDto noticeDto) {
+        try {
+            // 새로운 공지사항을 저장하는 서비스 메서드 호출
+            noticeService.createNotice(noticeDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body("새로운 공지사항이 성공적으로 저장되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("공지사항 저장 중 오류 발생");
+        }
+    }
+
 }
