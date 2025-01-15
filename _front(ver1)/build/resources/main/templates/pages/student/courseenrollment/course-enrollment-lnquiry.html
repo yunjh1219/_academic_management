@@ -5,30 +5,30 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>수강신청조회: Course Registration Inquiry</title>
-    <link rel="stylesheet" href="/css/student/courseenrollment/course-enrollment-lnquiry.css">
+    <title>수강신청조회 : course-enrollment-lnquiry</title>
 </head>
-<body>
-<div class="tabsconfig">
-    <div class="H1depth0401">
+<th:block layout:fragment="content">
+
+    <div class="content">
+
         <div class="content-title">
-            <h5>수강 > 수강관리 > 수강 신청 조회</h5>
+            <h5>수강 > 수강관리 > 수강신청조회</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="searchBtn">조회</button>
+            </div>
         </div>
 
-        <div class="content-box">
 
-            <!-- 성적내역 -->
-            <!-- 성적내역 -->
-            <div class="Details-of-grades">
-                <div class="table-top">
-                    <h5>수강신청내역</h5>
-                    <h5>[34]</h5>
-                </div>
-                <!-- 성적 테이블 추가 -->
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead class="table-light">
-                        <tr>
+        <div class="table-container">
+            <div class="table-title">
+                수강신청목록
+            </div>
+            <div class="table-box">
+                <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <thead>
+                    <tr>
                             <th>No</th>
                             <th>학년</th>
                             <th>강좌명</th>
@@ -60,9 +60,10 @@
 
 
 
-        </div>
+
     </div>
 </div>
 
-</body>
+
+</th:block>
 </html>

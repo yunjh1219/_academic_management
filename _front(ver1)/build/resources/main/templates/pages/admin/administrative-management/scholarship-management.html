@@ -6,9 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>장학금 관리: scholarship-management</title>
-    <link rel="stylesheet" th:href="@{/css/admin/common.css}">
-    <link rel="stylesheet" th:href="@{/css/admin/modal.css}">
-    <script defer th:src="@{/js/admin/administrative-management/scholarship-management.js}"></script>
+
 </head>
 <th:block layout:fragment="content">
 
@@ -18,7 +16,20 @@
             <h5>행정관리 > 장학금 > 장학금 관리</h5>
         </div>
 
-
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="searchBtn">조회</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="deleteBtn">삭제</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
+            </div>
+        </div>
 
         <div class="search-select-container">
 
@@ -37,25 +48,33 @@
                 <button>검색</button>
             </div>
         </div>
-        <!-- 폼 시작 -->
-        <form th:action="@{/attendance/save}" method="post">
-            <div class="table-container">
+
+        <!-- 공지사항 목록 테이블 -->
+        <div class="table-container">
+            <div class="table-title">
+                장학자명단
+            </div>
+            <div class="table-box">
                 <table>
                     <thead>
                     <tr>
-                        <th>이름</th>
-                        <th>학번</th>
-                        <th>학과</th>
-                        <th>학년도</th>
-                        <th>학기</th>
-                        <th>장학금명</th>
-                        <th>지급구분</th>
-                        <th>장학금액</th>
-                        <th>확정일자</th>
+                        <th style="width: 5%;">
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th style="width: 5%;">이름</th>
+                        <th style="width: 10%;">학번</th>
+                        <th style="width: 25%;">학과</th>
+                        <th style="width: 8%;">학년도</th>
+                        <th style="width: 5%;">학기</th>
+                        <th style="width: 17%;">장학금명</th>
+                        <th style="width: 9%;">지급구분</th>
+                        <th style="width: 7%;">장학금액</th>
+                        <th style="width: 14%;">확정일자</th>
                     </tr>
                     </thead>
                     <tbody>
                     <th:block>
+                        <td><input type="checkbox" id="selectAl6l"></td>
                         <td>홍길동</td>
                         <td>20230001</td>
                         <td>컴퓨터공학과</td>
@@ -68,42 +87,69 @@
                     </th:block>
                     </tbody>
                 </table>
-            </div>  <!-- 제출 버튼 -->
-            <button type="submit" id="form-btn">삭제</button>
-            <button type="button" id="openAddModal">등록</button>
-
-        </form>
-        <!-- 폼 끝 -->
-        <!-- 학생 신규 등록 -->
-        <div id="studentaddModal" class="modal">
-            <div class="modal-content">
-                <span class="close" id="close-modal">&times;</span>
-                <h3>신규등록</h3>
-                <form>
-                    <label for="student-id">학번</label>
-                    <input type="text" id="student-id" name="student-id" placeholder="학번"><br><br>
-
-                    <label for="student-name">이름</label>
-                    <input type="text" id="student-name" name="student-name" placeholder="학생 이름"><br><br>
-
-                    <label for="department">학과</label>
-                    <input type="text" id="department" name="department" placeholder="학과"><br><br>
-
-                    <label for="semester">학기</label>
-                    <input type="text" id="semester" name="semester" placeholder="학기"><br><br>
-
-                    <label for="scholarship-name">장학금명</label>
-                    <input type="text" id="scholarship-name" name="scholarship-name" placeholder="장학금명"><br><br>
-
-                    <label for="payment-type">지급구분</label>
-                    <input type="text" id="payment-type" name="payment-type" placeholder="지급구분"><br><br>
-
-                    <label for="amount">금액</label>
-                    <input type="number" id="amount" name="amount" placeholder="금액"><br><br>
-
-                    <button type="submit">제출</button>
-                </form>
             </div>
+
+        <!-- 항상 보이는 edit-container -->
+        <div class="edit-container" id="editContainer">
+            <form action="#" method="post" id="editNoticeForm">
+
+                <!-- 이름 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="name">이름</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="이름을 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 학번 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="studentId">학번</label>
+                        <input type="text" id="studentId" name="studentId" class="form-control" placeholder="학번을 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 학과 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="department">학과</label>
+                        <input type="text" id="department" name="department" class="form-control" placeholder="학과를 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 학기 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="semester">학기</label>
+                        <input type="text" id="semester" name="semester" class="form-control" placeholder="학기를 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 장학금명 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="scholarshipName">장학금명</label>
+                        <input type="text" id="scholarshipName" name="scholarshipName" class="form-control" placeholder="장학금명을 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 지급구분 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="paymentType">지급구분</label>
+                        <input type="text" id="paymentType" name="paymentType" class="form-control" placeholder="지급구분을 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 금액 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="amount">금액</label>
+                        <input type="number" id="amount" name="amount" class="form-control" placeholder="금액을 입력하세요" required>
+                    </div>
+                </div>
+
+            </form>
         </div>
 
 

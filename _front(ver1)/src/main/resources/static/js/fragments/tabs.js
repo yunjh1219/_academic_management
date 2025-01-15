@@ -64,7 +64,7 @@ $(function() {
     });
 
     // 예를 들어, 'course2'라는 탭을 자동으로 클릭하고 싶을 때
-    var tabToActivate = $("#menu .snb_depth3 a[data-tab='공지사항']");
+    var tabToActivate = $("#menu .snb_depth3 a[data-tab='기이수성적조회']");
 
     if (tabToActivate.length > 0) {
         tabToActivate.trigger("click");

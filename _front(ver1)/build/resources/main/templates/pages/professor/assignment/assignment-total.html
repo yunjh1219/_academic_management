@@ -17,39 +17,36 @@
             <h5>과제 > 과제관리 > 과제점수관리</h5>
         </div>
 
-        <div class="query-container">
-            <div class="query-box">
-                <button class="query-btn">제출</button>
-            </div>
-            <div class="query-box">
-                <button class="query-btn">미제출</button>
-            </div>
-        </div>
-
+        <!-- 검색 및 필터 부분은 그대로 유지 -->
         <div class="search-select-container">
-            <div class="select-container">
-                <div class="select-box">
-                    <select>
-                        <option>강의1</option>
-                        <option>강의2</option>
-                    </select>
-                </div>
-                <div class="select-box">
-                    <select>
-                        <option>1주차</option>
-                        <option>2주차</option>
-                    </select>
-                </div>
-            </div>
             <div class="search-container">
+                <div class="searchf-box">
+                    <select>
+                        <option>제목</option>
+                        <option>작성자</option>
+                    </select>
+                </div>
+                <div class="searchf-box">
+                    <select>
+                        <option>제목</option>
+                        <option>작성자</option>
+                    </select>
+                </div>
                 <div class="search-box">
                     <!-- 이름 검색 입력란 -->
-                    <input type="text" placeholder="이름을 입력하세요" />
+                    <input type="text" placeholder="내용입력" />
                 </div>
                 <button>검색</button>
             </div>
         </div>
-        <div class="table-container">
+
+    </div>
+
+    <div class="table-container">
+        <div class="table-title">
+            수강학생과제 성적목록
+        </div>
+        <div class="table-box">
             <table>
                 <thead>
                 <tr>

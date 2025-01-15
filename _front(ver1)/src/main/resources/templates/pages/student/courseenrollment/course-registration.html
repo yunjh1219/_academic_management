@@ -5,135 +5,112 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
-  <title>수강신청: course-registration</title>
-  <link rel="stylesheet" href="/css/student/courseenrollment/course-registration.css">
+  <title>수강신청 : course-registration</title>
+
 </head>
-<body>
-<div class="tabsconfig">
-  <div class="H1depth0401">
+<th:block layout:fragment="content">
+
+  <div class="content">
+
     <div class="content-title">
-      <h5>수강 > 수강관리 > 수강 신청</h5>
+      <h5>수강 > 수강관리 > 수강신청</h5>
     </div>
 
-    <div class="content-box">
-      <div class="select-container">
-        <!-- 전공/교양 선택 -->
-        <div class="select-section">
-          <label for="major-or-general">전공/교양:</label>
-          <select id="major-or-general" name="major-or-general">
-            <option value="major">전공</option>
-            <option value="general">교양</option>
+    <div class="query-container">
+      <div class="query-box">
+        <button class="query-btn" id="searchBtn">조회</button>
+      </div>
+      <div class="query-box">
+        <button class="query-btn" id="newNoticeBtn">수강신청</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+      </div>
+      <div class="query-box">
+        <button class="query-btn" id="deleteBtn">수강취소</button>
+      </div>
+      <div class="query-box">
+        <button class="query-btn" id="saveBtn">수강저장</button>  <!-- 저장 버튼 -->
+      </div>
+    </div>
+
+    <!-- 검색 및 필터 부분은 그대로 유지 -->
+    <div class="search-select-container">
+      <div class="search-container">
+        <div class="searchf-box">
+          <select>
+            <option>전공/교양</option>
           </select>
         </div>
-
-        <!-- 학과명 선택 -->
-        <div class="select-section">
-          <label for="department">학과명:</label>
-          <select id="department" name="department">
-            <option value="computer-science">컴퓨터공학과</option>
-            <option value="business">경영학과</option>
-            <option value="english">영어영문학과</option>
-            <option value="design">디자인학과</option>
+        <div class="searchf-box">
+          <select>
+            <option>학과명</option>
           </select>
         </div>
-
-        <!-- 교수명 검색 -->
-        <div class="select-section">
-          <label for="professor-name">교수명:</label>
-          <input type="text" id="professor-name" name="professor-name" placeholder="교수명을 검색하세요">
+        <div class="search-box">
+          <!-- 이름 검색 입력란 -->
+          <input type="text" placeholder="내용입력" />
         </div>
+        <button>검색</button>
+      </div>
+    </div>
+
+    <!-- 공지사항 목록 테이블 -->
+    <div class="table-container">
+      <div class="table-title">
+        전체강의목록
+      </div>
+      <div class="table-box">
+        <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+          <thead>
+          <tr>
+            <th style="width: 6%;">
+              <input type="checkbox" id="selectAll">
+            </th>
+            <th style="width: 6%;">NO</th>
+            <th style="width: 53%;">학년</th>
+            <th style="width: 10%;">강의명</th>
+            <th style="width: 25%;">이수구분</th>
+            <th style="width: 25%;">학점</th>
+            <th style="width: 25%;">담당교수</th>
+            <th style="width: 25%;">강의실</th>
+            <th style="width: 25%;">요일</th>
+            <th style="width: 25%;">시간</th>
+          </tr>
+          </thead>
+          <tbody id="noticeTableBody">
+
+          </tbody>
+        </table>
       </div>
 
-      <!-- 성적내역 -->
-      <!-- 성적내역 -->
-      <div class="Details-of-grades">
-        <div class="table-top">
-          <h5>전체 강의 목록</h5>
-          <h5>[34]</h5>
+      <!-- 공지사항 목록 테이블 -->
+      <div class="table-container">
+        <div class="table-title">
+          수강 신청 강의
         </div>
-        <!-- 성적 테이블 추가 -->
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover">
-            <thead class="table-light">
+        <div class="table-box">
+          <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+            <thead>
             <tr>
-              <th>No</th>
-              <th>학년</th>
-              <th>강좌명</th>
-              <th>이수구분</th>
-              <th>학점</th>
-              <th>담당교수</th>
-              <th>강의실</th>
-              <th>요일</th>
-              <th>시간</th>
+              <th style="width: 6%;">
+                <input type="checkbox" id="selectAll2">
+              </th>
+              <th style="width: 6%;">NO</th>
+              <th style="width: 53%;">학년</th>
+              <th style="width: 10%;">강의명</th>
+              <th style="width: 25%;">이수구분</th>
+              <th style="width: 25%;">학점</th>
+              <th style="width: 25%;">담당교수</th>
+              <th style="width: 25%;">강의실</th>
+              <th style="width: 25%;">요일</th>
+              <th style="width: 25%;">시간</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-              <td><button type="button">신청</button></td>
-              <td>1학년</td>
-              <td>웹디자인기초</td>
-              <td>xb</td>
-              <td>3학점</td>
-              <td>홍길동</td>
-              <td>1301</td>
-              <td>수</td>
-              <td>2,3,4</td>
-            </tr>
+            <tbody id="noticeTableBody2">
+
             </tbody>
           </table>
         </div>
       </div>
-      <div class="Details-of-grades">
-        <div class="table-top">
-          <h5>수강신청내역</h5>
-          <h5>[34]</h5>
-        </div>
-        <!-- 성적 테이블 추가 -->
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover">
-            <thead class="table-light">
-            <tr>
-              <th>No</th>
-              <th>학년</th>
-              <th>강좌명</th>
-              <th>이수구분</th>
-              <th>학점</th>
-              <th>담당교수</th>
-              <th>강의실</th>
-              <th>요일</th>
-              <th>시간</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td><button type="button">취소</button></td>
-              <td>1학년</td>
-              <td>웹디자인기초</td>
-              <td>xb</td>
-              <td>3학점</td>
-              <td>홍길동</td>
-              <td>1301</td>
-              <td>수</td>
-              <td>2,3,4</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- 총 신청학점과 신청 버튼 -->
-      <div class="total-credits">
-        <div class="total-credits-left">
-          <span>총 신청학점: 3학점</span>
-        </div>
-        <div class="total-credits-right">
-          <button type="button">수강 신청</button>
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
-
-</body>
+</th:block>
 </html>

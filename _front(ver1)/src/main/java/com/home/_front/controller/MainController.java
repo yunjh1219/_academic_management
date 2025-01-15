@@ -119,9 +119,8 @@ public class MainController {
     @GetMapping("/course-regist")
     public String courseRegist() {return "pages/professor/course/prof-course-registration";}
 
-    //강의 수강 등록 세부 페이지
-    @GetMapping("/course-regist-detail")
-    public String courseRegistDetail() {return "pages/professor/course/prof-course-registration-detail";}
+
+
 
     //성적 기입
     @GetMapping("/enter-grade")
@@ -142,5 +141,9 @@ public class MainController {
     //과제 확인
     @GetMapping("/assignment-check")
     public String assignmentcheck() {return "pages/professor/assignment/assignment-check";}
+
+    //공지사항
+    @GetMapping("/prof-notice")
+    public String profNotice() {return "pages/professor/notice/notice";}
 
 }
