@@ -1,5 +1,6 @@
 package com.home._front.controller.notice;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Notice {
     private String author;
 
     @Column(updatable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDate;
 
     private LocalDateTime updatedDate;

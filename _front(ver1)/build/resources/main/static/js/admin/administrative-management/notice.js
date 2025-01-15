@@ -12,11 +12,13 @@ document.getElementById('searchBtn').addEventListener('click', function() {
             data.forEach((notice, index) => {  // index 값을 사용하여 순차적인 번호를 할당
                 const row = document.createElement('tr');  // 새로운 행 추가
 
-                const formattedDate = new Date(notice.createdAt).toLocaleDateString('ko-KR', {  // 날짜 포맷팅
+// 데이터가 존재하는지 확인하고 날짜 포맷팅
+                const formattedDate = notice.createdAt ? new Date(notice.createdAt).toLocaleDateString('ko-KR', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric'
-                });
+                }) : '날짜 없음';  // 만약 createdAt이 없다면 '날짜 없음' 표시
+
 
                 // 각 공지사항 데이터를 테이블 행에 삽입
                 row.dataset.id = notice.id;  // 실제 DB에서 받아온 고유 ID를 dataset.id로 설정
@@ -41,12 +43,17 @@ document.getElementById('searchBtn').addEventListener('click', function() {
 document.getElementById('newNoticeBtn').addEventListener('click', function() {
     const tableBody = document.getElementById('noticeTableBody');
 
-    // 신규 공지사항 ID 관리 (단순히 increment하는 방식 사용)
-    const newNoticeId = `new-${Date.now()}`; // 고유한 ID 생성 (시간을 기반으로)
+    // 행 순서대로 ID 생성 (현재 행의 개수를 기반으로)
+    const newNoticeId = `new+${tableBody.rows.length + 1}`; // 테이블의 현재 행 수에 1을 더한 값
+
+    // "new+" 부분을 제거한 ID만 표시
+    const displayId = newNoticeId.replace('new+', ''); // 'new+'를 빈 문자열로 대체
 
     // 새로운 행(tr) 생성
     const newRow = document.createElement('tr');
     newRow.dataset.id = newNoticeId;  // 고유한 data-id 부여
+
+
 
     // 현재 날짜를 기본값으로 설정 (작성일자)
     const today = new Date().toLocaleDateString('ko-KR', {
@@ -58,14 +65,14 @@ document.getElementById('newNoticeBtn').addEventListener('click', function() {
     // 새로운 행의 HTML 구조 설정
     newRow.innerHTML = `
         <td><input type="checkbox" class="notice-checkbox"></td>
-        <td>${newNoticeId}</td> <!-- 신규 ID 표시 -->
-        <td contenteditable="true" style="text-align: left;">제목을 입력하세요</td>
-        <td contenteditable="true">작성자</td>
-        <td>${today}</td>
+        <td>${displayId}</td> <!-- 신규 ID에서 'new+' 부분 제거하여 표시 -->
+        <td contenteditable="true" style="text-align: left;" data-field="title">제목을 입력하세요</td>
+        <td contenteditable="true" data-field="author">작성자</td>
+        <td data-field="date">${today}</td>
     `;
 
-    // 테이블에 행 추가
-    tableBody.prepend(newRow); // 가장 위에 새로운 행을 추가
+    // 테이블에 행 추가 (맨 아래에 추가)
+    tableBody.appendChild(newRow); // appendChild로 맨 아래에 새로운 행을 추가
 
     // 선택된 행 강조
     newRow.classList.add('selected');
@@ -77,8 +84,31 @@ document.getElementById('newNoticeBtn').addEventListener('click', function() {
     document.getElementById('createdate').value = today;
     document.getElementById('updatedate').value = today;
 
+    // 실시간 반영 이벤트 추가
+    addRealTimeEditing(newRow);
+
     alert('새로운 공지사항을 추가했습니다. 내용을 입력하세요.');
 });
+
+// 실시간으로 수정 내용 반영
+function addRealTimeEditing(row) {
+    const titleCell = row.querySelector('td[data-field="title"]');
+    const contentCell = row.querySelector('td[data-field="content"]');
+
+    // 제목 수정 시, 테이블의 제목 셀 실시간으로 반영
+    document.getElementById('title').addEventListener('input', function() {
+        if (titleCell) {
+            titleCell.textContent = this.value;  // 제목 수정 반영
+        }
+    });
+
+    // 내용 입력란을 수정하면 테이블의 내용도 실시간으로 반영
+    document.getElementById('content').addEventListener('input', function() {
+        if (contentCell) {
+            contentCell.textContent = this.value;  // 내용 수정 반영
+        }
+    });
+}
 
 
 // 공지사항 테이블 행 클릭 시 발생하는 이벤트
@@ -154,15 +184,24 @@ document.getElementById('saveBtn').addEventListener('click', function() {
     let method = '';
     let noticeId = null;
 
+
     if (selectedRow) {
-        // 수정: PUT 요청
+        // 선택된 행에서 ID를 가져옴
         noticeId = selectedRow.dataset.id;  // 선택된 공지사항의 ID
-        url = `/admin-potal/notices/${noticeId}`;
-        method = 'PUT';
+
+        if (noticeId.startsWith('new+')) {
+            // 신규 공지사항 (new+ 로 시작하는 ID)
+            url = '/admin-potal/notices';
+            method = 'POST';  // 신규 추가: POST 요청
+        } else {
+            // 기존 공지사항 (실제 DB ID가 존재하는 경우)
+            url = `/admin-potal/notices/${noticeId}`;
+            method = 'PUT';  // 수정: PUT 요청
+        }
     } else {
-        // 신규: POST 요청
+        // 선택된 행이 없으면 신규로 처리
         url = '/admin-potal/notices';
-        method = 'POST';
+        method = 'POST';  // 신규 추가: POST 요청
     }
 
     // 공지사항 데이터 객체 생성
@@ -196,84 +235,3 @@ document.getElementById('saveBtn').addEventListener('click', function() {
             alert('공지사항을 저장하는 중 오류가 발생했습니다.');
         });
 });
-
-//
-// // '저장' 버튼 클릭 시, 수정된 내용을 서버로 전송하여 저장
-// document.getElementById('saveBtn').addEventListener('click', function() {
-//     // 선택된 행에서 data-id를 사용하여 공지사항 ID 가져오기
-//     const selectedRow = document.querySelector('#noticeTableBody tr[data-id]');
-//     if (!selectedRow) {
-//         alert('저장할 공지사항을 선택해주세요.');
-//         return;
-//     }
-//
-//     const noticeId = selectedRow.dataset.id;  // data-id 속성에서 ID 가져오기
-//
-//     // 수정된 공지사항 데이터를 객체로 생성
-//     const updatedNotice = {
-//         title: document.getElementById('title').value,
-//         content: document.getElementById('content').value,
-//         author: document.getElementById('author').value
-//     };
-//
-//     // PUT 요청을 사용하여 서버에 수정 데이터 전송
-//     fetch(`/admin-potal/notices/${noticeId}`, {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(updatedNotice)
-//     })
-//         .then(response => {
-//             if (response.ok) {
-//                 alert('공지사항이 성공적으로 저장되었습니다.');
-//             } else {
-//                 throw new Error('저장 중 오류가 발생했습니다.');
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             alert('공지사항을 저장하는 중 오류가 발생했습니다.');
-//         });
-// });
-//
-//
-//
-// // '저장' 버튼 클릭 시, 신규 공지사항을 서버로 전송하여 저장
-// document.getElementById('saveBtn').addEventListener('click', function() {
-//     // 새로운 공지사항 ID는 data-id로 관리
-//     const newRow = document.querySelector('#noticeTableBody tr[data-id]');
-//     if (!newRow) {
-//         alert('저장할 공지사항을 선택해주세요.');
-//         return;
-//     }
-//
-//     const newNoticeId = newRow.dataset.id;  // 신규 ID 가져오기 (new-<timestamp>)
-//
-//     // 수정된 공지사항 데이터를 객체로 생성
-//     const newNotice = {
-//         title: document.getElementById('title').value,
-//         content: document.getElementById('content').value,
-//         author: document.getElementById('author').value
-//     };
-//
-//     // POST 요청을 사용하여 서버에 새로운 공지사항 데이터 전송
-//     fetch('/admin-potal/notices', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(newNotice)
-//     })
-//         .then(response => {
-//             if (response.ok) {
-//                 alert('새로운 공지사항이 성공적으로 저장되었습니다.');
-//             } else {
-//                 throw new Error('저장 중 오류가 발생했습니다.');
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             alert('공지사항을 저장하는 중 오류가 발생했습니다.');
-//         });
-// });
