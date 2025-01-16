@@ -19,7 +19,7 @@ document.getElementById('searchBtn').addEventListener('click', function() {
                     day: 'numeric'
                 }) : '날짜 없음';  // 만약 createdAt이 없다면 '날짜 없음' 표시
 
-
+                row.classList.add('notice-row');  // CSS 클래스 추가
                 // 각 공지사항 데이터를 테이블 행에 삽입
                 row.dataset.id = notice.id;  // 실제 DB에서 받아온 고유 ID를 dataset.id로 설정
                 row.innerHTML = `
@@ -66,19 +66,25 @@ document.getElementById('newNoticeBtn').addEventListener('click', function() {
     newRow.innerHTML = `
         <td><input type="checkbox" class="notice-checkbox"></td>
         <td>${displayId}</td> <!-- 신규 ID에서 'new+' 부분 제거하여 표시 -->
-        <td contenteditable="true" style="text-align: left;" data-field="title">제목을 입력하세요</td>
-        <td contenteditable="true" data-field="author">작성자</td>
-        <td data-field="date">${today}</td>
+        <td style="text-align: left;" data-field="title"></td>
+        <td data-field="author">작성자</td>
+        <td data-field="date"></td>
     `;
 
-    // 테이블에 행 추가 (맨 아래에 추가)
-    tableBody.appendChild(newRow); // appendChild로 맨 아래에 새로운 행을 추가
+    // 기존에 선택된 행의 'selected' 제거
+    const previouslySelectedRow = document.querySelector('#noticeTableBody tr.selected');
+    if (previouslySelectedRow) {
+        previouslySelectedRow.classList.remove('selected');
+    }
 
-    // 선택된 행 강조
-    newRow.classList.add('selected');
+    // 새로운 행을 추가하고 자동으로 선택 상태로 만듦
+    tableBody.appendChild(newRow);
+// 새로운 행을 추가할 때 CSS 클래스 적용
+    newRow.classList.add('notice-row', 'selected');
+
 
     // 제목, 내용 등 폼 필드 초기화
-    document.getElementById('title').value = '제목을 입력하세요';
+    document.getElementById('title').value = '';
     document.getElementById('content').value = '';
     document.getElementById('author').value = '작성자';
     document.getElementById('createdate').value = today;
@@ -134,7 +140,6 @@ document.getElementById('noticeTableBody').addEventListener('click', function(ev
                 // 데이터 폼에 채우기
                 document.getElementById('title').value = notice.title;
                 document.getElementById('content').value = notice.content;
-                document.getElementById('file').value = '';  // 파일 첨부 필드는 비워둠
                 document.getElementById('createdate').value = new Date(notice.createdAt).toLocaleDateString();  // 작성일자
                 document.getElementById('updatedate').value = new Date().toLocaleDateString();  // 수정일자 (현재 날짜로 표시)
                 document.getElementById('author').value = notice.author;  // 작성자
