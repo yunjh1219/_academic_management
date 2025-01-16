@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>등록금 납부관리: tuition-payment-management</title>
+    <link rel="stylesheet" th:href="@{/css/admin/common.css}">
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>행정관리 > 등록금 > 등록금 납부 관리</h5>
+        </div>
+
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="searchBtn">조회</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="deleteBtn">삭제</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
+            </div>
+        </div>
+
+        <div class="query-container">
+            <div class="check-box">
+                <label>
+                    <input type="checkbox" name="status" value="미납">
+                    미납
+                </label>
+            </div>
+            <div class="check-box">
+                <label>
+                    <input type="checkbox" name="status" value="수락대기">
+                    수락대기
+                </label>
+            </div>
+        </div>
+
+        <div class="search-select-container">
+
+
+            <div class="search-container">
+                <div class="searchf-box">
+                    <select>
+                        <option>학과</option>
+                        <option>학번</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <!-- 이름 검색 입력란 -->
+                    <input type="text" placeholder="내용입력" />
+                </div>
+                <button>검색</button>
+            </div>
+        </div>
+
+        <!-- 공지사항 목록 테이블 -->
+        <div class="table-container">
+            <div class="table-title">
+                등록금납부현황
+            </div>
+            <div class="table-box">
+                <table>
+                    <thead>
+                    <tr>
+                        <th style="width: 5%;">
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th style="width: 10%;">이름</th>
+                        <th style="width: 15%;">학번</th>
+                        <th style="width: 40%;">학과</th>
+                        <th style="width: 10%;">사용자</th>
+                        <th style="width: 10%;">납부여부</th>
+                        <th style="width: 15%;">납부날짜</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+
+
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> 사이드바 영역 </title>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</head>
+<body>
+<!-- sidebarFragment 선언 -->
+<th:block th:fragment="sidebarFragment">
+    <aside class="sidebar">
+        <nav class="snb">
+            <!-- 검색 입력란 추가 -->
+            <div class="menu-search-container">
+                <!-- 메뉴 검색 입력란 -->
+                <input type="text" id="menuSearch" class="menu-search" placeholder="메뉴를 검색하세요...">
+            </div>
+
+            <!-- 메뉴 항목 -->
+            <ul class="snb_depth1" id="menu">
+                <li class="student">
+                    <a>수강</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>수강관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/cour-ion" data-tab="수강신청">수강신청</a></li>
+                                <li><a href="/cour-lnq" data-tab="수강신청조회">수강신청조회</a></li>
+                                <li><a href="/cour-ent" data-tab="수강시간표관리">수강시간표관리</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="student">
+                    <a>출석</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>조회</a>
+
+                            <ul class="snb_depth3">
+                                <li><a href="/atten-iry" data-tab="출석조회">출석조회</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="student">
+                    <a>과제</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>조회</a>
+
+                            <ul class="snb_depth3">
+                                <li><a href="/ass-iry" data-tab="과제조회">과제조회</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="student">
+                    <a>성적</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>조회</a>
+
+                            <ul class="snb_depth3">
+                                <li><a href="/gra-cur-iry" data-tab="금학기성적조회">금학기성적조회</a></li>
+                                <li><a href="/gra-pre-iry" data-tab="기이수성적조회">기이수성적조회</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="student">
+                    <a>등록</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>학적관리</a>
+
+                            <ul class="snb_depth3">
+                                <li><a href="/regi-tbc"  data-tab="복학신청">복학신청</a></li>
+                                <li><a href="/regi-tpc" data-tab="휴학신청">휴학신청</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a>등록출력</a>
+
+                            <ul class="snb_depth3">
+                                <li><a href="/regi-loaa" data-tab="등록금납부확인">등록금납부확인</a></li>
+                                <li><a href="/regi-ra" data-tab="등록금고지서확인">등록금고지서확인</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="student">
+                    <a>장학</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>조회</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/schol-sdc" data-tab="장학내역확인">장학내역확인</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 관리자 모드 항목 -->
+                <li class="admin">
+                    <a>사용자관리</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>학생</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/adminS2" data-tab="학생관리">학생 관리</a></li>
+                                <li><a href="/adminS1" data-tab="학생성적조회">학생 성적 조회</a></li>
+                            </ul>
+                            <a>교수</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/adminS3" data-tab="교수정보관리">교수정보관리</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="admin">
+                    <a>행정관리</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>공지사항</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/adminP2" data-tab="공지사항">공지사항</a></li>
+                            </ul>
+                            <a>일정</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/adminP1" data-tab="학사일정">학사일정</a></li>
+                            </ul>
+                            <a>등록금납부관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/adminP4" data-tab="등록금납부관리">등록금납부관리</a></li>
+                            </ul>
+                            <a>장학금관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/adminP3" data-tab="장학금관리">장학금관리</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- 교수 모드 항목 -->
+                <li class="prof">
+                    <a>출석</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>출석 관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/atten-daily" data-tab="금일출석관리">금일 출석 관리</a></li>
+                                <li><a href="/atten-tot" data-tab="출석통계">출석 통계</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="prof">
+                    <a>수강</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>수강 관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/course-regist" data-tab="강의수강등록">강의 수강 등록</a></li>
+                                <li><a href="/user-sgi" data-tab="강의시간표">강의 시간표</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="prof">
+                    <a>성적</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>성적 관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/enter-grade" data-tab="점수기입">점수 기입</a></li>
+                                <li><a href="/grade-processing" data-tab="성적처리">성적 처리</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="prof">
+                    <a>과제</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>과제 관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/assignment-registration" data-tab="과제등록">과제 등록</a></li>
+                                <li><a href="/assignment-check" data-tab="과제확인">과제 확인</a></li>
+                                <li><a href="/assignment-total" data-tab="과제점수관리">과제 점수 관리</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="prof">
+                    <a>기타</a>
+                    <ul class="snb_depth2">
+                        <li>
+                            <a>기타관리</a>
+                            <ul class="snb_depth3">
+                                <li><a href="/prof-notice" data-tab="교수공지사항">공지사항</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+
+        </nav>
+    </aside>
+
+</th:block>
+<!-- sidebarFragment 선언 끝 -->
+</body>
+</html>

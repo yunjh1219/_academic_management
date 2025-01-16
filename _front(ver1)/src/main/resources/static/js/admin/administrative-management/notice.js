@@ -43,14 +43,10 @@ document.getElementById('searchBtn').addEventListener('click', function() {
 document.getElementById('newNoticeBtn').addEventListener('click', function() {
     const tableBody = document.getElementById('noticeTableBody');
 
-    // 행 순서대로 ID 생성 (현재 행의 개수를 기반으로)
-    const newNoticeId = `new+${tableBody.rows.length + 1}`; // 테이블의 현재 행 수에 1을 더한 값
 
-    // "new+" 부분을 제거한 ID만 표시
+    const newNoticeId = `new+${tableBody.rows.length + 1}`;   // 행 순서대로 ID 생성 (현재 행의 개수를 기반으로)
     const displayId = newNoticeId.replace('new+', ''); // 'new+'를 빈 문자열로 대체
-
-    // 새로운 행(tr) 생성
-    const newRow = document.createElement('tr');
+    const newRow = document.createElement('tr');   // 새로운 행(tr) 생성
     newRow.dataset.id = newNoticeId;  // 고유한 data-id 부여
 
 
@@ -79,7 +75,6 @@ document.getElementById('newNoticeBtn').addEventListener('click', function() {
 
     // 새로운 행을 추가하고 자동으로 선택 상태로 만듦
     tableBody.appendChild(newRow);
-// 새로운 행을 추가할 때 CSS 클래스 적용
     newRow.classList.add('notice-row', 'selected');
 
 
@@ -115,6 +110,9 @@ function addRealTimeEditing(row) {
         }
     });
 }
+
+
+
 
 
 // 공지사항 테이블 행 클릭 시 발생하는 이벤트
@@ -240,3 +238,5 @@ document.getElementById('saveBtn').addEventListener('click', function() {
             alert('공지사항을 저장하는 중 오류가 발생했습니다.');
         });
 });
+
+

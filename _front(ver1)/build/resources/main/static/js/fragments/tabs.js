@@ -5,7 +5,7 @@ $(function() {
     $("#menu .snb_depth3 a").on("click", function(event) {
         event.preventDefault();
         var tabName = $(this).data("tab");
-        var tabId = "tabs-" + tabName.replace(/\s+/g, '');
+        var tabId = "tabs-" + tabName.replace(/\s+/g, ''); // 공백 제거하여 tabId 생성
         var url = $(this).attr("href");
 
         var existingTab = $("#" + tabId);
@@ -17,16 +17,17 @@ $(function() {
         }
 
         if (existingTab.length === 0) {
+            // 탭 생성
             $("#tabs ul").append("<li><a href='#" + tabId + "'>" + tabName + "</a><span class='ui-icon ui-icon-close' role='presentation'></span></li>");
-
             $("#tabs").append("<div id='" + tabId + "'><p>로딩 중...</p></div>");
             tabs.tabs("refresh");
 
+            // AJAX로 콘텐츠 로드
             $.ajax({
                 url: url,
                 method: 'GET',
                 success: function(data) {
-                    $("#" + tabId).html(data);
+                    $("#" + tabId).html(data);  // 콘텐츠 삽입
                 },
                 error: function() {
                     $("#" + tabId).html("<p>콘텐츠를 불러오는 데 실패했습니다.</p>");
@@ -34,9 +35,9 @@ $(function() {
             });
         }
 
+        // 새로 생성된 탭을 활성화
         tabs.tabs("option", "active", $("#tabs").find("a[href='#" + tabId + "']").parent().index());
     });
-
 
 
     // ❗️ X 버튼 클릭 시 모든 탭 삭제 기능 추가
