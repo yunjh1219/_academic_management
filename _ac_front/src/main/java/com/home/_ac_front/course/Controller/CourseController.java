@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class CourseController {
@@ -45,4 +46,17 @@ public class CourseController {
         }
 
     }
+
+
+    @GetMapping
+    @RequestMapping("/api/names")
+    public List<String> getCourseNames() {
+        return courseRepository.findAll()
+                .stream()
+                .map(Course::getCourseName)
+                .collect(Collectors.toList());
+    }
+
+
+
 }

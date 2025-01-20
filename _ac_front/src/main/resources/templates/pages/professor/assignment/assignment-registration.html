@@ -9,6 +9,9 @@
 
     <link rel="stylesheet" th:href="@{/css/professor/common.css}">
     <link rel="stylesheet" th:href="@{/css/professor/assignment/assignment-registration.css}">
+
+    <script th:src="@{/js/prof/assign/check.js}"></script>
+
 </head>
 <th:block layout:fragment="content">
 
@@ -19,16 +22,16 @@
         </div>
         <div class="query-container">
             <div class="query-box">
-                <button class="query-btn" id="searchBtn">조회</button>
+                <button class="query-btn" id="prof-assign-searchBtn">조회</button>
             </div>
             <div class="query-box">
-                <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+                <button class="query-btn" id="prof-assign-newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
             </div>
             <div class="query-box">
-                <button class="query-btn" id="deleteBtn">삭제</button>
+                <button class="query-btn" id="prof-assign-deleteBtn">삭제</button>
             </div>
             <div class="query-box">
-                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
+                <button class="query-btn" id="prof-assign-saveBtn">저장</button>  <!-- 저장 버튼 -->
             </div>
         </div>
 
@@ -36,16 +39,15 @@
         <div class="search-select-container">
             <div class="search-container">
                 <div class="searchf-box">
-                    <select>
-                        <option>제목</option>
-                        <option>작성자</option>
+                    <select id="course-name-select">
+                        <option value="">강좌명</option>  <!-- 강좌명 옵션은 비어있는 값을 기본으로 설정 -->
                     </select>
                 </div>
-                <div class="search-box">
-                    <!-- 이름 검색 입력란 -->
-                    <input type="text" placeholder="내용입력" />
+                <div class="searchf-box">
+                    <select id="week-select">
+                        <option value="">주차</option>  <!-- 주차 옵션은 비어있는 값을 기본으로 설정 -->
+                    </select>
                 </div>
-                <button>검색</button>
             </div>
         </div>
 
@@ -68,7 +70,7 @@
                         <th style="width: 25%;">제출기한</th>
                     </tr>
                     </thead>
-                    <tbody id="noticeTableBody">
+                    <tbody id="prof-assign-search-TableBody">
                     </tbody>
                 </table>
             </div>
