@@ -1,0 +1,350 @@
+/* tabsconfig 전체가 잘리게 설정 */
+.content {
+    position: relative;
+    background-color: white;
+    padding: 5px 20px;
+    overflow: hidden;         /* 넘치는 부분 숨김 */
+    white-space: nowrap;      /* 줄바꿈 방지 */
+    max-width: 100%;          /* 부모 요소를 넘지 않도록 제한 */
+    box-sizing: border-box;   /* 패딩과 border를 포함한 크기 계산 */
+}
+
+.content-title{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 0;
+    border-bottom: 1px solid grey;
+    height: 20px;
+}
+
+
+/* 조회버튼 */
+/* ============================================================= */
+
+.query-container{
+    display: flex;
+    justify-content: flex-end; /* 버튼을 우측으로 정렬 */
+}
+
+.query-box{
+    position: relative;
+    margin-right: 3px;
+    width: 50px;
+}
+
+.query-box:last-child {
+    margin-right: 0;
+}
+
+.query-btn{
+    width: 100%;
+    padding: 3px 5px;
+    display: flex;                /* flexbox 활성화 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center;     /* 수직 중앙 정렬 */
+    text-align: center;      /* 텍스트 중앙 정렬 */
+}
+
+.check-box{
+    position: relative;
+    margin-right: 10px;
+
+}
+
+
+
+/* 서치/선택상자 */
+/* ============================================================= */
+
+.search-select-container{
+    display: flex;
+    width: 100%; /* 부모 컨테이너가 100% 너비를 차지하도록 설정 */
+    margin-top: 20px;
+}
+
+.select-container{
+    display: flex;
+}
+
+.select-box{
+    position: relative;
+    margin-right: 10px;
+    width: 160px;
+}
+
+/* 마지막 .select-box 요소에만 margin-right 제거 */
+.select-box:last-child {
+    margin-right: 0;
+}
+
+.select-box select{
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.select-box option{
+    font-size: 13px; /* 옵션 텍스트의 크기 */
+    padding: 10px; /* 텍스트와 옵션 항목의 간격 */
+}
+
+/* 선택된 항목을 표시하는 스타일 */
+.select-box select:focus {
+    border-color: #4A90E2; /* 포커스 시 테두리 색 변경 */
+    outline: none; /* 포커스를 받을 때 테두리 외곽선 제거 */
+}
+
+/* 옵션 요소가 활성화될 때 배경색을 변경 */
+.select-box select option:hover {
+    background-color: #f0f0f0; /* 마우스 오버 시 배경 색상 */
+}
+
+
+/*====*/
+
+
+.searchf-box{
+    position: relative;
+    margin-right: 10px;
+    width: 160px;
+}
+
+
+/* 마지막 .select-box 요소에만 margin-right 제거 */
+.searchf-box:last-child {
+    margin-right: 0;
+}
+
+
+.searchf-box select{
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.searchf-box option{
+    font-size: 13px; /* 옵션 텍스트의 크기 */
+    padding: 10px; /* 텍스트와 옵션 항목의 간격 */
+}
+
+/*====*/
+.search-container{
+    display: flex;
+    justify-content: flex-end; /* 자식 요소들을 오른쪽으로 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    width: 100%; /* 부모 컨테이너가 100% 너비를 차지하도록 설정 */
+}
+
+.search-box{
+    position: relative;
+    margin-right: 5px;
+    width: 160px;
+}
+
+/* 마지막 .select-box 요소에만 margin-right 제거 */
+.search-box:last-child {
+    margin-right: 0;
+}
+
+
+.search-box input{
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.search-container button{
+    width: 40px;
+    padding: 3px 5px;
+    display: flex;                /* flexbox 활성화 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center;     /* 수직 중앙 정렬 */
+    text-align: center;      /* 텍스트 중앙 정렬 */
+}
+
+/* ============================================================= */
+
+
+/* ============================================================= */
+
+/* 표상자 */
+/* ============================================================= */
+
+.table-container{
+    position: relative;
+    margin-top: 10px;
+}
+
+.table-title{
+    font-weight: bold;
+    font-size: 13px;
+    color: #333333;
+}
+
+.table-box {
+    position: relative;
+    height: 500px;
+    border-top: 2px solid blue;
+    border-bottom: 1px solid grey;
+    background-color: #dddddd;
+    overflow: auto; /* 오버플로우 시 스크롤 생기도록 설정 */
+    padding-right: 10px;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-collapse: collapse;
+}
+
+
+
+/* 테이블 헤더 스타일 */
+th {
+    margin: 0;
+    background-color:  #4d4d4d;
+    padding: 5px 15px;
+    text-align: center;"
+    font-weight: bold;
+    border: 1px solid #ddd; /* 헤더에 경계선 추가 */
+    position: sticky; /* 스크롤 시 헤더 고정 */
+    top: 0; /* 상단에 고정 */
+    color: white;
+}
+
+/* 테이블 데이터 스타일 */
+td {
+    padding: 5px 15px;
+    text-align: center;
+    border: 1px solid gainsboro;
+}
+
+/* 홀수 행에 배경색을 다르게 */
+tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* 마지막 행에만 경계선 추가하지 않기 */
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* '상세보기' 링크 스타일 */
+td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline; /* 호버 시 밑줄 추가 */
+}
+
+
+
+
+
+/* form 제출용 버튼 css */
+#form-btn{
+    margin-top: 10px;
+    background-color: #007bff; /* 버튼 배경 색상 */
+    color: white; /* 텍스트 색상 */
+    padding: 10px 20px; /* 위아래, 좌우 패딩 */
+    font-size: 16px; /* 폰트 크기 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+    display: inline-block; /* 버튼을 인라인 블록으로 표시 */
+    float: right; /* 오른쪽 정렬 */
+}
+
+#openAddModal{
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #007bff; /* 버튼 배경 색상 */
+    color: white; /* 텍스트 색상 */
+    padding: 10px 20px; /* 위아래, 좌우 패딩 */
+    font-size: 16px; /* 폰트 크기 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+    display: inline-block; /* 버튼을 인라인 블록으로 표시 */
+    float: right; /* 오른쪽 정렬 */
+}
+
+
+/* 이벤트 btn */
+/* ============================================================= */
+.event-btn .create-post-link{
+    text-decoration: none;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #007bff; /* 버튼 배경 색상 */
+    color: white; /* 텍스트 색상 */
+    padding: 10px 20px; /* 위아래, 좌우 패딩 */
+    font-size: 16px; /* 폰트 크기 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 커서 변경 */
+    transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+    display: inline-block; /* 버튼을 인라인 블록으로 표시 */
+    float: right; /* 오른쪽 정렬 */
+}
+
+/* edit-container */
+/* 글 작성 */
+/* ============================================================= */
+
+.edit-container{
+    border: 1px solid grey;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(135, 206, 235, 0.2); /* 아주 연한 skyblue */
+    width: 100%;
+}
+
+.form-group{
+    display: flex;
+    width: 100%;
+}
+
+.form-item{
+    display: flex;
+    width: 100%;
+    padding: 3px;
+}
+
+.form-item label {
+    color: rgb(0, 0, 139); /* 진한 블루 텍스트 색상 */
+    padding: 5px 10px; /* 텍스트와 경계 사이의 간격 추가 */
+    min-width: 150px; /* 최소 너비를 150px로 설정 */
+    display: inline-block; /* 레이블을 블록 요소로 설정하여 너비를 적용 */
+    text-align: right; /* 텍스트를 우측 정렬 */
+    margin-right: 10px; /* 레이블과 입력 필드 사이에 간격 추가 */
+}
+
+.form-item input{
+    padding: 5px;
+    border: 1px solid skyblue;
+    flex-grow: 1; /* 남은 공간을 입력 필드가 차지하도록 */
+}
+
+.form-item input:focus {
+    border-color: #0066cc; /* 선택 시 진한 파란색 테두리 */
+    outline: none; /* 기본 선택 시 외곽선 제거 */
+}
+
+.form-item textarea{
+    padding: 5px;
+    resize: none;
+    height: 200px;
+    border: 1px solid skyblue;
+    flex-grow: 1; /* 남은 공간을 입력 필드가 차지하도록 */
+}
+
+.form-item textarea:focus{
+    border-color: #0066cc; /* 선택 시 진한 파란색 테두리 */
+    outline: none; /* 기본 선택 시 외곽선 제거 */
+}
+
