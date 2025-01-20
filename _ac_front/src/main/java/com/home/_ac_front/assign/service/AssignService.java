@@ -24,6 +24,9 @@ public class AssignService {
         return assignRepository.save(assign);  // 저장 후 반환
     }
 
+    public Assign getAssignmentById(Long id) {
+        return assignRepository.findById(id).orElseThrow(() -> new RuntimeException("과제를 찾을 수 없습니다."));
+    }
 
     // 강좌명 목록을 가져오는 메서드
     public List<String> getCourseNames() {

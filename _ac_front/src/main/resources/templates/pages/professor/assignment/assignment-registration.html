@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/professor/common.css}">
     <link rel="stylesheet" th:href="@{/css/professor/assignment/assignment-registration.css}">
 
-    <script th:src="@{/js/prof/assign/check.js}"></script>
+    <script th:src="@{/js/prof/assign/registr.js}"></script>
 
 </head>
 <th:block layout:fragment="content">
@@ -89,7 +89,7 @@
                     <div class="form-group">
                         <div class="form-item">
                             <label for="week">주차</label>
-                            <input type="number" id="week" name="week" class="form-control" placeholder="주차를 입력하세요" required>
+                            <input type="text" id="week" name="week" class="form-control" placeholder="주차를 입력하세요" required>
                         </div>
                     </div>
 
@@ -109,8 +109,8 @@
 
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="submissionDeadline">제출기한</label>
-                            <input type="datetime-local" id="submissionDeadline" name="submissionDeadline" class="form-control" required>
+                            <label for="Deadline">제출기한</label>
+                            <input type="date" id="Deadline" name="submissionDeadline" class="form-control" required>
                         </div>
                     </div>
 

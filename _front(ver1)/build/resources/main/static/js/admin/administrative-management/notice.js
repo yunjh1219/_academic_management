@@ -1,5 +1,5 @@
 // '검색' 버튼 클릭 시 공지사항 목록을 불러오는 함수
-document.getElementById('noticesearchBtn').addEventListener('click', function() {
+document.getElementById('noticesearchBtn').addEventListener('click', function () {
     const url = '/api/notices';  // 공지사항 목록을 가져올 URL
 
     console.log("아아아아아아")
@@ -42,7 +42,7 @@ document.getElementById('noticesearchBtn').addEventListener('click', function() 
 
 
 // 신규 버튼 클릭 시 새로운 행 추가
-document.getElementById('newNoticeBtn').addEventListener('click', function() {
+document.getElementById('newNoticeBtn').addEventListener('click', function () {
     const tableBody = document.getElementById('noticeTableBody');
 
 
@@ -50,7 +50,6 @@ document.getElementById('newNoticeBtn').addEventListener('click', function() {
     const displayId = newNoticeId.replace('new+', ''); // 'new+'를 빈 문자열로 대체
     const newRow = document.createElement('tr');   // 새로운 행(tr) 생성
     newRow.dataset.id = newNoticeId;  // 고유한 data-id 부여
-
 
 
     // 현재 날짜를 기본값으로 설정 (작성일자)
@@ -99,14 +98,14 @@ function addRealTimeEditing(row) {
     const contentCell = row.querySelector('td[data-field="content"]');
 
     // 제목 수정 시, 테이블의 제목 셀 실시간으로 반영
-    document.getElementById('title').addEventListener('input', function() {
+    document.getElementById('title').addEventListener('input', function () {
         if (titleCell) {
             titleCell.textContent = this.value;  // 제목 수정 반영
         }
     });
 
     // 내용 입력란을 수정하면 테이블의 내용도 실시간으로 반영
-    document.getElementById('content').addEventListener('input', function() {
+    document.getElementById('content').addEventListener('input', function () {
         if (contentCell) {
             contentCell.textContent = this.value;  // 내용 수정 반영
         }
@@ -114,12 +113,9 @@ function addRealTimeEditing(row) {
 }
 
 
-
-
-
 // 공지사항 테이블 행 클릭 시 발생하는 이벤트
 // 공지사항 테이블에서 특정 행을 클릭했을 때 데이터 표시 및 실시간 업데이트 처리
-document.getElementById('noticeTableBody').addEventListener('click', function(event) {
+document.getElementById('noticeTableBody').addEventListener('click', function (event) {
     if (event.target.tagName === 'TD') {  // 클릭한 요소가 'TD'일 경우
         const row = event.target.parentElement;  // 클릭한 행을 가져옴
         const noticeId = row.dataset.id;  // 해당 행의 dataset.id를 noticeId로 사용 (실제 DB의 고유 ID)
@@ -146,7 +142,7 @@ document.getElementById('noticeTableBody').addEventListener('click', function(ev
 
                 // **실시간으로 테이블 업데이트**
                 // 제목 수정 시, 테이블의 제목 셀 실시간으로 반영
-                document.getElementById('title').addEventListener('input', function() {
+                document.getElementById('title').addEventListener('input', function () {
                     // 제목을 수정하면 테이블의 제목 셀을 업데이트
                     const selectedRow = document.querySelector('#noticeTableBody tr.selected');  // 선택된 행 찾기
                     if (selectedRow) {
@@ -158,7 +154,7 @@ document.getElementById('noticeTableBody').addEventListener('click', function(ev
                 });
 
                 // 내용 입력란을 수정하면 테이블의 내용도 실시간으로 반영
-                document.getElementById('content').addEventListener('input', function() {
+                document.getElementById('content').addEventListener('input', function () {
                     // 내용을 수정하면 테이블의 내용 셀을 업데이트
                     const selectedRow = document.querySelector('#noticeTableBody tr.selected');  // 선택된 행 찾기
                     if (selectedRow) {
@@ -177,8 +173,7 @@ document.getElementById('noticeTableBody').addEventListener('click', function(ev
 });
 
 
-
-document.getElementById('saveBtn').addEventListener('click', function() {
+document.getElementById('saveBtn').addEventListener('click', function () {
     const title = document.getElementById('title').value;
     const content = document.getElementById('content').value;
     const author = document.getElementById('author').value;

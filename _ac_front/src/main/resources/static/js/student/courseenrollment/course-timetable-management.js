@@ -11,7 +11,7 @@ $(function () {
             method: 'GET',
             success: function (data) {
                 // 요청 성공 시, 데이터를 받아서 시간표에 채우기
-                var tableBody = $('table tbody');
+                var tableBody = $('#stu-course-time-TableBody'); // id가 stu-course-time-TableBody인 tbody
                 tableBody.empty(); // 기존 내용을 비움
 
                 // 시간표 데이터를 처리
@@ -25,7 +25,7 @@ $(function () {
                         const course = data.find(schedule =>
                             schedule.courseDay === day && schedule.start <= hour && schedule.end >= hour
                         );
-                        row.append(`<td>${course ? course.courseName : ''}</td>`);
+                        row.append(`<td>${course ? course.courseName : ''}</td>`); // 수업명 추가
                     });
 
                     tableBody.append(row); // 테이블에 추가

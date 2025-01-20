@@ -48,4 +48,10 @@ public class AssignController {
             @RequestParam(required = false) String week) {
         return assignService.getAssignments(courseName, week);
     }
+
+    @GetMapping("/assignment-detail/{id}")
+    public Assign getAssignmentDetail(@PathVariable Long id) {
+        return assignService.getAssignmentById(id);  // id를 통해 과제 상세 정보를 조회
+    }
+
 }

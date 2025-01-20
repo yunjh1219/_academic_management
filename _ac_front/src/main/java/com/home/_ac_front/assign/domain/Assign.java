@@ -1,5 +1,6 @@
 package com.home._ac_front.assign.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,9 @@ public class Assign {
     private String professorName; // 교수명
     private String content; // 과제 내용
     private LocalDate createDate; // 작성일
+
+    @JsonFormat(pattern = "yyyy-MM-dd")  // 날짜 형식 지정
     private LocalDate dueDate; // 제출기한
+
 
 }
