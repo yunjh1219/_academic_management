@@ -1,6 +1,8 @@
 // '검색' 버튼 클릭 시 공지사항 목록을 불러오는 함수
-document.getElementById('searchBtn').addEventListener('click', function() {
-    const url = '/admin-potal/notices';  // 공지사항 목록을 가져올 URL
+document.getElementById('noticesearchBtn').addEventListener('click', function() {
+    const url = '/api/notices';  // 공지사항 목록을 가져올 URL
+
+    console.log("아아아아아아")
 
     fetch(url)  // fetch API를 사용하여 서버에서 공지사항 데이터를 요청
         .then(response => response.json())  // 응답을 JSON 형식으로 변환

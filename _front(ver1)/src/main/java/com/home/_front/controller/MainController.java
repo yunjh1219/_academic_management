@@ -12,7 +12,7 @@ public class MainController {
     public String noticewrite() {return "pages/write/noticewrite";}
 
     @GetMapping("/")
-    public String index() {return "pages/login/LoginPage";}
+    public String index() {return "pages/main/student-main";}
 
 
     @GetMapping("/stu-main")

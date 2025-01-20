@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>수강신청조회 : course-enrollment-lnquiry</title>
+    <script th:src="@{/js/student/courseenrollment/course-enrollment-lnquiry.js}"></script>
 </head>
 <th:block layout:fragment="content">
 
@@ -16,7 +17,7 @@
         </div>
         <div class="query-container">
             <div class="query-box">
-                <button class="query-btn" id="searchBtn">조회</button>
+                <button class="query-btn" id="MyCourses-SearchBtn">조회</button>
             </div>
         </div>
 
@@ -31,7 +32,7 @@
                     <tr>
                             <th>No</th>
                             <th>학년</th>
-                            <th>강좌명</th>
+                            <th>강의명</th>
                             <th>이수구분</th>
                             <th>학점</th>
                             <th>담당교수</th>
@@ -40,18 +41,7 @@
                             <th>시간</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>1학년</td>
-                            <td>웹디자인기초</td>
-                            <td>xb</td>
-                            <td>3학점</td>
-                            <td>홍길동</td>
-                            <td>1301</td>
-                            <td>수</td>
-                            <td>2,3,4</td>
-                        </tr>
+                        <tbody id="Registered-Courses-TableBody">
                         </tbody>
                     </table>
                 </div>

@@ -1,13 +1,9 @@
 $(function() {
     var tabs = $("#tabs").tabs();
 
-    // 메뉴 항목을 클릭할 때 해당 탭 생성 및 활성화
-    $("#menu .snb_depth3 a").on("click", function(event) {
-        event.preventDefault();
-        var tabName = $(this).data("tab");
+    // 탭 생성 및 활성화 로직을 함수로 분리
+    function openTab(tabName, url) {
         var tabId = "tabs-" + tabName.replace(/\s+/g, ''); // 공백 제거하여 tabId 생성
-        var url = $(this).attr("href");
-
         var existingTab = $("#" + tabId);
 
         // 🔥 최대 8개 탭 제한 추가
@@ -35,11 +31,53 @@ $(function() {
             });
         }
 
-        // 새로 생성된 탭을 활성화
+        // 새로 생성된 또는 기존 탭을 활성화
         tabs.tabs("option", "active", $("#tabs").find("a[href='#" + tabId + "']").parent().index());
+    }
+
+    // 메뉴 항목 클릭 이벤트
+    $("#menu .snb_depth3 a").on("click", function(event) {
+        event.preventDefault();  // 기본 링크 동작 방지
+        var tabName = $(this).data("tab");
+        var url = $(this).attr("href");
+        openTab(tabName, url);
     });
 
+    // 바로가기 링크 클릭 이벤트
+    $("a.shortcut-link").on("click", function(event) {
+        event.preventDefault();  // 기본 링크 동작 방지
+        var tabName = $(this).data("tab");
+        var url = $(this).attr("href");
+        openTab(tabName, url);
+    });
 
+    // load-content 링크 클릭 이벤트
+    $("a.load-content").on("click", function(event) {
+        event.preventDefault();  // 기본 링크 이동 방지
+        var tabName = $(this).data("tab"); // data-tab 속성으로 탭 이름 가져오기
+        var url = $(this).attr("href");
+
+        if (tabName) {
+            // 탭이름이 있다면 탭 생성 및 활성화
+            openTab(tabName, url);
+        } else {
+            // 탭 이름이 없는 경우 현재 활성화된 탭에 콘텐츠 로드
+            var activeTabId = $("#tabs .ui-tabs-panel:visible").attr("id"); // 현재 활성화된 탭 ID
+            if (activeTabId) {
+                var activeTabContent = $("#" + activeTabId);
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function(data) {
+                        activeTabContent.html(data); // 현재 활성화된 탭에 콘텐츠 로드
+                    },
+                    error: function() {
+                        activeTabContent.html("<p>콘텐츠를 불러오는 데 실패했습니다.</p>");
+                    }
+                });
+            }
+        }
+    });
     // ❗️ X 버튼 클릭 시 모든 탭 삭제 기능 추가
     $("#tabs").on("click", ".close-btn", function () {
         $("#tabs ul li").remove();  // 모든 탭 제목 삭제
@@ -54,54 +92,17 @@ $(function() {
         tabs.tabs("refresh");
     });
 
-    // 예를 들어, 'course2'라는 탭을 자동으로 클릭하고 싶을 때
-    var tabToActivate = $("#menu .snb_depth3 a[data-tab='통합정보']");
 
-    if (tabToActivate.length > 0) {
-        tabToActivate.trigger("click");
+    var tabToActivate = $('a[data-tab="수강시간표관리"]');
+
+// 현재 열린 탭이 없을 때만 기본 탭을 활성화
+    if ($("#tabs ul li").length === 0) {  // 탭 목록이 비어있다면
+        if (tabToActivate.length > 0) {
+            // 기본 탭을 활성화
+            var tabName = tabToActivate.data("tab");
+            var url = tabToActivate.attr("href");
+            openTab(tabName, url);
+        }
     }
 
-    // 첫 번째 탭 자동 클릭
-    // var firstTab = $("#menu .snb_depth3 a").first();
-    // if (firstTab.length > 0) {
-    //     firstTab.trigger("click");
-    // }
-
-    // depth1의 a 태그 클릭 시 depth2 메뉴 토글
-    $(".snb_depth1 li > a").click(function() {
-        var depth2 = $(this).next("ul");
-
-        // depth2 메뉴가 화면상에 보일 때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-        if (depth2.is(":visible")) {
-            depth2.slideUp(100);  // 100ms 동안 슬라이드 업
-            $(this).parent().removeClass("open");
-        } else {
-            depth2.slideDown(100);  // 100ms 동안 슬라이드 다운
-            $(this).parent().addClass("open");
-        }
-
-        // 모든 다른 li 요소에서 active 클래스 제거
-        $(".snb_depth1 li").removeClass("active");
-        // 클릭된 요소에 active 클래스 추가
-        $(this).parent().addClass("active");
-
-        // 활성화된 메뉴를 sessionStorage에 저장
-        sessionStorage.setItem('activeDepth1', $(this).parent()[0].outerHTML);
-
-    });
-
-    // depth2의 a 태그 클릭 시, 페이지 이동 전에 상태 유지
-    $(".snb_depth2 li > a").click(function() {
-        var depth1 = $(this).closest(".snb_depth1 > li");
-        // 클릭된 depth1 항목에 active 클래스 유지
-        depth1.addClass("active");
-
-        // 이동 시에도 sessionStorage에 저장
-        sessionStorage.setItem('activeDepth1', depth1[0].outerHTML);
-    });
-
-    // depth3의 a 태그 클릭 시 페이지 이동 허용
-    $(".snb_depth3 li > a").click(function() {
-        return true; // 페이지 이동을 허용
-    });
 });

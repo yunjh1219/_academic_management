@@ -39,3 +39,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// DOMContentLoaded 이벤트를 통해 DOM이 로드된 후 실행
+document.addEventListener('DOMContentLoaded', function () {
+    // 모든 depth1 항목 가져오기
+    const depth1Items = document.querySelectorAll('.snb_depth1 > li > a');
+
+    // depth1 클릭 이벤트 처리
+    depth1Items.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault(); // 기본 동작 방지
+
+            // 모든 다른 li 요소에서 active 클래스 제거
+            $(".snb_depth1 li").removeClass("active");
+            // 클릭된 요소에 active 클래스 추가
+            $(this).parent().addClass("active");
+
+            // 현재 클릭된 항목의 하위 depth2 가져오기
+            const subMenu = this.nextElementSibling;
+            if (subMenu && subMenu.classList.contains('snb_depth2')) {
+                // 토글로 열고 닫기
+                subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+    });
+
+    // 모든 depth2 항목 가져오기
+    const depth2Items = document.querySelectorAll('.snb_depth2 > li > a');
+
+    // depth2 클릭 이벤트 처리
+    depth2Items.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault(); // 기본 동작 방지
+
+            // 현재 클릭된 항목의 하위 depth3 가져오기
+            const subMenu = this.nextElementSibling;
+            if (subMenu && subMenu.classList.contains('snb_depth3')) {
+                // 토글로 열고 닫기
+                subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+    });
+    // 모든 depth3 항목 가져오기
+    const depth3Items = document.querySelectorAll('.snb_depth3 > li > a');
+
+    // depth3 클릭 이벤트 처리
+    depth3Items.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault(); // 기본 동작 방지
+
+            // 모든 다른 depth3 항목에서 active 클래스 제거
+            $(".snb_depth3 li").removeClass("active");
+            // 클릭된 요소에 active 클래스 추가
+            $(this).parent().addClass("active");
+        });
+    });
+});

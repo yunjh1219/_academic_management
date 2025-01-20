@@ -4,7 +4,7 @@ $(function() {
 
     // 공지사항 목록을 가져오는 함수
     function loadNotices() {
-        var url = '/api/notices';  // 공지사항 API URL (서버에서 공지사항 목록을 가져옴)
+        var url = '/api/course';  // 공지사항 API URL (서버에서 공지사항 목록을 가져옴)
 
         $.ajax({
             url: url,
@@ -26,7 +26,10 @@ $(function() {
 
                         var row = $("<tr>").append(
                             $("<td>").text(index + 1),
-                            $("<td>").addClass("left").text(notice.title), // 'right' 클래스 추가
+                            $("<td>").addClass("left").text(notice.courseName), // 'right' 클래스 추가
+                            $("<td>").text(notice.division),
+                            $("<td>").text(notice.credits),
+                            $("<td>").text(notice.author),
                             $("<td>").text(notice.author),
                             $("<td>").text(formattedDate)
                         );

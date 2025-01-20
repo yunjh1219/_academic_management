@@ -55,7 +55,7 @@ $(function() {
     });
 
     // 예를 들어, 'course2'라는 탭을 자동으로 클릭하고 싶을 때
-    var tabToActivate = $("#menu .snb_depth3 a[data-tab='공지사항']");
+    var tabToActivate = $("#menu .snb_depth3 a[data-tab='수강신청']");
 
     if (tabToActivate.length > 0) {
         tabToActivate.trigger("click");
@@ -88,20 +88,5 @@ $(function() {
         // 활성화된 메뉴를 sessionStorage에 저장
         sessionStorage.setItem('activeDepth1', $(this).parent()[0].outerHTML);
 
-    });
-
-    // depth2의 a 태그 클릭 시, 페이지 이동 전에 상태 유지
-    $(".snb_depth2 li > a").click(function() {
-        var depth1 = $(this).closest(".snb_depth1 > li");
-        // 클릭된 depth1 항목에 active 클래스 유지
-        depth1.addClass("active");
-
-        // 이동 시에도 sessionStorage에 저장
-        sessionStorage.setItem('activeDepth1', depth1[0].outerHTML);
-    });
-
-    // depth3의 a 태그 클릭 시 페이지 이동 허용
-    $(".snb_depth3 li > a").click(function() {
-        return true; // 페이지 이동을 허용
     });
 });
