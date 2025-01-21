@@ -33,7 +33,7 @@ public class UserScholarship {
 	@JoinColumn(name = "scholarship_id")
 	private Scholarship scholarship;
 
-	@ManyToOne(fetch = LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = LAZY)
 	@JoinColumn(name = "school_year_id")
 	private SchoolYear schoolYear;
 

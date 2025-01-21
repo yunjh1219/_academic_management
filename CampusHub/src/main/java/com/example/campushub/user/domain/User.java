@@ -101,7 +101,7 @@ public class User {
     public void updateStatus() {
         if(this.status == Status.ENROLLED)
             this.status = Status.BREAK_PENDING;
-        if(this.status == Status.BREAK)
+        else if(this.status == Status.BREAK)
             this.status = Status.RETURN_PENDING;
     }
 

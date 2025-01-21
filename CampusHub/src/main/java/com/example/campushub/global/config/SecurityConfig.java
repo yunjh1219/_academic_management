@@ -33,35 +33,32 @@ public class SecurityConfig {
 	private final ApiAccessDeniedHandler deniedHandler;
 
 	@Bean
-	public BCryptPasswordEncoder encodePwd() {
-		return new BCryptPasswordEncoder();
-	}
-
-	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 				.formLogin(form -> form // 폼 로그인 활성화
 						.loginPage("/login")  // 커스텀 로그인 페이지 경로 설정
 						.permitAll()) // 로그인 페이지는 모든 사용자에게 허용
-				.httpBasic(basic -> basic.disable()) // HTTP Basic 인증 비활성화
-				.csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
-				.headers(headers -> headers
-						.frameOptions(frame -> frame.disable())) // X-Frame-Options 비활성화
-				.sessionManagement(session ->
-						session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless 세션 정책
-				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers("/**").permitAll() // 모든 요청에 대해 권한 허용
-						.requestMatchers(ApiUrls.PERMIT_API_URLS).permitAll() // 특정 API 경로 허용
-						.anyRequest().permitAll()) // 나머지 요청도 모두 허용
-				.exceptionHandling(exceptions ->
-						exceptions
-								.authenticationEntryPoint(entryPoint) // 인증 실패 처리
-								.accessDeniedHandler(deniedHandler) // 권한 부족 처리
-				);
+			.httpBasic(basic -> basic.disable()) // HTTP Basic 인증 비활성화
+			.csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
+			.headers(headers -> headers
+				.frameOptions(frame -> frame.disable())) // X-Frame-Options 비활성화
+			.sessionManagement(session ->
+				session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless 세션 정책
+			.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers(toH2Console()).permitAll() // H2 콘솔 접근 허용
+				.requestMatchers(ApiUrls.PERMIT_API_URLS).permitAll() // 특정 URL 허용
+				.anyRequest().authenticated()) // 나머지 요청은 인증 필요
+			.exceptionHandling(exceptions ->
+				exceptions
+					.authenticationEntryPoint(entryPoint) // 인증 실패 처리
+					.accessDeniedHandler(deniedHandler) // 권한 부족 처리
+			);
+
+		// JWT 인증 필터 추가
+		http.addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}
-
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

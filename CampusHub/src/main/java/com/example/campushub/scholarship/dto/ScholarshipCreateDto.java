@@ -10,7 +10,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ScholarshipCreateDto {
+public class  ScholarshipCreateDto {
 
 
     private User user;
@@ -23,16 +23,16 @@ public class ScholarshipCreateDto {
     @NotBlank(message = "지급 구분을 입력하세요")
     private PaymentType type;
     @NotBlank(message = "금액을 입력하세요")
-    private int amout;
+    private int amount;
 
     @Builder
-    public ScholarshipCreateDto(String userNum, String userName, String deptName, SchoolYear schoolYear, String scholarshipName, int amout, PaymentType type) {
+    public ScholarshipCreateDto(String userNum, String userName, String deptName, SchoolYear schoolYear, String scholarshipName, int amount, PaymentType type) {
         this.userNum = userNum;
         this.userName = userName;
         this.deptName = deptName;
         this.schoolYear = schoolYear;
         this.scholarshipName = scholarshipName;
-        this.amout = amout;
+        this.amount = amount;
         this.type = type;
 
     }
@@ -41,7 +41,7 @@ public class ScholarshipCreateDto {
         return Scholarship.builder()
             .scholarshipName(scholarshipName)
             .type(type)
-            .amount(amout)
+            .amount(amount)
             .build();
 
     }

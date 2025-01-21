@@ -7,6 +7,5 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface ScholarshipRepository extends JpaRepository<Scholarship, Long>, ScholarshipRepositoryCustom {
-
-
+    Scholarship findScholarshipByScholarshipName(String scholarshipName);
 }

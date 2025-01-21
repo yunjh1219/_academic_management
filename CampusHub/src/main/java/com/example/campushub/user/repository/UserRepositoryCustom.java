@@ -20,4 +20,6 @@ public interface UserRepositoryCustom {
 	//교수단건조회
 	Optional<UserFindOneDto> getProfessorByUserNum(String userNum);
 
+
+
 }

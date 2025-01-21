@@ -1,8 +1,10 @@
 package com.example.campushub.user.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClient;
 
 import com.example.campushub.global.common.SuccessResponse;
@@ -20,16 +22,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
 
 	private final AuthService authService;
-	private final RestClient.Builder builder;
-
-
 
 	//로그인
 	@PostMapping("/api/login")

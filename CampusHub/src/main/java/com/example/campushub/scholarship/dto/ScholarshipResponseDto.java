@@ -1,6 +1,8 @@
 package com.example.campushub.scholarship.dto;
 
 
+import com.example.campushub.scholarship.domain.PaymentType;
+import com.example.campushub.schoolyear.domain.Semester;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,16 +21,16 @@ public class ScholarshipResponseDto {
  private String deptName;
  @DateTimeFormat(pattern = "yyyy")
  private LocalDate year;
- private Enum  semester;
+ private Semester semester;
  private String scholarshipName;
- private Enum type;
+ private PaymentType type;
  private int amount;
  @DateTimeFormat(pattern = "yyyy-MM-dd")
  private LocalDate confDate;
 
  @Builder
  @QueryProjection
- public ScholarshipResponseDto(String username, String userNum ,String deptName, LocalDate year, Enum semester, String scholarshipName, Enum type, int amount, LocalDate confDate ) {
+ public ScholarshipResponseDto(String username, String userNum ,String deptName, LocalDate year, Semester semester, String scholarshipName, PaymentType type, int amount, LocalDate confDate ) {
   this.username = username;
   this.userNum = userNum;
   this.deptName = deptName;

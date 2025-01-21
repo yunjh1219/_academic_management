@@ -21,4 +21,6 @@ public interface UserRepository extends JpaRepository<User, Long>, UserRepositor
 
 	@Query("select u from User u where u.userNum in :userNums")
 	List<User> findAllByUserNums(List<String> userNums);
+
+
 }

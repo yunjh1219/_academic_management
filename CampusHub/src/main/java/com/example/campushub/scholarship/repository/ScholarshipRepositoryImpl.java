@@ -1,9 +1,8 @@
 package com.example.campushub.scholarship.repository;
 
 
-import com.example.campushub.scholarship.dto.QScholarshipResponseDto;
-import com.example.campushub.scholarship.dto.ScholarshipResponseDto;
-import com.example.campushub.scholarship.dto.ScholarshipSearchCondition;
+import com.example.campushub.scholarship.dto.*;
+import com.example.campushub.user.domain.User;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +43,22 @@ public class ScholarshipRepositoryImpl implements ScholarshipRepositoryCustom {
                 .join(userScholarship.schoolYear, schoolYear)
                 .join(user.dept, dept)
                 .where(eqUserNum(cond.getUserNum()), eqDeptName(cond.getDeptName()))
+                .fetch();
+    }
+
+    @Override
+    public List<GetMyScholarshipDto> findAllMyScholarship(User user) {
+        return queryFactory.select(new QGetMyScholarshipDto(
+                schoolYear.year,
+                schoolYear.semester,
+                scholarship.scholarshipName,
+                scholarship.type,
+                scholarship.amount,
+                userScholarship.confDate
+            )).from(scholarship)
+                .join(userScholarship).on(userScholarship.scholarship.eq(scholarship))
+                .join(userScholarship.schoolYear , schoolYear)
+                .where(userScholarship.user.eq(user))
                 .fetch();
     }
 

@@ -5,8 +5,10 @@ import com.example.campushub.dept.repository.DeptRepository;
 import com.example.campushub.global.config.QueryDslConfig;
 import com.example.campushub.scholarship.domain.PaymentType;
 import com.example.campushub.scholarship.domain.Scholarship;
+import com.example.campushub.scholarship.dto.GetMyScholarshipDto;
 import com.example.campushub.scholarship.dto.ScholarshipResponseDto;
 import com.example.campushub.scholarship.dto.ScholarshipSearchCondition;
+import com.example.campushub.scholarship.service.ScholarshipService;
 import com.example.campushub.schoolyear.domain.SchoolYear;
 import com.example.campushub.schoolyear.domain.Semester;
 import com.example.campushub.schoolyear.repository.SchoolYearRepository;
@@ -28,6 +30,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
 @DataJpaTest
 @Import(QueryDslConfig.class)
@@ -136,6 +139,12 @@ public class ScholarshipRepositoryImplTest {
     }
 
 
+    private User createUserNum(String userNum) {
+        return User.builder()
+                .userNum(userNum)
+                .build();
+    }
+
     private User createUser(String userNum, Dept dept) {
         return User.builder()
                 .userName("박" + userNum)
@@ -180,5 +189,6 @@ public class ScholarshipRepositoryImplTest {
                 .deptName(deptName)
                 .build();
     }
+
 
 }

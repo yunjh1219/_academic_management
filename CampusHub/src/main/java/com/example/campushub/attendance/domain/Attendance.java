@@ -38,4 +38,25 @@ public class Attendance {
 		this.nWeek = nWeek;
 		this.status = status;
 	}
+
+	public boolean isApplyAttendance() {
+		if(this.status == AttendanceStatus.ATTENDANCE || this.status == AttendanceStatus.EARLYDISMISSAL
+				|| this.status == AttendanceStatus.ABSENCE || this.status == AttendanceStatus.PERCEPTION)
+			return true;
+		return false;
+	}
+
+	public void updateAttendance(AttendanceStatus newstatus) {
+		if (this.status != newstatus) {
+			this.status = newstatus;
+		}
+	}
+
+	public void countAbsence() {
+		int cnt = 0;
+		if(this.status == AttendanceStatus.ABSENCE){
+			cnt++;
+			return ;
+		}
+	}
 }

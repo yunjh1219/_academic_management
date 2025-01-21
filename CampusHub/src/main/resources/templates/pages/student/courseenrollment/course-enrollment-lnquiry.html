@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>수강신청조회 : course-enrollment-lnquiry</title>
+    <script th:src="@{/js/student/courseenrollment/course-enrollment-lnquiry.js}"></script>
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>수강 > 수강관리 > 수강신청조회</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="MyCourses-SearchBtn">조회</button>
+            </div>
+        </div>
+
+
+        <div class="table-container">
+            <div class="table-title">
+                수강신청목록
+            </div>
+            <div class="table-box">
+                <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                            <th>No</th>
+                            <th>학년</th>
+                            <th>강의명</th>
+                            <th>이수구분</th>
+                            <th>학점</th>
+                            <th>담당교수</th>
+                            <th>강의실</th>
+                            <th>요일</th>
+                            <th>시간</th>
+                        </tr>
+                        </thead>
+                        <tbody id="Registered-Courses-TableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+    </div>
+</div>
+
+
+</th:block>
+</html>

@@ -1,6 +1,6 @@
 package com.example.campushub.attendance.domain;
 
 public enum AttendanceStatus {
-	//결석, 출석, 지각, 조퇴,
+	//출석, 결석, 지각, 조퇴,
 	ATTENDANCE, ABSENCE, PERCEPTION, EARLYDISMISSAL
 }

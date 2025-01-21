@@ -1,4 +1,4 @@
-package com.example.campushub.User.repository;
+package com.example.campushub.user.repository;
 
 import static org.assertj.core.api.Assertions.*;
 
