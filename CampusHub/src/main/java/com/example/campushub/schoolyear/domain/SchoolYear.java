@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Getter
@@ -19,7 +20,9 @@ public class SchoolYear {
     private Long id;
 
     @Column(name = "school_year_year")
+    @DateTimeFormat(pattern = "yyyy")
     private LocalDate year;
+
     @Enumerated(EnumType.STRING)
     private Semester semester;
     private boolean is_current;
