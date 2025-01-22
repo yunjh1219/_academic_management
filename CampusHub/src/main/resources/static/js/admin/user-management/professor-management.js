@@ -1,141 +1,257 @@
-// '조회' 버튼 클릭 시 교수 목록을 불러오는 함수
+// // Mock 데이터 저장소 (빈 배열)
+// let mockProfessors = [];
+//
+// // 조회 버튼 클릭 시 교수 정보 목록을 불러오는 함수
+// document.getElementById('searchBtn').addEventListener('click', function () {
+//     console.log("교수 정보 목록을 불러오는 중...");
+//
+//     const tableBody = document.getElementById('professorTableBody');
+//     tableBody.innerHTML = ''; // 기존 데이터를 제거
+//
+//     // Mock 데이터를 기반으로 테이블에 행 추가
+//     mockProfessors.forEach((professor, index) => {
+//         const row = document.createElement('tr');
+//         row.classList.add('professor-row');
+//         row.dataset.id = professor.id;
+//
+//         row.innerHTML = `
+//             <td><input type="checkbox" class="professor-checkbox"></td>
+//             <td>${index + 1}</td>
+//             <td>${professor.name}</td>
+//             <td>${professor.professorId}</td>
+//             <td>${professor.department}</td>
+//             <td>${professor.type}</td>
+//             <td>${professor.status}</td>
+//             <td>${professor.remarks || ''}</td>
+//         `;
+//
+//         tableBody.appendChild(row); // 테이블에 행 추가
+//     });
+// });
+//
+// // 신규 버튼 클릭 시 새로운 행 추가
+// document.getElementById('newProfessorBtn').addEventListener('click', function () {
+//     const tableBody = document.getElementById('professorTableBody');
+//
+//     const newRowId = `new+${tableBody.rows.length + 1}`;
+//     const displayId = newRowId.replace('new+', '');
+//     const newRow = document.createElement('tr');
+//     newRow.dataset.id = newRowId;
+//
+//     newRow.innerHTML = `
+//         <td><input type="checkbox" class="professor-checkbox"></td>
+//         <td>${displayId}</td>
+//         <td contenteditable="true"></td>
+//         <td contenteditable="true"></td>
+//         <td contenteditable="true"></td>
+//         <td contenteditable="true"></td>
+//         <td contenteditable="true"></td>
+//         <td contenteditable="true"></td>
+//     `;
+//
+//     tableBody.appendChild(newRow);
+//     alert('새로운 교수 정보를 추가했습니다. 내용을 입력하세요.');
+// });
+//
+// // 저장 버튼 클릭 시 교수 정보 저장
+// document.getElementById('saveBtn').addEventListener('click', function () {
+//     const selectedRow = document.querySelector('#professorTableBody tr.selected');
+//     let professorIdInRow = null;
+//
+//     const name = document.getElementById('name').value;
+//     const birthdate = document.getElementById('birthdate').value + "T00:00:00";
+//     const department = document.getElementById('department').value;
+//     const professorId = document.getElementById('professorId').value;
+//     const phone = document.getElementById('phone').value;
+//     const email = document.getElementById('email').value;
+//     const address = document.getElementById('address').value;
+//     const password = document.getElementById('password').value;
+//
+//     if (selectedRow) {
+//         professorIdInRow = selectedRow.dataset.id;
+//
+//         if (professorIdInRow.startsWith('new+')) {
+//             // 새로운 교수 정보 추가
+//             const newId = mockProfessors.length + 1; // ID 자동 생성
+//             mockProfessors.push({
+//                 id: newId,
+//                 name: name,
+//                 professorId: professorId,
+//                 department: department,
+//                 type: 'PROFESSOR',
+//                 status: 'ACTIVE',
+//                 remarks: '',
+//             });
+//             alert('새로운 교수 정보가 저장되었습니다.');
+//         } else {
+//             // 기존 교수 정보 수정
+//             const professor = mockProfessors.find(p => p.id === parseInt(professorIdInRow));
+//             if (professor) {
+//                 professor.name = name;
+//                 professor.professorId = professorId;
+//                 professor.department = department;
+//                 alert('교수 정보가 수정되었습니다.');
+//             }
+//         }
+//     } else {
+//         // 새로운 교수 정보 추가
+//         const newId = mockProfessors.length + 1; // ID 자동 생성
+//         mockProfessors.push({
+//             id: newId,
+//             name: name,
+//             professorId: professorId,
+//             department: department,
+//             type: 'PROFESSOR',
+//             status: 'ACTIVE',
+//             remarks: '',
+//         });
+//         alert('새로운 교수 정보가 저장되었습니다.');
+//     }
+//
+//     // 데이터 저장 후 테이블을 갱신하지 않음
+//     // 테이블 갱신은 조회 버튼 클릭 시 이루어짐
+// });
+
+
+// Mock 데이터 저장소 (빈 배열)
+let mockProfessors = [];
+
+// 조회 버튼 클릭 시 교수 정보 목록을 불러오는 함수
 document.getElementById('searchBtn').addEventListener('click', function () {
-    const url = '/api/admin/professors/condition'; // 교수 목록을 가져올 URL
+    console.log("교수 정보 목록을 불러오는 중...");
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('professorTableBody'); // 테이블 tbody 요소
-            tableBody.innerHTML = ''; // 기존 데이터를 제거
+    const tableBody = document.getElementById('professorTableBody');
+    tableBody.innerHTML = ''; // 기존 데이터를 제거
 
-            data.forEach((professor, index) => {
-                const row = document.createElement('tr');
+    // Mock 데이터를 기반으로 테이블에 행 추가
+    mockProfessors.forEach((professor, index) => {
+        const row = document.createElement('tr');
+        row.classList.add('professor-row');
+        row.dataset.id = professor.id;
 
-                row.dataset.id = professor.id; // 고유 ID 설정
-                row.innerHTML = `
-                    <td><input type="checkbox" class="rowCheckbox"></td>
-                    <td>${index + 1}</td>
-                    <td contenteditable="true" data-field="name">${professor.name}</td>
-                    <td contenteditable="true" data-field="department">${professor.department}</td>
-                    <td>${professor.email}</td>
-                `;
+        row.innerHTML = `
+            <td><input type="checkbox" class="professor-checkbox"></td>
+            <td>${index + 1}</td>
+            <td>${professor.name}</td>
+            <td>${professor.professorId}</td>
+            <td>${professor.department}</td>
+            <td>${professor.type}</td>
+            <td>${professor.status}</td>
+            <td>${professor.remarks || ''}</td>
+        `;
 
-                tableBody.appendChild(row);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('교수 명단을 불러오는 중 오류가 발생했습니다.');
-        });
+        tableBody.appendChild(row); // 테이블에 행 추가
+    });
 });
 
-// '신규' 버튼 클릭 시 새로운 행 추가
+// 신규 버튼 클릭 시 새로운 행 추가
 document.getElementById('newProfessorBtn').addEventListener('click', function () {
     const tableBody = document.getElementById('professorTableBody');
-    const newRowId = `new+${tableBody.rows.length + 1}`;
 
+    const newRowId = `new+${tableBody.rows.length + 1}`;
+    const displayId = newRowId.replace('new+', '');
     const newRow = document.createElement('tr');
     newRow.dataset.id = newRowId;
 
     newRow.innerHTML = `
-        <td><input type="checkbox" class="rowCheckbox"></td>
-        <td>${tableBody.rows.length + 1}</td>
-        <td contenteditable="true" data-field="name">이름 입력</td>
-        <td contenteditable="true" data-field="department">학과 입력</td>
-        <td contenteditable="true" data-field="email">이메일 입력</td>
+        <td><input type="checkbox" class="professor-checkbox"></td>
+        <td>${displayId}</td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
     `;
 
     tableBody.appendChild(newRow);
     alert('새로운 교수 정보를 추가했습니다. 내용을 입력하세요.');
 });
 
-// 행 선택 로직
-document.getElementById('professorTableBody').addEventListener('click', function (e) {
-    const row = e.target.closest('tr'); // 클릭한 요소가 속한 행 찾기
-    if (row) {
-        // 모든 행에서 selected 클래스 제거
-        Array.from(document.querySelectorAll('#professorTableBody tr')).forEach(tr => {
-            tr.classList.remove('selected');
-        });
-
-        // 클릭한 행에 selected 클래스 추가
-        row.classList.add('selected');
-    }
-});
-
-// '저장' 버튼 클릭 시 저장 요청 처리
+// 저장 버튼 클릭 시 교수 정보 저장
 document.getElementById('saveBtn').addEventListener('click', function () {
     const selectedRow = document.querySelector('#professorTableBody tr.selected');
-    let url = '';
-    let method = '';
-    const professorData = {};
+    let professorIdInRow = null;
+
+    const name = document.getElementById('name').value;
+    const birthdate = document.getElementById('birthdate').value + "T00:00:00";
+    const department = document.getElementById('department').value;
+    const professorId = document.getElementById('professorId').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const address = document.getElementById('address').value;
+    const password = document.getElementById('password').value;
 
     if (selectedRow) {
-        const professorId = selectedRow.dataset.id;
+        professorIdInRow = selectedRow.dataset.id;
 
-        professorData.name = selectedRow.querySelector('td[data-field="name"]').textContent;
-        professorData.department = selectedRow.querySelector('td[data-field="department"]').textContent;
-        professorData.email = selectedRow.querySelector('td[data-field="email"]').textContent;
-
-        if (professorId.startsWith('new+')) {
-            url = '/api/admin/professors';
-            method = 'POST';
+        if (professorIdInRow.startsWith('new+')) {
+            // 새로운 교수 정보 추가
+            const newId = mockProfessors.length + 1; // ID 자동 생성
+            mockProfessors.push({
+                id: newId,
+                name: name,
+                professorId: professorId,
+                department: department,
+                type: 'PROFESSOR',
+                status: 'ACTIVE',
+                remarks: '',
+            });
+            alert('새로운 교수 정보가 저장되었습니다.');
         } else {
-            url = `/api/admin/professors/${professorId}`;
-            method = 'PUT';
+            // 기존 교수 정보 수정
+            const professor = mockProfessors.find(p => p.id === parseInt(professorIdInRow));
+            if (professor) {
+                professor.name = name;
+                professor.professorId = professorId;
+                professor.department = department;
+                alert('교수 정보가 수정되었습니다.');
+            }
         }
     } else {
-        alert('저장할 교수를 선택해주세요.');
-        return;
+        // 새로운 교수 정보 추가
+        const newId = mockProfessors.length + 1; // ID 자동 생성
+        mockProfessors.push({
+            id: newId,
+            name: name,
+            professorId: professorId,
+            department: department,
+            type: 'PROFESSOR',
+            status: 'ACTIVE',
+            remarks: '',
+        });
+        alert('새로운 교수 정보가 저장되었습니다.');
     }
 
-    fetch(url, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(professorData)
-    })
-        .then(response => {
-            if (response.ok) {
-                alert(method === 'POST' ? '새로운 교수 정보가 저장되었습니다.' : '교수 정보가 수정되었습니다.');
-            } else {
-                throw new Error('저장 중 오류가 발생했습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('저장하는 중 오류가 발생했습니다.');
-        });
+    document.getElementById('editNoticeForm').reset(); // 폼 초기화
 });
 
-// '삭제' 버튼 클릭 시 선택된 교수 삭제 요청
+// 삭제 버튼 클릭 시 선택된 교수 정보 삭제
 document.getElementById('deleteBtn').addEventListener('click', function () {
-    const selectedCheckboxes = document.querySelectorAll('#professorTableBody .rowCheckbox:checked');
-    const professorIds = Array.from(selectedCheckboxes).map(checkbox => checkbox.closest('tr').dataset.id);
+    const selectedRows = document.querySelectorAll('#professorTableBody tr.selected');
 
-    if (professorIds.length === 0) {
-        alert('삭제할 교수를 선택해주세요.');
+    if (selectedRows.length === 0) {
+        alert('삭제할 교수 정보를 선택하세요.');
         return;
     }
 
-    fetch('/api/admin/professors', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ ids: professorIds })
-    })
-        .then(response => {
-            if (response.ok) {
-                alert('선택된 교수가 성공적으로 삭제되었습니다.');
-                selectedCheckboxes.forEach(checkbox => checkbox.closest('tr').remove());
-            } else {
-                throw new Error('삭제 중 오류가 발생했습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('삭제하는 중 오류가 발생했습니다.');
-        });
+    selectedRows.forEach(row => {
+        const professorIdInRow = row.dataset.id;
+        // Mock 데이터에서 삭제
+        mockProfessors = mockProfessors.filter(p => p.id !== parseInt(professorIdInRow));
+    });
+
+    alert('선택한 교수 정보가 삭제되었습니다.');
+
+    // 삭제 후 테이블 갱신: 조회 버튼 클릭 이벤트 호출
+    document.getElementById('searchBtn').click();
+});
+
+
+// 테이블 행 클릭 시 선택 상태 변경
+document.getElementById('professorTableBody').addEventListener('click', function (event) {
+    const row = event.target.closest('tr');
+    if (row) {
+        row.classList.toggle('selected');
+    }
 });
