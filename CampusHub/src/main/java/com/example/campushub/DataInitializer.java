@@ -6,22 +6,36 @@ import com.example.campushub.dept.repository.DeptRepository;
 import com.example.campushub.schoolyear.domain.SchoolYear;
 import com.example.campushub.schoolyear.domain.Semester;
 import com.example.campushub.schoolyear.repository.SchoolYearRepository;
+import com.example.campushub.user.domain.Role;
+import com.example.campushub.user.domain.Status;
+import com.example.campushub.user.domain.Type;
+import com.example.campushub.user.domain.User;
+import com.example.campushub.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
 
     private final DeptRepository deptRepository;
     private final SchoolYearRepository schoolYearRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DataInitializer(DeptRepository deptRepository, SchoolYearRepository schoolYearRepository) {
+    public DataInitializer(DeptRepository deptRepository,
+                           SchoolYearRepository schoolYearRepository,
+                           UserRepository userRepository,
+                           PasswordEncoder passwordEncoder) {
         this.deptRepository = deptRepository;
         this.schoolYearRepository = schoolYearRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -70,6 +84,27 @@ public class DataInitializer implements CommandLineRunner {
             schoolYearRepository.save(schoolYear4);
         }
 
-        System.out.println("Departments and School Years initialized!");
+        // 관리자 계정 초기화
+        if (userRepository.count() == 0) {
+            User admin = User.builder()
+                    .userNum("admin")
+                    .password(passwordEncoder.encode("1234")) // 비밀번호 암호화
+                    .userName("Admin User")
+                    .birthday(LocalDateTime.of(1990, 1, 1, 0, 0)) // 생일 예시
+                    .email("admin@example.com")
+                    .phone("010-1234-5678")
+                    .address("Admin Address")
+                    .dept(null) // 관리자 계정은 학과가 없음
+                    .grade(null) // 관리자 계정은 학년이 없음
+                    .role(Role.ADMIN) // Role 설정
+                    .type(Type.ADMIN) // Type 설정
+                    .status(Status.EMPLOYED) // 상태 설정
+                    .refreshToken(null) // 초기 리프레시 토큰
+                    .build();
+
+            userRepository.save(admin);
+        }
+
+        System.out.println("Departments, School Years, and Admin User initialized!");
     }
 }

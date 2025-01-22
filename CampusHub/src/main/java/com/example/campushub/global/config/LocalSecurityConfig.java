@@ -2,6 +2,9 @@ package com.example.campushub.global.config;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.*;
 
+import com.example.campushub.user.domain.Type;
+import com.example.campushub.user.domain.User;
+import com.example.campushub.user.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.campushub.global.filter.ApiAccessDeniedHandler;
@@ -25,19 +29,20 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class LocalSecurityConfig {
 
 	private final JwtProvider jwtProvider;
 	private final ApiUserDetailsService userDetailsService;
 	private final ApiAuthenticationEntryPoint entryPoint;
 	private final ApiAccessDeniedHandler deniedHandler;
+	private final UserRepository userRepository;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 				.formLogin(form -> form // 폼 로그인 활성화
 						.loginPage("/login")  // 커스텀 로그인 페이지 경로 설정
-						.permitAll()) // 로그인 페이지는 모든 사용자에게 허용
+						.permitAll())  // 로그인 성공 후 핸들러 설정
 			.httpBasic(basic -> basic.disable()) // HTTP Basic 인증 비활성화
 			.csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
 			.headers(headers -> headers
@@ -59,6 +64,8 @@ public class SecurityConfig {
 
 		return http.build();
 	}
+
+
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

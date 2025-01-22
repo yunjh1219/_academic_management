@@ -1,4 +1,4 @@
-// '검색' 버튼 클릭 시 학생 정보 목록을 불러오는 함수
+// '조회' 버튼 클릭 시 학생 정보 목록을 불러오는 함수
 document.getElementById('admin-stuinfo-searchBtn').addEventListener('click', function() {
     const url = '/api/admin/students/condition';  // 학생 정보 목록을 가져올 URL
 

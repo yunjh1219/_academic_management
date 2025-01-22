@@ -1,0 +1,177 @@
+body{
+    margin: 0;
+}
+.mypage-header{
+    position: relative;
+    display: flex;
+    background-color: white;
+    height: 100px;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+.header-tx{
+    width: 740px;
+    position: relative;
+    display: flex;
+
+    justify-content: space-between; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100%; /* 부모 요소와 동일한 높이 */
+}
+
+.header-tx img{
+    width: 60px;
+}
+
+.title-tx{
+    width: 740px;
+    position: relative;
+    display: flex;
+
+    justify-content: start; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100%; /* 부모 요소와 동일한 높이 */
+
+    background-image: url('/img/login/symbol.png'); /* 배경 이미지 추가 */
+    background-size: 200px 200px; /* 배경 이미지 크기 조정 (50px로 설정) */
+    background-position: right center; /* 배경 이미지가 우측 중앙에 배치됨 */
+    background-repeat: no-repeat; /* 배경 이미지 반복 안 되도록 설정 */
+
+    opacity: 0.4; /* 배경을 50% 투명하게 설정 */
+}
+
+
+.mypage-title{
+    position: relative;
+    display: flex;
+    background-color: #4169E1;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+.mypage-content{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+
+
+
+
+/* 네비게이션 */
+/*-------------*/
+.mypage-header-nav {
+    margin: 10px 0;
+    padding-bottom: 30px;
+    bottom: 0px; /* 네비게이션을 이미지 컨테이너의 하단에 위치 */
+    width: 100%; /* 네비게이션이 이미지 컨테이너의 너비를 가득 채우도록 설정 */
+    text-align: center;
+}
+
+.mypage-header-nav ul {
+    display: flex; /* 수평 일열로 */
+    list-style: none;
+    justify-content: center;
+    padding: 0; /* 패딩 제거 */
+    margin: 0; /* 마진 제거 */
+}
+
+.mypage-header-nav li {
+    margin: 0; /* 링크들 사이의 간격 제거 */
+}
+
+.mypage-header-nav a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #d1cccc;
+    color: #424141;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 85px;
+    transition: all 0.3s;
+    width: 200px;
+}
+
+
+
+
+.mypage-header-nav a.active {
+    background-color: #1f1e1e;
+    color: white;
+}
+
+
+/*-------------*/
+
+.content-tx{
+    position: relative;
+    display: flex;
+    width: 740px;
+    box-sizing: border-box; /* padding과 border가 width에 포함되게 설정 */
+}
+
+.user-info {
+    position: relative;
+    width: 100%;
+    max-width: 100%; /* 부모 컨테이너 너비를 넘지 않게 설정 */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* padding과 border가 width에 포함되게 설정 */
+    overflow: hidden; /* 내용이 넘치지 않게 설정 */
+
+}
+
+table {
+    position: relative;
+    width: 100%;
+    table-layout: fixed; /* 고정된 테이블 레이아웃 사용 */
+    box-sizing: border-box; /* padding과 border가 width에 포함되게 설정 */
+    overflow: hidden; /* 테이블 내용이 넘치지 않도록 설정 */
+}
+
+td {
+    max-width: 100%; /* td가 부모를 넘지 않게 설정 */
+    word-wrap: break-word; /* 긴 텍스트가 넘치지 않도록 단어 끊기 */
+    flex-direction: column; /* 세로로 배치 */
+    justify-content: center; /* 수직 가운데 정렬 */
+
+}
+
+td span {
+    display: flex; /* flexbox 활성화 */
+    flex-direction: column; /* 세로로 정렬 */
+    justify-content: center; /* 수직 가운데 정렬 */
+    width: 100%; /* span이 td를 넘지 않도록 설정 */
+    max-width: 100%; /* span이 td를 넘지 않도록 설정 */
+    height: 50px; /* 높이 설정 */
+    max-height: 60px; /* 최대 높이 설정 */
+    padding: 15px 10px; /* 패딩 추가 */
+    border: 1px solid #ccc; /* 테두리 스타일 */
+    border-right: 3px solid grey;
+    border-left: 3px solid grey;
+    background-color: white;
+    box-sizing: border-box; /* padding과 border가 width에 포함되게 설정 */
+}
+
+span input{
+
+    font-size: 20px; /* 글자 크기 조정 */
+    border: none;
+}
+
+td span:first-child {
+    border-top: 3px solid grey; /* 첫 번째 span의 탑 보더를 3px로 설정 */
+}
+
+td span:not(:last-child) {
+    border-bottom: none; /* 마지막 요소가 아닌 span에는 선을 없앰 */
+}
+
+td span:last-child{
+    border-bottom: 3px solid grey;
+}
+

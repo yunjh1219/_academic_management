@@ -3,6 +3,7 @@
 <head>
   <title>Login Homepage</title>
   <link rel="stylesheet" th:inline="css" th:href="@{/css/login.css}">
+  <script src="/js/login.js" defer></script> <!-- 외부 JS 파일 연결 -->
 </head>
 <body>
 <div class="login-container">
@@ -25,9 +26,23 @@
     <div class="login-box-middle">
       <div class="login-form">
 
-        <form action="#" method="POST">
+        <form id="loginForm">
+
+          <!-- 유형 선택 -->
           <div class="form-group">
-            <input type="text" id="username" name="username" placeholder="아이디" required>
+            <label>
+              <input type="radio" name="type" value="student" required> 학생
+            </label>
+            <label>
+              <input type="radio" name="type" value="professor" required> 교수
+            </label>
+            <label>
+              <input type="radio" name="type" value="admin" required> 관리자
+            </label>
+          </div>
+
+          <div class="form-group">
+            <input type="text" id="userNum" name="userNum" placeholder="아이디" required>
           </div>
           <div class="form-group">
             <input type="password" id="password" name="password" placeholder="비밀번호" required>
@@ -37,10 +52,12 @@
           </div>
         </form>
 
+
         <!-- 아이디 찾기, 비밀번호 찾기 링크 -->
         <div class="login-links">
-          <a href="/stu-main" class="forgot-link">학생 메인</a>
-          <a href="/prof-main" class="forgot-link">교수 메인</a>
+          <a href="/stu/main" class="forgot-link">학생 메인]]</a>
+          <a href="/prof/main" class="forgot-link">교수 메인]]</a>
+          <a th:href="@{admin/total}" class="forgot-link">관리자 메인</a>
         </div>
 
 

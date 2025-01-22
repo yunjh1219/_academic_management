@@ -1,0 +1,7 @@
+/* 전체 페이지 스타일 */
+body {
+
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* 페이지에서 스크롤이 생기지 않도록 설정 */
+}

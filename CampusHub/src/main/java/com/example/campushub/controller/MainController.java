@@ -20,16 +20,19 @@ public class MainController {
     }
 
     //메인페이지
-    @GetMapping("/stu-main") //- 학생 메인
+    @GetMapping("/stu/main") //- 학생 메인
     public String stuMainPage() {return "pages/student/main/stu-main";}
-    @GetMapping("/prof-main") //- 교수 메인
+    @GetMapping("/prof/main") //- 교수 메인
     public String profMainPage() {return "pages/professor/main/prof-main";}
 
     //포탈페이지
-    @GetMapping("/stu-total") //- 학생 포탈
+    @GetMapping("/stu/total") //- 학생 포탈
     public String stuTotalPage() {return "pages/student/main/stu-total";}
-    @GetMapping("/prof-total") //- 교수 포탈
+    @GetMapping("/prof/total") //- 교수 포탈
     public String profTotalPage() {return "pages/professor/main/prof-total";}
+
+    @GetMapping("/admin/total")
+    public String adminTotalPage() {return "pages/admin/main/admin-total";}
 
 
     // 학생
