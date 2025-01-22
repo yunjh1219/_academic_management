@@ -4,7 +4,7 @@
     <title>Login Homepage</title>
     <link rel="stylesheet" th:inline="css" th:href="@{/css/common/common.css}">
     <link rel="stylesheet" th:inline="css" th:href="@{/css/common/login.css}">
-    <script src="/js/login.js" defer></script> <!-- 외부 JS 파일 연결 -->
+    <script src="/js/common/login.js" defer></script> <!-- 외부 JS 파일 연결 -->
 </head>
 <body>
 <div class="login-container">
@@ -27,7 +27,8 @@
         <div class="login-box-middle">
             <div class="login-form">
 
-                <form id="loginForm">
+
+                <form id="loginForm" onsubmit="handleLogin(event)">
 
                     <!-- 유형 선택 -->
                     <div class="form-group">

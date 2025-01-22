@@ -23,11 +23,16 @@
 #top_title{
     position: relative;
     display: flex;
+    justify-content: start; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
     box-sizing: border-box;
     width: 800px;
     height: 100%;
     background-color: white;
+}
 
+#top_title img{
+    width: 150px;
 }
 
 .content_join{

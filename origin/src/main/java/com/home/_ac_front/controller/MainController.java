@@ -22,8 +22,16 @@ public class MainController {
     // 아이디(학번/교번) , 비밀번호 찾기
     @GetMapping("/findID")
     public String findAccountPage() { return "pages/common/findID"; }
-
     @GetMapping("/findPW")
     public String findPasswordPage() { return "pages/common/findPW"; }
 
+    // 메인페이지
+    @GetMapping("/stu-main")
+    public String stuMainPage() { return "pages/main/stu_main"; }
+    @GetMapping("/prof-main")
+    public String profMainPage() { return "pages/main/prof_main"; }
+
+    //통합정보
+    @GetMapping("/stu_total")
+    public String stuTotalPage() { return "pages/main/stu_total"; }
 }
