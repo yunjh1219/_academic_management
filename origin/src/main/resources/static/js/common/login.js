@@ -85,13 +85,13 @@ function handleLogin(event) {
         // 타입에 따른 리다이렉트
         switch (type) {
             case "student":
-                window.location.href = "/stu-main";
+                window.location.href = "/stu_main";
                 break;
             case "professor":
-                window.location.href = "/prof-main";
+                window.location.href = "/prof_main";
                 break;
             case "admin":
-                window.location.href = "/admin-dashboard";
+                window.location.href = "/admin_total";
                 break;
             default:
                 alert("잘못된 로그인 유형입니다.");

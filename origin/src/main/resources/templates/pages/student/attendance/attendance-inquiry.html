@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>출석 조회:attendance-inquiry</title>
+  <script th:src="@{/js/student/attendance/attendance-inquiry.js}"></script>
+</head>
+<th:block layout:fragment="content">
+
+  <div class="content">
+
+    <div class="content-title">
+      <h5>출석 > 조회 > 출석조회</h5>
+    </div>
+    <div class="query-container">
+      <div class="query-box">
+        <button class="query-btn" id="stu-atten-searchBtn">조회</button>
+      </div>
+    </div>
+
+    <!-- 검색 및 필터 부분은 그대로 유지 -->
+    <div class="search-select-container">
+      <div class="search-container">
+        <div class="searchf-box">
+          <select id="course-select">
+            <option value="">강의를 선택하세요</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 공지사항 목록 테이블 -->
+    <div class="table-container">
+      <div class="table-title">
+        출석조회
+      </div>
+      <div class="table-box">
+        <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+          <thead>
+          <tr>
+            <th style="width: 6%;">NO</th>
+            <th style="width: 53%;">수업일자</th>
+            <th style="width: 10%;">결석일자</th>
+            <th style="width: 25%;">지각/조퇴(시)</th>
+          </tr>
+          </thead>
+          <tbody id="stu-atten-TableBody">
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+
+</th:block>
+</html>

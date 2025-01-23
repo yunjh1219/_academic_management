@@ -44,7 +44,10 @@ window.addEventListener('load', function () {
              </tr> 
              
          </table>
-                    <button id="save-changes">저장</button>
+        <div class="button-container">
+            <button class="common_btn" id="save-changes">변경</button>
+            <button class="common_btn" id="cancel-btn">취소</button>
+        </div>
                     
                          `;
                 // 'user-info' div에 추가

@@ -27,7 +27,7 @@
             <div class="info-box">
 
                 <div class="login-info-join">
-                    <a th:href="@{/stu/update/Info}">
+                    <a th:href="@{/mypage_info}">
                         <img src="/img/common/user_info.png" id="user-logo" alt="User Logo">
                     </a>
                     <div class="login-info">
@@ -76,10 +76,44 @@
                                 <h3>학점현황</h3>
                             </div>
                             <div class="date-content">
-
+                                <table border="1">
+                                    <thead>
+                                    <tr>
+                                        <th>구분</th>
+                                        <th>총 학점</th>
+                                        <th>전공</th>
+                                        <th>교양</th>
+                                        <th>타과</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>졸업요건</td>
+                                        <td>120</td>
+                                        <td>100</td>
+                                        <td>20</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>취득학점</td>
+                                        <td id="earned-total">0</td>
+                                        <td id="earned-major">0</td>
+                                        <td id="earned-general">0</td>
+                                        <td id="earned-other">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>수강신청</td>
+                                        <td id="applied-total">0</td>
+                                        <td id="applied-major">0</td>
+                                        <td id="applied-general">0</td>
+                                        <td id="applied-other">0</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+
 
                 </div>
                 <div class="info-board">
