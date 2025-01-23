@@ -6,7 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>공지사항 : notice</title>
-    <script th:src="@{/js/admin/administrative-management/notice.js}"></script>
+    <script th:src="@{/js/admin/administrative-management/admin-notice.js}"></script>
+
 
     <script th:src="@{/js/fragments/tabs-event.js}"></script>
 </head>
@@ -19,7 +20,7 @@
         </div>
         <div class="query-container">
             <div class="query-box">
-                <button class="query-btn" id="noticesearchBtn">조회</button>
+                <button class="query-btn" id="noticeSearchBtn">조회</button>
             </div>
             <!-- 신규 버튼 클릭 시 /write 페이지로 이동 -->
             <a th:href="@{/write}" class="load-content" id="newNotidceBtn">신규</a>
@@ -28,11 +29,11 @@
                 <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
             </div>
             <div class="query-box">
-                <button class="query-btn" id="deleteBtn">삭제</button>
+                <button class="query-btn" id="noticeDeleteBtn">삭제</button>
 
             </div>
             <div class="query-box">
-                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
+                <button class="query-btn" id="noticeSaveBtn">저장</button>  <!-- 저장 버튼 -->
             </div>
         </div>
 

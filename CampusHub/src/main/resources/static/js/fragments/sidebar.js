@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     sidebarItems.forEach(function(sidebarItem) {
-        if (sidebarItem.classList.contains('prof')) {
+        if (sidebarItem.classList.contains('admin')) {
             sidebarItem.style.display = 'block';  // 기본 메뉴(학생모드)만 보이기
         } else {
             sidebarItem.style.display = 'none';   // 나머지 항목 숨기기
