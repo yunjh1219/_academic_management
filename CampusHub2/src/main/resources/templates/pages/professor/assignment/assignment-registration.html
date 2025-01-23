@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>과제 등록 : assignment-registration</title>
+
+    <link rel="stylesheet" th:href="@{/css/professor/common.css}">
+    <link rel="stylesheet" th:href="@{/css/professor/assignment/assignment-registration.css}">
+
+    <script th:src="@{/js/prof/assign/registr.js}"></script>
+
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>과제 > 과제관리 > 과제등록</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="prof-assign-searchBtn">조회</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="prof-assign-newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="prof-assign-deleteBtn">삭제</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="prof-assign-saveBtn">저장</button>  <!-- 저장 버튼 -->
+            </div>
+        </div>
+
+        <!-- 검색 및 필터 부분은 그대로 유지 -->
+        <div class="search-select-container">
+            <div class="search-container">
+                <div class="searchf-box">
+                    <select id="course-name-select">
+                        <option value="">강좌명</option>  <!-- 강좌명 옵션은 비어있는 값을 기본으로 설정 -->
+                    </select>
+                </div>
+                <div class="searchf-box">
+                    <select id="week-select">
+                        <option value="">주차</option>  <!-- 주차 옵션은 비어있는 값을 기본으로 설정 -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 공지사항 목록 테이블 -->
+        <div class="table-container">
+            <div class="table-title">
+                과제 목록
+            </div>
+            <div class="table-box">
+                <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                        <th style="width: 6%;">
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th style="width: 6%;">NO</th>
+                        <th style="width: 53%;">강의명</th>
+                        <th style="width: 10%;">주차</th>
+                        <th style="width: 25%;">파일</th>
+                        <th style="width: 25%;">제출기한</th>
+                    </tr>
+                    </thead>
+                    <tbody id="prof-assign-search-TableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 항상 보이는 edit-container -->
+            <div class="edit-container" id="editContainer">
+                <form action="#" method="post" id="editNoticeForm">
+                    <!-- 강의명, 주차, 내용, 첨부파일, 제출기한, 작성자 -->
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="lectureTitle">강의명</label>
+                            <input type="text" id="lectureTitle" name="lectureTitle" class="form-control" placeholder="강의명을 입력하세요" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="week">주차</label>
+                            <input type="text" id="week" name="week" class="form-control" placeholder="주차를 입력하세요" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="content">내용</label>
+                            <textarea id="content" name="content" class="form-control" placeholder="내용을 입력하세요" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="file">첨부파일</label>
+                            <input type="text" id="file" name="file" class="form-control" placeholder="파일을 첨부하세요">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="Deadline">제출기한</label>
+                            <input type="date" id="Deadline" name="submissionDeadline" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="author">작성자</label>
+                            <input type="text" id="author" name="author" class="form-control" placeholder="작성자를 입력하세요" readonly> <!-- 작성자는 수정 불가 -->
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

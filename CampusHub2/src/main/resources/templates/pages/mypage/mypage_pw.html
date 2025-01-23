@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main_layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>비밀번호 변경</title>
+  <link rel="stylesheet" th:inline="css" th:href="@{/css/mypage/mypage.css}">
+  <script th:src="@{/js/mypage/update-password-edit.js}"></script>
+</head>
+
+<div layout:fragment="content">
+  <div class="content_join">
+
+    <div id="cotent_top">
+      <div id="content_title">
+        <h2>마이페이지</h2>
+        <img src="/img/common/symbol.png">
+      </div>
+    </div>
+
+    <nav class="mypage-header-nav">
+      <ul>
+        <li><a th:href="@{/mypage_info}">회원정보</a></li>
+        <li><a class="active">비밀번호 변경</a></li>
+      </ul>
+    </nav>
+
+    <div id="content_area">
+      <div id="area_title">
+        <h3>기본정보</h3>
+      </div>
+      <div class="pw_change">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>stu mainpage</title>
+    <link rel="stylesheet" th:inline="css" th:href="@{/css/main/common.css}">
+    <link rel="stylesheet" th:inline="css" th:href="@{/css/main/prof_main.css}">
+    <script src="/js/main/stu_main.js" defer></script> <!-- 외부 JS 파일 연결 -->
+    <script src="/js/main/stu_item.js" defer></script> <!-- 외부 JS 파일 연결 -->
+</head>
+<body>
+
+<div class="stu-main-container">
+
+    <div class="stu-main-total-container">
+
+        <div class="stu-info-container"> <!-- 정보 -->
+            <div class="logo-box">
+                <div class="stu-logo-img">
+                    <img src="/img/common/symbol.png">
+                </div>
+                <div class="text-container">
+                    <h1>복정대학교</h1>
+                    <a>BOKJEUNG PORTAL SERVICE</a>
+                </div>
+            </div>
+
+            <div class="info-box">
+
+                <div class="login-info-join">
+                    <a th:href="@{/mypage_info}">
+                        <img src="/img/common/user_info.png" id="user-logo" alt="User Logo">
+                    </a>
+                    <div class="login-info">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stu-item-container">
+
+            <div class="stu-item-link">
+                <a th:href="@{/prof_total}">
+                    <img src="/img/common/pngegg.png"> <br>
+                    통합정보
+                </a>
+
+            </div>
+
+            <div class="stu-info-table">
+
+                <div class="info-board">
+                    <div class="info-board-right">
+                        <div class="item">
+                            <div class="item-title">
+                                <h3>학사공지</h3>
+                            </div>
+                            <div class="date-content">
+                                <table id="department-notices">
+                                    <tbody>
+                                    <!-- 학과 공지사항 데이터가 여기에 삽입됩니다 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-board-left">
+                        <div class="item">
+                            <div class="item-title">
+                                <h3>학사일정</h3>
+                            </div>
+                            <div class="date-content">
+                                <div class="calendar-header">
+                                    <button id="prev-month"><</button>
+                                    <h3 id="month-title">2025년 1월</h3>
+                                    <button id="next-month">></button>
+                                </div>
+
+                                <table id="academic-calendar">
+
+                                    <tbody>
+                                    <!-- 학사 일정 데이터가 여기에 삽입됩니다 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
