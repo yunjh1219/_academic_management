@@ -126,15 +126,30 @@ document.getElementById('deleteScholarshipBtn').addEventListener('click', functi
 
 // 검색 버튼 클릭 시 필터링된 데이터 표시
 document.querySelector('.search-container button').addEventListener('click', function () {
-    const filterType = document.querySelector('.searchf-box select').value; // 선택된 필터 타입 (학과/학번)
-    const filterValue = document.querySelector('.search-box input').value.trim(); // 입력된 검색 값
+    const filterTypeElement = document.querySelector('.searchf-box select');
+    const filterValueElement = document.querySelector('.search-box input');
+
+
+
+    if (!filterTypeElement || !filterValueElement) {
+        console.error("필터 타입 또는 검색 값 요소를 찾을 수 없습니다.");
+        return;
+    }
+
+    const filterType = filterTypeElement.value.trim(); // 선택된 필터 타입 (학과/학번)
+    const filterValue = filterValueElement.value.trim(); // 입력된 검색 값
 
     const tableBody = document.getElementById('scholarshipTableBody');
+    if (!tableBody) {
+        console.error("테이블 본문 요소를 찾을 수 없습니다.");
+        return;
+    }
+
     tableBody.innerHTML = ''; // 기존 테이블 초기화
 
-    // 검색어가 비어 있으면 전체 데이터를 표시
-    const filteredScholarships = mockScholarships.filter(scholarship => {
-        if (!filterValue) return true;
+    // 검색 조건에 따른 데이터 필터링
+    const filteredScholarships = mockScholarships.filter((scholarship) => {
+        if (!filterValue) return true; // 검색어가 비어 있으면 모든 데이터 반환
         if (filterType === "학과") {
             return scholarship.department.includes(filterValue);
         } else if (filterType === "학번") {
@@ -144,7 +159,7 @@ document.querySelector('.search-container button').addEventListener('click', fun
     });
 
     // 필터링된 데이터를 테이블에 추가
-    filteredScholarships.forEach(scholarship => {
+    filteredScholarships.forEach((scholarship) => {
         const row = document.createElement('tr');
         row.classList.add('scholarship-row');
         row.dataset.id = scholarship.id;
@@ -174,4 +189,3 @@ document.querySelector('.search-container button').addEventListener('click', fun
         tableBody.appendChild(noDataRow);
     }
 });
-

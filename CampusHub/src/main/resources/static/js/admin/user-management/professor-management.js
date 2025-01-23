@@ -58,14 +58,14 @@ document.getElementById('saveBtn').addEventListener('click', function () {
     const selectedRow = document.querySelector('#professorTableBody tr.selected');
     let professorIdInRow = null;
 
-    const name = document.getElementById('name').value;
-    const birthdate = document.getElementById('birthdate').value + "T00:00:00";
-    const department = document.getElementById('department').value;
+    const name = document.getElementById('professor-name').value;
+    const birthdate = document.getElementById('professor-birthdate').value + "T00:00:00";
+    const department = document.getElementById('professor-department').value;
     const professorId = document.getElementById('professorId').value;
-    const phone = document.getElementById('phone').value;
-    const email = document.getElementById('email').value;
-    const address = document.getElementById('address').value;
-    const password = document.getElementById('password').value;
+    const phone = document.getElementById('professor-phone').value;
+    const email = document.getElementById('professor-email').value;
+    const address = document.getElementById('professor-address').value;
+    const password = document.getElementById('professor-password').value;
 
     if (selectedRow) {
         professorIdInRow = selectedRow.dataset.id;
@@ -144,6 +144,8 @@ document.getElementById('professorTableBody').addEventListener('click', function
 // 검색 버튼 클릭 시 이름 또는 교번으로 교수 정보를 검색
 document.querySelector('.search-container button').addEventListener('click', function () {
     const searchInput = document.querySelector('.search-container input[type="text"]').value.trim();
+
+    console.log("ddd");
 
     if (!searchInput) {
         alert("이름 또는 교번을 입력하세요.");
