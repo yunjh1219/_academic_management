@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>과제조회: Assignment Inquiry</title>
+</head>
+<th:block layout:fragment="content">
+
+  <div class="content">
+
+    <div class="content-title">
+      <h5>과제 > 조회 > 과제조회</h5>
+    </div>
+    <div class="query-container">
+      <div class="query-box">
+        <button class="query-btn" id="searchBtn">조회</button>
+      </div>
+      <div class="query-box">
+        <button class="query-btn" id="saveBtn">제출</button>  <!-- 저장 버튼 -->
+      </div>
+    </div>
+
+    <!-- 검색 및 필터 부분은 그대로 유지 -->
+    <div class="search-select-container">
+      <div class="search-container">
+        <div class="searchf-box">
+          <select>
+            <option>강의명</option>
+            <option>작성자</option>
+          </select>
+        </div>
+        <div class="searchf-box">
+          <select>
+            <option>주차</option>
+            <option>작성자</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 공지사항 목록 테이블 -->
+    <div class="table-container">
+      <div class="table-title">
+        강의목록
+      </div>
+      <div class="table-box">
+        <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+          <thead>
+          <tr>
+            <th style="width: 6%;">
+              <input type="checkbox" id="selectAll">
+            </th>
+            <th style="width: 6%;">NO</th>
+            <th style="width: 53%;">주차</th>
+            <th style="width: 10%;">강의명</th>
+            <th style="width: 25%;">교수명</th>
+            <th style="width: 25%;">제출여부</th>
+            <th style="width: 25%;">등록날짜</th>
+          </tr>
+          </thead>
+          <tbody id="noticeTableBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- 항상 보이는 edit-container -->
+    <div class="edit-container" id="editContainer">
+      <form action="#" method="post" id="editNoticeForm">
+        <!-- 주차, 강의명, 교수명, 내용, 제출여부, 등록날짜, 첨부파일 -->
+        <div class="form-group">
+          <div class="form-item">
+            <label for="week">주차</label>
+            <input type="number" id="week" name="week" class="form-control" placeholder="주차를 입력하세요" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-item">
+            <label for="lectureTitle">강의명</label>
+            <input type="text" id="lectureTitle" name="lectureTitle" class="form-control" placeholder="강의명을 입력하세요" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-item">
+            <label for="professor">교수명</label>
+            <input type="text" id="professor" name="professor" class="form-control" placeholder="교수명을 입력하세요" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-item">
+            <label for="content">내용</label>
+            <textarea id="content" name="content" class="form-control" placeholder="내용을 입력하세요" required></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-item">
+            <label for="submissionStatus">제출여부</label>
+            <select id="submissionStatus" name="submissionStatus" class="form-control" required>
+              <option value="submitted">제출</option>
+              <option value="notSubmitted">미제출</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-item">
+            <label for="registrationDate">등록날짜</label>
+            <input type="datetime-local" id="registrationDate" name="registrationDate" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-item">
+            <label for="file">첨부파일</label>
+            <input type="text" id="file" name="file" class="form-control" placeholder="파일을 첨부하세요">
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+
+
+
+
+  </div>
+</div>
+
+</th:block>
+</html>
