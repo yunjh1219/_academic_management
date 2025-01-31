@@ -44,6 +44,7 @@ document.getElementById('admin-stuinfo-searchBtn').addEventListener('click', fun
         });
 });
 
+//단건조회
 document.getElementById('admin-stuinfo-TableBody').addEventListener('click', function (event) {
     const clickedRow = event.target.closest('tr');
     if (clickedRow) {
@@ -55,7 +56,6 @@ document.getElementById('admin-stuinfo-TableBody').addEventListener('click', fun
 
         // 선택된 행의 userNum 가져오기
         const userNum = clickedRow.querySelector('[data-field="studentId"]')?.textContent || '';
-        console.log(userNum + "uuuuu");
 
         // JWT 토큰을 로컬 스토리지에서 가져오기
         const token = localStorage.getItem('jwtToken');
@@ -78,13 +78,13 @@ document.getElementById('admin-stuinfo-TableBody').addEventListener('click', fun
                 // 데이터 편집 창에 반영
                 if (data && data.data) { // 데이터가 존재하는지 확인
                     const student = data.data; // 학생 정보 객체
-                    document.getElementById('name').value = student.username || '';
-                    document.getElementById('studentId').value = student.userNum || '';
-                    document.getElementById('department').value = student.deptName || '';
-                    document.getElementById('phone').value = student.phone || '';
-                    document.getElementById('email').value = student.email || '';
-                    document.getElementById('address').value = student.address || '';
-                    document.getElementById('birthdate').value = student.birthdate || '';
+                    document.getElementById('name').value = student.username || '이름없음';
+                    document.getElementById('studentId').value = student.userNum || '학번없음';
+                    document.getElementById('department').value = student.deptName || '학과없음';
+                    document.getElementById('phone').value = student.phone || '폰없음';
+                    document.getElementById('email').value = student.email || '메일없음';
+                    document.getElementById('address').value = student.address || '주소없음';
+                    document.getElementById('birthdate').value = student.birthdate || '생일없음';
                 } else {
                     alert('학생 정보를 찾을 수 없습니다.');
                 }

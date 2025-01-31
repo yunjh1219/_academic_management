@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>교수정보관리 : professor-management</title>
+    <script th:src="@{/js/admin/user-management/professor-management.js}"></script>
 </head>
 <th:block layout:fragment="content">
 
@@ -17,16 +18,19 @@
 
         <div class="query-container">
             <div class="query-box">
-                <button class="query-btn" id="searchBtn">조회</button>
+                <button class="query-btn" id="admin-profinfo-searchBtn">조회</button>
             </div>
             <div class="query-box">
-                <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+                <button class="query-btn" id="admin-profinfo-newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
             </div>
             <div class="query-box">
-                <button class="query-btn" id="deleteBtn">삭제</button>
+                <button class="query-btn" id="admin-profinfo-delBtn">삭제</button>
             </div>
             <div class="query-box">
-                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
+                <button class="query-btn" id="admin-profinfo-savBtn">저장</button>  <!-- 저장 버튼 -->
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="admin-profinfo-accBtn">수락</button>  <!-- 저장 버튼 -->
             </div>
         </div>
 
@@ -47,7 +51,6 @@
                 <button>검색</button>
             </div>
         </div>
-        <!-- 공지사항 목록 테이블 -->
         <div class="table-container">
             <div class="table-title">
                 교수명단
@@ -56,21 +59,20 @@
             <table>
                 <thead>
                 <tr>
-                    <th style="width: 5%;">
+                    <th style="width: 3%;">
                         <input type="checkbox" id="selectAll">
                     </th>
-                    <th style="width: 8%;">이름</th>
-                    <th style="width: 12%;">교번</th>
-                    <th style="width: 39%;">학과</th>
-                    <th style="width: 8%;">사용자</th>
-                    <th style="width: 8%;">상태</th>
-                    <th style="width: 20%;">비고</th>
+                    <th style="width: 5%;">No</th>
+                    <th style="width: 10%;">이름</th>
+                    <th style="width: 20%;">교번</th>
+                    <th style="width: 20%;">학과</th>
+                    <th style="width: 20%;">사용자</th>
+                    <th style="width: 9%;">상태</th>
+                    <th style="width: 18%;">비고</th>
                 </tr>
                 </thead>
-                <tbody>
-                <th:block>
-                    <!-- 여기에 출력하면 됨 -->
-                </th:block>
+                <tbody id="admin-profinfo-TableBody">
+
                 </tbody>
             </table>
         </div>
@@ -78,7 +80,7 @@
 
         <!-- 항상 보이는 edit-container -->
         <div class="edit-container" id="editContainer">
-            <form action="#" method="post" id="editNoticeForm">
+            <form action="#" method="post" id="editProfManaForm">
 
                 <!-- 이름 -->
                 <div class="form-group">
@@ -135,7 +137,7 @@
 
 
 
-
+        </div>
     </div>
 </th:block>
 </html>
