@@ -48,13 +48,41 @@ window.addEventListener('load', function () {
 
     // 로그아웃 버튼 클릭 시
     document.getElementById('logoutBtn').addEventListener('click', function () {
-        // localStorage 초기화
-        localStorage.removeItem('userInfo');
+        // 로컬 스토리지에서 JWT 토큰 가져오기
+        const token = localStorage.getItem('jwtToken');
 
-        // 로그인 페이지로 리다이렉트
-        window.location.href = '/login';  // 실제 로그인 페이지 경로로 변경
+        if (!token) {
+            alert('토큰이 없습니다. 로그인이 필요합니다.');
+            window.location.href = '/api/login';
+            return;
+        }
+
+        fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${token}` // JWT 토큰 추가
+            },
+            credentials: 'same-origin',
+        })
+            .then(response => {
+                if (response.ok) {
+                    // 로그아웃 성공 처리
+                    alert('로그아웃 성공');
+
+                    // 로컬 스토리지 초기화
+                    localStorage.removeItem('jwtToken');
+                    localStorage.removeItem('userInfo');
+
+                    // 로그인 페이지로 리다이렉트
+                    window.location.href = '/api/login';
+                } else {
+                    alert('로그아웃 실패');
+                }
+            })
+            .catch(error => {
+                console.error('로그아웃 중 오류 발생:', error);
+                alert('로그아웃 중 오류 발생');
+            });
     });
 });
-
-
-

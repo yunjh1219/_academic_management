@@ -32,6 +32,7 @@ document.getElementById('admin-stuinfo-searchBtn').addEventListener('click', fun
                 <td data-field="name" style="text-align: left;">${student.username}</td>
                 <td data-field="studentId">${student.userNum}</td>
                 <td data-field="department">${student.deptName}</td>
+                <td data-field="type">${student.type}</td>
                 <td data-field="status">${student.status}</td>
                 <td data-field="remarks"></td>
             `;
@@ -78,7 +79,7 @@ document.getElementById('admin-stuinfo-TableBody').addEventListener('click', fun
                 // 데이터 편집 창에 반영
                 if (data && data.data) { // 데이터가 존재하는지 확인
                     const student = data.data; // 학생 정보 객체
-                    document.getElementById('name').value = student.username || '이름없음';
+                    document.getElementById('name').value = student.userName || '이름없음';
                     document.getElementById('studentId').value = student.userNum || '학번없음';
                     document.getElementById('department').value = student.deptName || '학과없음';
                     document.getElementById('phone').value = student.phone || '폰없음';
@@ -99,8 +100,19 @@ document.getElementById('admin-stuinfo-TableBody').addEventListener('click', fun
 
 // 신규 버튼 클릭 시 새로운 행 추가
 document.getElementById('admin-stuinfo-newBtn').addEventListener('click', function() {
-    const tableBody = document.getElementById('admin-stuinfo-TableBody');
 
+    // 폼 초기화 (입력된 데이터 초기화)
+    document.getElementById('name').value = '';
+    document.getElementById('studentId').value = '';
+    document.getElementById('department').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('birthdate').value = '';
+
+    alert('새로운 학생 정보를 추가했습니다. 정보를 입력해주세요.');
+
+    const tableBody = document.getElementById('admin-stuinfo-TableBody');
     const newNoticeId = `new+${tableBody.rows.length + 1}`;   // 행 순서대로 ID 생성 (현재 행의 개수를 기반으로)
     const displayId = newNoticeId.replace('new+', ''); // 'new+'를 빈 문자열로 대체
     const newRow = document.createElement('tr');   // 새로운 행(tr) 생성
@@ -146,8 +158,6 @@ document.getElementById('admin-stuinfo-newBtn').addEventListener('click', functi
 
     // 실시간 반영 이벤트 추가
     addRealTimeEditing(newRow);
-
-    alert('새로운 학생 정보를 추가했습니다. 내용을 확인하세요.');
 });
 
 
@@ -268,4 +278,46 @@ document.getElementById('admin-stuinfo-savBtn').addEventListener('click', functi
             console.error('Error:', error);
             alert('학생 정보를 저장하는 중 오류가 발생했습니다.');
         });
+});
+
+// 삭제 버튼 클릭 이벤트 핸들러
+document.getElementById('admin-stuinfo-delBtn').addEventListener('click', function () {
+    const selectedRow = document.querySelector('#admin-stuinfo-TableBody tr.selected');  // 선택된 행 찾기
+
+    if (!selectedRow) {
+        alert('삭제할 학생을 선택하세요.');
+        return;
+    }
+
+    const userNum = selectedRow.querySelector('[data-field="studentId"]')?.textContent;
+
+    if (!userNum) {
+        alert('올바른 학생 ID를 찾을 수 없습니다.');
+        return;
+    }
+
+    const url = `/api/admin/user/${userNum}`;  // 삭제 API 경로
+    const token = localStorage.getItem('jwtToken');  // JWT 토큰 가져오기
+
+    if (confirm('정말로 이 학생 정보를 삭제하시겠습니까?')) {
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('학생 정보가 성공적으로 삭제되었습니다.');
+                    selectedRow.remove();  // 테이블에서 선택된 행 삭제
+                } else {
+                    throw new Error('삭제 중 오류가 발생했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('학생 정보를 삭제하는 중 오류가 발생했습니다.');
+            });
+    }
 });

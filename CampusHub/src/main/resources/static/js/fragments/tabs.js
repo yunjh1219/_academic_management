@@ -93,7 +93,7 @@ $(function() {
     });
 
 
-    var tabToActivate = $('a[data-tab="교수정보관리"]');
+    var tabToActivate = $('a[data-tab="학생관리"]');
 
 // 현재 열린 탭이 없을 때만 기본 탭을 활성화
     if ($("#tabs ul li").length === 0) {  // 탭 목록이 비어있다면

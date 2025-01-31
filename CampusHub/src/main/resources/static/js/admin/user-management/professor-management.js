@@ -57,10 +57,9 @@ document.getElementById('admin-profinfo-newBtn').addEventListener('click', funct
     document.getElementById('address').value = '';
     document.getElementById('birthdate').value = '';
 
-    alert('새로운 교수 정보를 추가했습니다. 내용을 확인하세요.');
+    alert('새로운 교수 정보를 추가했습니다. 정보를 입력해주세요.');
 
     const tableBody = document.getElementById('admin-profinfo-TableBody');
-
     const newNoticeId = `new+${tableBody.rows.length + 1}`;   // 행 순서대로 ID 생성 (현재 행의 개수를 기반으로)
     const displayId = newNoticeId.replace('new+', ''); // 'new+'를 빈 문자열로 대체
     const newRow = document.createElement('tr');   // 새로운 행(tr) 생성
@@ -105,8 +104,6 @@ document.getElementById('admin-profinfo-newBtn').addEventListener('click', funct
 
     // 실시간 반영 이벤트 추가
     addRealTimeProfEditing(newRow);
-
-
 });
 
 // 실시간으로 수정 내용 반영
