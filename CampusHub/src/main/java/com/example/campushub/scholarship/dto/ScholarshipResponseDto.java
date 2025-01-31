@@ -20,13 +20,13 @@ public class ScholarshipResponseDto {
  private String userNum;
  private String deptName;
  @DateTimeFormat(pattern = "yyyy")
- private LocalDate year;
- private Semester semester;
- private String scholarshipName;
- private PaymentType type;
- private int amount;
+ private LocalDate year; //학년도
+ private Semester semester; //학기
+ private String scholarshipName; //장학금명
+ private PaymentType type; //지급구분
+ private int amount; //장학금액
  @DateTimeFormat(pattern = "yyyy-MM-dd")
- private LocalDate confDate;
+ private LocalDate confDate; //확정일자
 
  @Builder
  @QueryProjection

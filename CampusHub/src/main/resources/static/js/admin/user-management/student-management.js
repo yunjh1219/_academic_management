@@ -321,3 +321,61 @@ document.getElementById('admin-stuinfo-delBtn').addEventListener('click', functi
             });
     }
 });
+
+document.getElementById('admin-stuNum-searchBtn').addEventListener('click', function () {
+    // 입력된 학번을 가져오기
+    const studentId = document.getElementById('stuNum').value.trim();
+
+    // 학번이 비어있으면 경고 메시지
+    if (!studentId) {
+        alert('학번을 입력하세요.');
+        return;
+    }
+
+    // 학번을 서버로 요청
+    fetch(`/api/admin/student/${studentId}`, {  // URL에서 {userNum}을 studentId로 바꿈
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`  // JWT 토큰 추가
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('학생 정보를 찾을 수 없습니다.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('서버 응답 데이터:', data);  // 서버에서 받은 데이터 출력
+
+            const tableBody = document.getElementById('admin-stuinfo-TableBody');
+            tableBody.innerHTML = '';  // 이전 검색 결과 지우기
+
+            // 학생 데이터가 있을 경우 테이블에 추가
+            if (data && data.data) {
+                const student = data.data;  // 학생 정보
+                const row = document.createElement('tr');
+                row.dataset.id = student.userNum;
+
+                row.innerHTML = `
+                <td><input type="checkbox" class="student-checkbox"></td>
+                <td>1</td>  <!-- 첫 번째 검색된 학생, 고정값 1로 표시 -->
+                <td data-field="name" style="text-align: left;">${student.userName}</td>
+                <td data-field="studentId">${student.userNum}</td>
+                <td data-field="department">${student.deptName}</td>
+                <td data-field="type">${student.type}</td>
+                <td data-field="status">${student.status}</td>
+                <td data-field="remarks"></td>
+            `;
+
+                tableBody.appendChild(row);  // 테이블에 행 추가
+            } else {
+                alert('학생 정보를 찾을 수 없습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('검색 중 오류 발생:', error);
+            alert('검색 중 오류가 발생했습니다.')
+        });
+});

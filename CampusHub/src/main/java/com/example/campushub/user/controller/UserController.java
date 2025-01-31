@@ -48,6 +48,7 @@ public class UserController {
 			.data(userService.getStudentByUserNum(loginUser, userNum))
 			.build();
 	}
+
 	//학생 전체 조회
 	@GetMapping("/api/admin/students/condition")
 	@ResponseStatus(HttpStatus.OK)
