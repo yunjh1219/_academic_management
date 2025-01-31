@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <title>교수정보관리 : professor-management</title>
-    <script th:src="@{/js/admin/user-management/professor-management.js}"></script>
 </head>
 <th:block layout:fragment="content">
 
@@ -18,16 +17,16 @@
 
         <div class="query-container">
             <div class="query-box">
-                <button class="query-btn" id="admin-profinfo-searchBtn">조회</button>
+                <button class="query-btn" id="searchBtn">조회</button>
             </div>
             <div class="query-box">
-                <button class="query-btn" id="admin-profinfo-newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+                <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
             </div>
             <div class="query-box">
-                <button class="query-btn" id="admin-profinfo-delBtn">삭제</button>
+                <button class="query-btn" id="deleteBtn">삭제</button>
             </div>
             <div class="query-box">
-                <button class="query-btn" id="admin-profinfo-savBtn">저장</button>  <!-- 저장 버튼 -->
+                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
             </div>
         </div>
 
@@ -54,83 +53,85 @@
                 교수명단
             </div>
             <div class="table-box">
-                <table>
-                    <thead>
-                    <tr>
-                        <th style="width: 5%;">
-                            <input type="checkbox" id="selectAll">
-                        </th>
-                        <th style="width: 5%;">No</th>
-                        <th style="width: 8%;">이름</th>
-                        <th style="width: 12%;">교번</th>
-                        <th style="width: 39%;">학과</th>
-                        <th style="width: 8%;">사용자</th>
-                        <th style="width: 8%;">상태</th>
-                        <th style="width: 20%;">비고</th>
-                    </tr>
-                    </thead>
-                    <tbody id="admin-profinfo-TableBody">
-                    </tbody>
-                </table>
-            </div>
-
-
-            <!-- 항상 보이는 edit-container -->
-            <div class="edit-container" id="editContainer">
-                <form action="#" method="post" id="editNoticeForm">
-
-                    <!-- 이름 -->
-                    <div class="form-group">
-                        <div class="form-item">
-                            <label for="name">이름</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="이름을 입력하세요" required>
-                        </div>
-                        <div class="form-item">
-                            <label for="birthdate">생년월일</label>
-                            <input type="date" id="birthdate" name="birthdate" class="form-control" required>
-                        </div>
-                    </div>
-
-
-
-                    <!-- 학과 -->
-                    <div class="form-group">
-                        <div class="form-item">
-                            <label for="department">학과</label>
-                            <input type="text" id="department" name="department" class="form-control" placeholder="학과를 입력하세요" required>
-                        </div>
-                        <div class="form-item">
-                            <label for="professorId">교번</label>
-                            <input type="text" id="professorId" name="professorId" class="form-control" placeholder="학번을 입력하세요" required>
-                        </div>
-                    </div>
-
-                    <!-- 이메일 -->
-                    <div class="form-group">
-                        <div class="form-item">
-                            <label for="phone">연락처</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="연락처를 입력하세요" required>
-                        </div>
-                        <div class="form-item">
-                            <label for="email">이메일</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="이메일을 입력하세요" required>
-                        </div>
-                    </div>
-
-
-                    <!-- 주소 -->
-                    <div class="form-group">
-                        <div class="form-item">
-                            <label for="address">주소</label>
-                            <input type="text" id="address" name="address" class="form-control" placeholder="주소를 입력하세요" required>
-                        </div>
-                    </div>
-
-
-
-                </form>
-            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%;">
+                        <input type="checkbox" id="selectAll">
+                    </th>
+                    <th style="width: 8%;">이름</th>
+                    <th style="width: 12%;">교번</th>
+                    <th style="width: 39%;">학과</th>
+                    <th style="width: 8%;">사용자</th>
+                    <th style="width: 8%;">상태</th>
+                    <th style="width: 20%;">비고</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block>
+                    <!-- 여기에 출력하면 됨 -->
+                </th:block>
+                </tbody>
+            </table>
         </div>
+
+
+        <!-- 항상 보이는 edit-container -->
+        <div class="edit-container" id="editContainer">
+            <form action="#" method="post" id="editNoticeForm">
+
+                <!-- 이름 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="name">이름</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="이름을 입력하세요" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="birthdate">생년월일</label>
+                        <input type="date" id="birthdate" name="birthdate" class="form-control" required>
+                    </div>
+                </div>
+
+
+
+                <!-- 학과 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="department">학과</label>
+                        <input type="text" id="department" name="department" class="form-control" placeholder="학과를 입력하세요" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="professorId">교번</label>
+                        <input type="text" id="professorId" name="professorId" class="form-control" placeholder="학번을 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 이메일 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="phone">연락처</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="연락처를 입력하세요" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="email">이메일</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="이메일을 입력하세요" required>
+                    </div>
+                </div>
+
+
+                <!-- 주소 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="address">주소</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="주소를 입력하세요" required>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+
 
 
 
