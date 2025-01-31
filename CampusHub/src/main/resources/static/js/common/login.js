@@ -42,7 +42,7 @@ function handleLogin(event) {
                 if (userType === 'STUDENT') {
                     window.location.href = "/stu_main"; // 학생 대시보드
                 } else if (userType === 'PROFESSOR') {
-                    window.location.href = "/prof_total"; // 교수 대시보드
+                    window.location.href = "/prof_main"; // 교수 대시보드
                 } else if (userType === 'ADMIN') {
                     window.location.href = "/admin_total"; // 관리자 대시보드
                 } else {
