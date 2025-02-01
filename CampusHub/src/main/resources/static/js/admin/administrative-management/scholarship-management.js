@@ -36,7 +36,6 @@ document.getElementById('admin-shipinfo-searchBtn').addEventListener('click', fu
                     <td data-field="scholarshipName">${scholarship.scholarshipName}</td>
                     <td data-field="type">${scholarship.type}</td>
                     <td data-field="amount">${scholarship.amount}</td>
-                    <td data-field="confDate">${scholarship.confDate ? scholarship.confDate : ''}</td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -85,7 +84,7 @@ document.getElementById('admin-shipinfo-newBtn').addEventListener('click', funct
     const scholarshipName = document.getElementById('admin_shipinfo_scholarshipName').value;
     const paymentType = document.getElementById('admin_shipinfo_paymentType').value;
     const amount = document.getElementById('admin_shipinfo_amount').value;
-    const confDate = document.getElementById('admin_shipinfo_confDate').value;
+
 
     // 새로운 행의 HTML 구조 설정
     newRow.innerHTML = `
@@ -99,7 +98,6 @@ document.getElementById('admin-shipinfo-newBtn').addEventListener('click', funct
         <td data-field="scholarshipName">${scholarshipName}</td> <!-- 장학금명 -->
         <td data-field="type">${paymentType}</td> <!-- 지급구분 -->
         <td data-field="amount">${amount}</td>  <!-- 장학금액 -->
-        <td data-field="confDate">${confDate}</td> <!-- 확정일자 -->
 
     `;
 
@@ -128,7 +126,7 @@ function addRealTimeShipEditing(row) {
     const admin_shipinfo_scholarshipNameCell = row.querySelector('td[data-field="scholarshipName"]')
     const admin_shipinfo_paymentTypeCell = row.querySelector('td[data-field="type"]')
     const admin_shipinfo_amountCell = row.querySelector('td[data-field="amount"]')
-    const admin_shipinfo_confDateCell = row.querySelector('td[data-field="confDate"]')
+
 
     // 폼 필드에 실시간으로 입력되는 값 반영
     document.getElementById('admin_shipinfo_name').addEventListener('input', function() {
@@ -180,10 +178,175 @@ function addRealTimeShipEditing(row) {
         }
     });
 
-    document.getElementById('admin_shipinfo_confDate').addEventListener('input', function() {
-        if (admin_shipinfo_confDateCell) {
-            admin_shipinfo_confDateCell.textContent = this.value;  // 상태 수정 반영
-        }
-    });
 
 }
+
+
+// 모달 열기 및 닫기 제어
+const modal = document.getElementById('admin_shipinfo_studentIdModal');
+const openModalBtn = document.getElementById('admin_shipinfo_Search_openModalBtn');
+const closeModalBtn = document.querySelector('.close');
+
+// 모달 열기
+openModalBtn.addEventListener('click', function() {
+    modal.style.display = 'block';
+});
+
+// 모달 닫기
+closeModalBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+});
+
+// 모달 바깥 클릭 시 닫기
+window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// 학번 조회 함수
+function searchStudent() {
+
+    const userNum = document.getElementById('admin_shipinfo_studentId_input').value;
+
+    if (userNum) {
+        const url = `/api/admin/student/${userNum}`;
+        const token = localStorage.getItem('jwtToken');
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('학생 정보를 가져오는 데 실패했습니다.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayStudentInfo(data);
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    } else {
+        alert('학번을 입력해주세요.');
+    }
+}
+
+function displayStudentInfo(response) {
+    const resultBox = document.getElementById('studentInfoResult');
+    if (response && response.data) {
+        const student = response.data; // 'data' 객체 안에 학생 정보가 들어 있습니다.
+
+        resultBox.innerHTML = `
+            <td><button id="registerStudentBtn" data-student-id="${student.userNum}">등록</button></td>
+            <td>학번: ${student.userNum}</td>
+            <td>이름: ${student.userName}</td>
+            <td>학과: ${student.deptName}</td>
+        `;
+
+        // 등록 버튼 클릭 시 폼에 값 설정
+        document.getElementById('registerStudentBtn').addEventListener('click', function () {
+            document.getElementById('admin_shipinfo_studentId').value = student.userNum;
+            document.getElementById('admin_shipinfo_name').value = student.userName;
+            document.getElementById('admin_shipinfo_department').value = student.deptName;
+
+            // 폼 입력 이벤트 트리거 (실시간 수정 반영)
+            document.getElementById('admin_shipinfo_studentId').dispatchEvent(new Event('input'));
+            document.getElementById('admin_shipinfo_name').dispatchEvent(new Event('input'));
+            document.getElementById('admin_shipinfo_department').dispatchEvent(new Event('input'));
+
+            modal.style.display = 'none'; // 모달 닫기
+        });
+
+    } else {
+        resultBox.innerHTML = '<p>학생 정보를 찾을 수 없습니다.</p>';
+    }
+}
+
+
+//저장버튼
+document.getElementById('admin-shipinfo-savBtn').addEventListener('click', function() {
+    const userName = document.getElementById('admin_shipinfo_name').value;  // 이름
+    const userNum = document.getElementById('admin_shipinfo_studentId').value;  // 학번
+    const deptName = document.getElementById('admin_shipinfo_department').value;  // 학과
+    const schoolYear = document.getElementById('admin_shipinfo_year').value;  // 학년도
+    const semester = document.getElementById('admin_shipinfo_semester').value;  // 학기
+    const scholarshipName = document.getElementById('admin_shipinfo_scholarshipName').value;  // 장학금명
+    const amount = parseInt(document.getElementById('admin_shipinfo_amount').value, 10);  // 숫자로 변환
+    const type = document.getElementById('admin_shipinfo_paymentType').value;  // 지급구분
+
+
+
+    // 선택된 행이 있는지 확인 (수정일 경우 ID가 존재)
+    const selectedRow = document.querySelector('#admin-stuinfo-TableBody tr.selected');  // 선택된 행 찾기
+    let url = '';
+    let method = '';
+    let shipinfoIdInRow = null;
+
+    if (selectedRow) {
+        // 선택된 행에서 ID 가져오기
+        shipinfoIdInRow = selectedRow.dataset.id;  // 선택된 학생의 ID
+
+        if (shipinfoIdInRow.startsWith('new+')) {
+            // 신규 학생 (new+로 시작하는 ID)
+            url = '/api/admin/scholarship';
+            method = 'POST';  // 신규 추가: POST 요청
+        }
+    } else {
+        // 선택된 행이 없으면 신규로 처리
+        url = '/api/join/student';
+        method = 'POST';  // 신규 추가: POST 요청
+    }
+
+    // 데이터 객체 생성
+    const shipinfoData = {
+        userName: userName,
+        userNum: userNum,
+        deptName: deptName,
+        schoolYear: {
+            year: schoolYear,  // "2025-01-01" 형식
+            semester: semester,  // "SPRING" 또는 "FALL"
+            is_current: true  // 현재 학기 여부
+        },
+        scholarshipName: scholarshipName,
+        amount: amount,
+        type: type
+    };
+
+    // 로컬 스토리지에서 JWT 토큰 가져오기
+    const token = localStorage.getItem('jwtToken');
+
+    console.log('요청 URL:', url);
+    console.log('요청 메서드:', method);
+    console.log('요청 본문:', JSON.stringify(shipinfoData));
+
+    // 요청 보내기
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${token}`  // JWT 토큰을 Authorization 헤더에 추가
+        },
+        body: JSON.stringify(shipinfoData)
+    })
+        .then(response => {
+            if (response.ok) {
+                if (method === 'PUT') {
+                    alert('장학금 정보가 성공적으로 수정되었습니다.');
+                } else {
+                    alert('새로운 장학금 정보가 성공적으로 저장되었습니다.');
+                }
+            } else {
+                throw new Error('저장 중 오류가 발생했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('장학금 정보를 저장하는 중 오류가 발생했습니다.');
+        });
+});

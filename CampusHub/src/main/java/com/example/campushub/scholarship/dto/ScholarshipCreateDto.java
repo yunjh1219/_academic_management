@@ -26,7 +26,7 @@ public class  ScholarshipCreateDto {
 
     @Builder
     public ScholarshipCreateDto(String userNum, String userName, String deptName, SchoolYear schoolYear, String scholarshipName, int amount, PaymentType type) {
-        this.userNum = userNum;
+        this.userNum = userNum;   //학번 이름 학과 학년도 장학금명 금액 지급구분
         this.userName = userName;
         this.deptName = deptName;
         this.schoolYear = schoolYear;

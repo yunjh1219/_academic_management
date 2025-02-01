@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>장학금 관리: scholarship-management</title>
     <script th:src="@{/js/admin/administrative-management/scholarship-management.js}"></script>
+    <link th:rel="stylesheet" th:href="@{/css/page/admin/administrative-management/scholarship-management.css}">
 </head>
 <th:block layout:fragment="content">
 
@@ -86,31 +87,25 @@
                 <div class="form-group">
                     <div class="form-item">
                         <label for="admin_shipinfo_name">이름</label>
-                        <input type="text" id="admin_shipinfo_name" name="name" class="form-control" placeholder="이름을 입력하세요" required>
+                        <input type="text" id="admin_shipinfo_name" name="name" class="admin_shipinof_form-control" readonly>
                     </div>
-                </div>
-
-                <!-- 학번 -->
-                <div class="form-group">
-                    <div class="form-item">
-                        <label for="admin_shipinfo_studentId">학번</label>
-                        <input type="text" id="admin_shipinfo_studentId" name="studentId" class="form-control" placeholder="학번을 입력하세요" required>
-                    </div>
-                </div>
-
-                <!-- 학과 -->
-                <div class="form-group">
                     <div class="form-item">
                         <label for="admin_shipinfo_department">학과</label>
-                        <input type="text" id="admin_shipinfo_department" name="department" class="form-control" placeholder="학과를 입력하세요" required>
+                        <input type="text" id="admin_shipinfo_department" name="department" class="admin_shipinof_form-control" readonly>
+                    </div>
+                    <div class="form-item">
+                        <label for="admin_shipinfo_studentId">학번</label>
+                        <input type="text" id="admin_shipinfo_studentId" name="studentId" class="admin_shipinof_form-control" readonly>
+                        <button id="admin_shipinfo_Search_openModalBtn">검색</button>
                     </div>
                 </div>
+
 
                 <!-- 학년도 -->
                 <div class="form-group">
                     <div class="form-item">
                         <label for="admin_shipinfo_year">학년도</label>
-                        <input type="text" id="admin_shipinfo_year" name="year" class="form-control" placeholder="학년도를 입력하세요" required>
+                        <input type="text" id="admin_shipinfo_year" name="year" class="admin_shipinof_form-control" placeholder="학년도를 입력하세요" required>
                     </div>
                 </div>
 
@@ -119,7 +114,10 @@
                 <div class="form-group">
                     <div class="form-item">
                         <label for="admin_shipinfo_semester">학기</label>
-                        <input type="text" id="admin_shipinfo_semester" name="semester" class="form-control" placeholder="학기를 입력하세요" required>
+                        <select id="admin_shipinfo_semester" name="semester" class="admin_shipinof_form-control" required>
+                            <option value="1">1학기</option>
+                            <option value="2">2학기</option>
+                        </select>
                     </div>
                 </div>
 
@@ -127,15 +125,19 @@
                 <div class="form-group">
                     <div class="form-item">
                         <label for="admin_shipinfo_scholarshipName">장학금명</label>
-                        <input type="text" id="admin_shipinfo_scholarshipName" name="scholarshipName" class="form-control" placeholder="장학금명을 입력하세요" required>
+                        <input type="text" id="admin_shipinfo_scholarshipName" name="scholarshipName" class="admin_shipinof_form-control" placeholder="장학금명을 입력하세요" required>
                     </div>
                 </div>
 
-                <!-- 지급구분 -->
+                <!-- 지급 구분 -->
                 <div class="form-group">
                     <div class="form-item">
-                        <label for="admin_shipinfo_paymentType">지급구분</label>
-                        <input type="text" id="admin_shipinfo_paymentType" name="paymentType" class="form-control" placeholder="지급구분을 입력하세요" required>
+                        <label for="admin_shipinfo_paymentType">지급 구분</label>
+                        <select id="admin_shipinfo_paymentType" name="type" class="admin_shipinof_form-control" required>
+                            <option value="">지급 구분을 선택하세요</option>
+                            <option value="PRE_PAYMENT">선지급</option>
+                            <option value="POST_PAYMENT">후지급</option>
+                        </select>
                     </div>
                 </div>
 
@@ -143,24 +145,26 @@
                 <div class="form-group">
                     <div class="form-item">
                         <label for="admin_shipinfo_amount">금액</label>
-                        <input type="number" id="admin_shipinfo_amount" name="amount" class="form-control" placeholder="금액을 입력하세요" required>
+                        <input type="number" id="admin_shipinfo_amount" name="amount" class="admin_shipinof_form-control" placeholder="금액을 입력하세요" required>
                     </div>
                 </div>
 
-                <!-- 금액 -->
-                <div class="form-group">
-                    <div class="form-item">
-                        <label for="admin_shipinfo_confDate">확정일자</label>
-                        <input type="number" id="admin_shipinfo_confDate" name="confDate" class="form-control" placeholder="확정일자를 입력하세요" required>
-                    </div>
-                </div>
 
             </form>
         </div>
-
-
-
         </div>
     </div>
+
+    <!-- 모달 구조 -->
+    <div id="admin_shipinfo_studentIdModal" class="admin_shipinfo_studentIdmodal">
+        <div class="admin_shipinfo_studentIdmodal_content">
+            <span class="close">&times;</span>
+            <h2>학번 조회</h2>
+            <input type="text" id="admin_shipinfo_studentId_input" class="admin_shipinfo_studentId_input" placeholder="학번을 입력하세요">
+            <button class="admin_shipinfo_search-button" onclick="searchStudent()">조회하기</button>
+            <div id="studentInfoResult" class="admin_shipinfo_result-box"></div>
+        </div>
+    </div>
+
 </th:block>
 </html>
