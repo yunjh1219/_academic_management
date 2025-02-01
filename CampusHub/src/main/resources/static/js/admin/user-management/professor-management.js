@@ -49,13 +49,13 @@ document.getElementById('admin-profinfo-searchBtn').addEventListener('click',fun
 document.getElementById('admin-profinfo-newBtn').addEventListener('click', function() {
 
     // 폼 초기화 (입력된 데이터 초기화)
-    document.getElementById('name').value = '';
-    document.getElementById('professorId').value = '';
-    document.getElementById('department').value = '';
-    document.getElementById('phone').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('address').value = '';
-    document.getElementById('birthdate').value = '';
+    document.getElementById('admin_profinfo_name').value = '';
+    document.getElementById('admin_profinfo_professorId').value = '';
+    document.getElementById('admin_profinfo_department').value = '';
+    document.getElementById('admin_profinfo_phone').value = '';
+    document.getElementById('admin_profinfo_email').value = '';
+    document.getElementById('admin_profinfo_address').value = '';
+    document.getElementById('admin_profinfo_birthdate').value = '';
 
     alert('새로운 교수 정보를 추가했습니다. 정보를 입력해주세요.');
 
@@ -73,13 +73,13 @@ document.getElementById('admin-profinfo-newBtn').addEventListener('click', funct
     });
 
     // 입력된 폼 데이터 가져오기
-    const name = document.getElementById('name').value;
-    const birthdate = document.getElementById('birthdate').value;
-    const department = document.getElementById('department').value;
-    const professorId = document.getElementById('professorId').value; // 교수 ID
-    const phone = document.getElementById('phone').value;
-    const email = document.getElementById('email').value;
-    const address = document.getElementById('address').value;
+    const name = document.getElementById('admin_profinfo_name').value;
+    const birthdate = document.getElementById('admin_profinfo_birthdate').value;
+    const department = document.getElementById('admin_profinfo_department').value;
+    const professorId = document.getElementById('admin_profinfo_professorId').value; // 교수 ID
+    const phone = document.getElementById('admin_profinfo_phone').value;
+    const email = document.getElementById('admin_profinfo_email').value;
+    const address = document.getElementById('admin_profinfo_address').value;
 
     // 새로운 행의 HTML 구조 설정
     newRow.innerHTML = `
@@ -108,40 +108,40 @@ document.getElementById('admin-profinfo-newBtn').addEventListener('click', funct
 
 // 실시간으로 수정 내용 반영
 function addRealTimeProfEditing(row) {
-    const nameCell = row.querySelector('td[data-field="name"]');
-    const studentIdCell = row.querySelector('td[data-field="professorId"]');
-    const departmentCell = row.querySelector('td[data-field="department"]');
-    const statusCell = row.querySelector('td[data-field="status"]');
-    const remarkCell = row.querySelector('td[data-field="remark"]');
+    const admin_profinfo_nameCell = row.querySelector('td[data-field="name"]');
+    const admin_profinfo_professorIdCell = row.querySelector('td[data-field="professorId"]');
+    const admin_profinfo_departmentCell = row.querySelector('td[data-field="department"]');
+    const admin_profinfo_statusCell = row.querySelector('td[data-field="status"]');
+    const admin_profinfo_remarkCell = row.querySelector('td[data-field="remark"]');
 
     // 폼 필드에 실시간으로 입력되는 값 반영
-    document.getElementById('name').addEventListener('input', function() {
-        if (nameCell) {
-            nameCell.textContent = this.value;  // 이름 수정 반영
+    document.getElementById('admin_profinfo_name').addEventListener('input', function() {
+        if (admin_profinfo_nameCell) {
+            admin_profinfo_nameCell.textContent = this.value;  // 이름 수정 반영
         }
     });
 
-    document.getElementById('professorId').addEventListener('input', function() {
-        if (studentIdCell) {
-            studentIdCell.textContent = this.value;  // 학번 수정 반영
+    document.getElementById('admin_profinfo_professorId').addEventListener('input', function() {
+        if (admin_profinfo_professorIdCell) {
+            admin_profinfo_professorIdCell.textContent = this.value;  // 학번 수정 반영
         }
     });
 
-    document.getElementById('department').addEventListener('input', function() {
-        if (departmentCell) {
-            departmentCell.textContent = this.value;  // 학과 수정 반영
+    document.getElementById('admin_profinfo_department').addEventListener('input', function() {
+        if (admin_profinfo_departmentCell) {
+            admin_profinfo_departmentCell.textContent = this.value;  // 학과 수정 반영
         }
     });
 
-    document.getElementById('status').addEventListener('input', function() {
-        if (statusCell) {
-            statusCell.textContent = this.value;  // 상태 수정 반영
+    document.getElementById('admin_profinfo_status').addEventListener('input', function() {
+        if (admin_profinfo_statusCell) {
+            admin_profinfo_statusCell.textContent = this.value;  // 상태 수정 반영
         }
     });
 
-    document.getElementById('remark').addEventListener('input', function() {
-        if (remarkCell) {
-            remarkCell.textContent = this.value;  // 비고 수정 반영
+    document.getElementById('admin_profinfo_remark').addEventListener('input', function() {
+        if (admin_profinfo_remarkCell) {
+            admin_profinfo_remarkCell.textContent = this.value;  // 비고 수정 반영
         }
     });
 }
@@ -149,13 +149,13 @@ function addRealTimeProfEditing(row) {
 
 //저장버튼
 document.getElementById('admin-profinfo-savBtn').addEventListener('click', function() {
-    const userName = document.getElementById('name').value; // 학생의 이름을 가져옵니다
-    const birthday = document.getElementById('birthdate').value;  // 생년월일을 가져옵니다. LocalDateTime 형식으로 변환이 필요합니다.
-    const deptName = document.getElementById('department').value; // 학생의 학과명을 가져옵니다
-    const userNum = document.getElementById('professorId').value; // 학생의 학번을 가져옵니다
-    const phone = document.getElementById('phone').value; // 학생의 연락처를 가져옵니다
-    const email = document.getElementById('email').value; // 학생의 이메일을 가져옵니다
-    const address = document.getElementById('address').value; // 학생의 주소를 가져옵니다
+    const userName = document.getElementById('admin_profinfo_name').value; // 학생의 이름을 가져옵니다
+    const birthday = document.getElementById('admin_profinfo_birthdate').value;  // 생년월일을 가져옵니다. LocalDateTime 형식으로 변환이 필요합니다.
+    const deptName = document.getElementById('admin_profinfo_department').value; // 교수의 학과명을 가져옵니다
+    const userNum = document.getElementById('admin_profinfo_professorId').value; // 학생의 학번을 가져옵니다
+    const phone = document.getElementById('admin_profinfo_phone').value; // 학생의 연락처를 가져옵니다
+    const email = document.getElementById('admin_profinfo_email').value; // 학생의 이메일을 가져옵니다
+    const address = document.getElementById('admin_profinfo_address').value; // 학생의 주소를 가져옵니다
 
     // 생년월일 값 처리 (예: "2000-01-01" 형식으로 전달)
     const formattedBirthday = birthday + "T00:00:00";  // 시간 부분 추가 (필요 시 수정 가능)
@@ -263,13 +263,13 @@ document.getElementById('admin-profinfo-TableBody').addEventListener('click', fu
                 // 데이터 편집 창에 반영
                 if (data && data.data) { // 데이터가 존재하는지 확인
                     const professor = data.data; // 교수 정보 객체
-                    document.getElementById('name').value = professor.userName || '이름없음';
-                    document.getElementById('professorId').value = professor.userNum || '교수 ID없음';
-                    document.getElementById('department').value = professor.deptName || '학과없음';
-                    document.getElementById('phone').value = professor.phone || '폰없음';
-                    document.getElementById('email').value = professor.email || '메일없음';
-                    document.getElementById('address').value = professor.address || '주소없음';
-                    document.getElementById('birthdate').value = professor.birthdate || '생일없음';
+                    document.getElementById('admin_profinfo_name').value = professor.userName || '이름없음';
+                    document.getElementById('admin_profinfo_professorId').value = professor.userNum || '교수 ID없음';
+                    document.getElementById('admin_profinfo_department').value = professor.deptName || '학과없음';
+                    document.getElementById('admin_profinfo_phone').value = professor.phone || '폰없음';
+                    document.getElementById('admin_profinfo_email').value = professor.email || '메일없음';
+                    document.getElementById('admin_profinfo_address').value = professor.address || '주소없음';
+                    document.getElementById('admin_profinfo_birthdate').value = professor.birthdate || '생일없음';
                 } else {
                     alert('교수 정보를 찾을 수 없습니다.');
                 }

@@ -18,17 +18,19 @@ $(function() {
             $("#tabs").append("<div id='" + tabId + "'><p>로딩 중...</p></div>");
             tabs.tabs("refresh");
 
-            // AJAX로 콘텐츠 로드
             $.ajax({
                 url: url,
                 method: 'GET',
+                cache: false,  // 캐시 방지
                 success: function(data) {
                     $("#" + tabId).html(data);  // 콘텐츠 삽입
+
                 },
                 error: function() {
                     $("#" + tabId).html("<p>콘텐츠를 불러오는 데 실패했습니다.</p>");
                 }
             });
+
         }
 
         // 새로 생성된 또는 기존 탭을 활성화
@@ -36,8 +38,8 @@ $(function() {
     }
 
     // 메뉴 항목 클릭 이벤트
-    $("#menu .snb_depth3 a").on("click", function(event) {
-        event.preventDefault();  // 기본 링크 동작 방지
+    $("#menu .snb_depth3 a").off("click").on("click", function(event) {
+        event.preventDefault();
         var tabName = $(this).data("tab");
         var url = $(this).attr("href");
         openTab(tabName, url);
@@ -70,6 +72,7 @@ $(function() {
                     method: 'GET',
                     success: function(data) {
                         activeTabContent.html(data); // 현재 활성화된 탭에 콘텐츠 로드
+                        initializeTabScripts("#" + activeTabId);  // 새로 로드된 탭의 스크립트 초기화
                     },
                     error: function() {
                         activeTabContent.html("<p>콘텐츠를 불러오는 데 실패했습니다.</p>");
@@ -77,12 +80,6 @@ $(function() {
                 });
             }
         }
-    });
-    // ❗️ X 버튼 클릭 시 모든 탭 삭제 기능 추가
-    $("#tabs").on("click", ".close-btn", function () {
-        $("#tabs ul li").remove();  // 모든 탭 제목 삭제
-        $("#tabs > div").remove();  // 모든 탭 콘텐츠 삭제
-        tabs.tabs("refresh");       // 탭 UI 갱신
     });
 
     // 닫기 아이콘 클릭 시 탭 삭제
@@ -92,10 +89,9 @@ $(function() {
         tabs.tabs("refresh");
     });
 
+    var tabToActivate = $('a[data-tab=장학금관리]');
 
-    var tabToActivate = $('a[data-tab="학생관리"]');
-
-// 현재 열린 탭이 없을 때만 기본 탭을 활성화
+    // 현재 열린 탭이 없을 때만 기본 탭을 활성화
     if ($("#tabs ul li").length === 0) {  // 탭 목록이 비어있다면
         if (tabToActivate.length > 0) {
             // 기본 탭을 활성화
@@ -104,5 +100,5 @@ $(function() {
             openTab(tabName, url);
         }
     }
-
 });
+
