@@ -59,16 +59,6 @@ public class AuthService {
 		return token;
 	}
 
-
-	//로그아웃
-	@Transactional
-	public void logout(LoginUser loginUser) {
-		User user = userRepository.findByUserNum(loginUser.getUserNum())
-				.orElseThrow(UserNotFoundException::new);
-
-		user.invalidateRefreshToken();
-	}
-
 	//학생 등록
 	@Transactional
 	public void joinStudent(LoginUser loginUser, JoinRequestDto joinRequestDto) {
@@ -121,6 +111,15 @@ public class AuthService {
 		user.updateRefreshToken(token.getRefreshToken().getData());
 
 		return token;
+	}
+
+	//로그아웃
+	@Transactional
+	public void logout(LoginUser loginUser) {
+		User user = userRepository.findByUserNum(loginUser.getUserNum())
+			.orElseThrow(UserNotFoundException::new);
+
+		user.invalidateRefreshToken();
 	}
 
 	//비밀번호 변경
