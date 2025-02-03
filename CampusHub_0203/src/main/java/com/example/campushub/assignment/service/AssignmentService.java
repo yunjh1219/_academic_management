@@ -54,7 +54,14 @@ public class AssignmentService {
 		Course course = courseRepository.findByCourseNameAndUser(request.getCourseName(), user)
 			.orElseThrow(CourseNotFoundException::new);
 
-		NWeek nweek = nweekRepository.findByCourseAndWeek(course, Week.valueOf(request.getWeek()))
+		// 주차 값 출력 (enum 값으로 변환되기 전)
+		System.out.println("주차를 enum으로 변환 중: " + request.getWeek());
+
+		// Week enum으로 변환되는 과정 출력
+		Week week = Week.of(request.getWeek());
+		System.out.println("변환된 주차 enum: " + week);
+
+		NWeek nweek = nweekRepository.findByCourseAndWeek(course, Week.of(request.getWeek()))
 			.orElseThrow(NWeekNotFoundException::new);
 
 		Assignment assignment = Assignment.builder()
@@ -94,6 +101,9 @@ public class AssignmentService {
 			.toList();
 		return assignmentRepository.findAllAssigmentByCond(condition, courseNames);
 	}
+
+
+
 	//과제 단건 조회
 	public AssignmentResponse findAssignment(LoginUser loginUser, Long assignmentId) {
 		User user = userRepository.findByUserNumAndType(loginUser.getUserNum(), loginUser.getType()

@@ -6,8 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>복학신청: readmission-application</title>
+    <script th:src="@{/js/student/registration/readmission-application.js}"></script>
 </head>
-<body>
+<th:block layout:fragment="content">
 <div class="tabsconfig">
     <div class="H2depth0101">
         <div class="content-title">
@@ -27,11 +28,11 @@
 
             <!-- 신청하기 버튼 추가 -->
             <div class="apply-button">
-                <button class="btn-apply">신청하기</button>
+                <button class="stu-read-btn-apply" id="stu-read-btn-apply">신청하기</button>
             </div>
 
         </div>
     </div>
 </div>
-</body>
+</th:block>
 </html>

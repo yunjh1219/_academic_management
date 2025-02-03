@@ -7,8 +7,7 @@
     <meta charset="UTF-8">
     <title>과제 등록 : assignment-registration</title>
 
-    <link rel="stylesheet" th:href="@{/css/professor/common.css}">
-    <link rel="stylesheet" th:href="@{/css/professor/assignment/assignment-registration.css}">
+
 
     <script th:src="@{/js/prof/assign/registr.js}"></script>
 
@@ -22,16 +21,13 @@
         </div>
         <div class="query-container">
             <div class="query-box">
-                <button class="query-btn" id="prof-assign-searchBtn">조회</button>
+                <button class="query-btn" id="prof-assign-reg-newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
             </div>
             <div class="query-box">
-                <button class="query-btn" id="prof-assign-newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+                <button class="query-btn" id="prof-assign-reg-deleteBtn">삭제</button>
             </div>
             <div class="query-box">
-                <button class="query-btn" id="prof-assign-deleteBtn">삭제</button>
-            </div>
-            <div class="query-box">
-                <button class="query-btn" id="prof-assign-saveBtn">저장</button>  <!-- 저장 버튼 -->
+                <button class="query-btn" id="prof-assign-reg-saveBtn">저장</button>  <!-- 저장 버튼 -->
             </div>
         </div>
 
@@ -81,22 +77,26 @@
                     <!-- 강의명, 주차, 내용, 첨부파일, 제출기한, 작성자 -->
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="lectureTitle">강의명</label>
-                            <input type="text" id="lectureTitle" name="lectureTitle" class="form-control" placeholder="강의명을 입력하세요" required>
+                            <label for="prof_assig_reg_courseName">강의명</label>
+                            <select id="prof_assig_reg_courseName" name="courseName" class="form-control" required>
+                                <option value="" disabled selected>강의명을 선택하세요</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="week">주차</label>
-                            <input type="text" id="week" name="week" class="form-control" placeholder="주차를 입력하세요" required>
+                            <label for="prof_assig_reg_week">주차</label>
+                            <select id="prof_assig_reg_week" name="week" class="form-control" required>
+                                <!-- 1주차부터 16주차까지의 옵션을 JavaScript로 추가할 예정 -->
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="content">내용</label>
-                            <textarea id="content" name="content" class="form-control" placeholder="내용을 입력하세요" required></textarea>
+                            <label for="prof_assig_reg_assginExplain">내용</label>
+                            <textarea id="prof_assig_reg_assginExplain" name="Explain" class="form-control" placeholder="내용을 입력하세요" required></textarea>
                         </div>
                     </div>
 
@@ -109,17 +109,11 @@
 
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="Deadline">제출기한</label>
-                            <input type="date" id="Deadline" name="submissionDeadline" class="form-control" required>
+                            <label for="prof_assig_reg_limitDate">제출기한</label>
+                            <input type="date" id="prof_assig_reg_limitDate" name="limitDate" class="form-control" required>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="form-item">
-                            <label for="author">작성자</label>
-                            <input type="text" id="author" name="author" class="form-control" placeholder="작성자를 입력하세요" readonly> <!-- 작성자는 수정 불가 -->
-                        </div>
-                    </div>
 
                 </form>
 

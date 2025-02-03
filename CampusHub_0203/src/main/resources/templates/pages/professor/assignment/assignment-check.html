@@ -6,8 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>과제 확인 : assignment-check</title>
-    <link rel="stylesheet" th:href="@{/css/professor/common.css}">
-    <link rel="stylesheet" th:href="@{/css/professor/assignment/assignment-check.css}">
+    <script th:src="@{/js/prof/assign/check.js}"></script>
+    <script th:src="@{/js/fragments/tabs.js}"></script>
 </head>
 <th:block layout:fragment="content">
 
@@ -18,39 +18,33 @@
         </div>
         <div class="query-container">
             <div class="query-box">
-                <button class="query-btn" id="searchBtn">조회</button>
-            </div>
-            <div class="query-box">
-                <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
-            </div>
-            <div class="query-box">
-                <button class="query-btn" id="deleteBtn">삭제</button>
-            </div>
-            <div class="query-box">
-                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
+                <button class="query-btn" id="prof-assign-check-searchBtn">조회</button>
             </div>
         </div>
 
-        <!-- 검색 및 필터 부분은 그대로 유지 -->
+        <!-- 검색 및 필터 부분 -->
         <div class="search-select-container">
             <div class="search-container">
                 <div class="searchf-box">
-                    <select>
-                        <option>강의명</option>
+                    <!-- 강의명 select -->
+                    <select id="courseName">
+                        <option value="">강의명 선택</option>
                     </select>
                 </div>
                 <div class="searchf-box">
-                    <select>
-                        <option>주차</option>
+                    <!-- 주차 select -->
+                    <select id="week">
+                        <option value="">주차 선택</option>
                     </select>
                 </div>
                 <div class="search-box">
-                    <!-- 이름 검색 입력란 -->
+                    <!-- 내용 검색 입력란 -->
                     <input type="text" placeholder="내용입력" />
                 </div>
                 <button>검색</button>
             </div>
         </div>
+
 
         <!-- 공지사항 목록 테이블 -->
         <div class="table-container">
@@ -71,7 +65,7 @@
                         <th style="width: 25%;">제출여부</th>
                     </tr>
                     </thead>
-                    <tbody id="noticeTableBody">
+                    <tbody id="prof-assign-stu-search-TableBody">
                     </tbody>
                 </table>
             </div>

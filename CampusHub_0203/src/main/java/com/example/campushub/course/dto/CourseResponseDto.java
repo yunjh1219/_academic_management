@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CourseResponseDto {
 	private Long id;
-	private String courseGrade;
+	private String courseGrade; //학년
 	private String courseName;
 	private String courseDivision;
-	private int creditScore;
+	private int creditScore; //점수
 	private String professorName;
 	private String courseRoom;
 	private String courseDay;

@@ -87,6 +87,7 @@ public class CourseController {
 			.message("학생 수강신청 성공")
 			.build();
 	}
+
 	//강의 생성
 	@PostMapping("/api/professor/course")
 	@ResponseStatus(HttpStatus.CREATED)

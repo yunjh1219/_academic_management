@@ -25,17 +25,91 @@ $(function() {
                 success: function(data) {
                     $("#" + tabId).html(data);  // 콘텐츠 삽입
 
+                    // 과제확인 탭일 때 강의명과 주차 가져오기
+                    if (tabName === "과제확인") {
+                        loadCourseAndWeek();
+                    }
                 },
                 error: function() {
                     $("#" + tabId).html("<p>콘텐츠를 불러오는 데 실패했습니다.</p>");
                 }
             });
-
         }
 
         // 새로 생성된 또는 기존 탭을 활성화
         tabs.tabs("option", "active", $("#tabs").find("a[href='#" + tabId + "']").parent().index());
     }
+
+    // 강의명과 주차를 가져오는 함수
+    function loadCourseAndWeek() {
+// 로컬 스토리지에서 JWT 토큰 가져오기
+        const token = localStorage.getItem('jwtToken');
+        const url = "/api/professor/course";
+
+// 강의명 정보 가져오기
+        fetch(url, {
+            method: 'GET',  // GET 방식으로 요청
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`  // JWT 토큰을 Authorization 헤더에 추가
+            }
+        })
+            .then(response => response.json())  // 응답을 JSON 형식으로 파싱
+            .then(data => {
+                console.log('받은 데이터:', data);  // 받아온 데이터를 콘솔에 출력하여 확인
+
+                const courseNameSelect = document.getElementById('courseName');  // courseName 셀렉트 박스 ID
+                const weekSelect = document.getElementById('week');  // week 셀렉트 박스 ID
+                courseNameSelect.innerHTML = '';  // 셀렉트 박스 초기화
+                weekSelect.innerHTML = '';  // 주차 셀렉트 박스 초기화
+
+                // 기본 옵션 유지
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '강의명을 선택하세요';
+                defaultOption.disabled = true;  // 선택 불가능한 옵션으로 설정
+                defaultOption.selected = true;  // 기본 선택되도록 설정
+                courseNameSelect.appendChild(defaultOption);
+
+                // 강의명 데이터를 셀렉트 박스에 추가
+                const courses = data.data || [];  // data.data가 배열 형태로 존재하는지 확인
+                courses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course.courseName;  // 강의명으로 value 설정
+                    option.textContent = course.courseName;  // 강의명 표시
+                    courseNameSelect.appendChild(option);  // courseName 셀렉트 박스에 옵션 추가
+                });
+
+                // 주차 옵션 추가 (1부터 19까지)
+                const defaultWeekOption = document.createElement('option');
+                defaultWeekOption.value = '';
+                defaultWeekOption.textContent = '주차를 선택하세요';
+                defaultWeekOption.disabled = true;
+                defaultWeekOption.selected = true;
+                weekSelect.appendChild(defaultWeekOption);
+
+                for (let i = 1; i <= 19; i++) {
+                    const weekOption = document.createElement('option');
+                    weekOption.value = i;  // 주차 값 설정
+                    weekOption.textContent = `${i}주차`;  // 주차 표시
+                    weekSelect.appendChild(weekOption);  // week 셀렉트 박스에 옵션 추가
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);  // 에러 발생 시 출력
+            });
+
+    }
+
+    // 탭이 활성화될 때마다 강의명과 주차를 불러오도록 설정
+    tabs.on("tabsactivate", function(event, ui) {
+        var activeTabId = ui.newPanel.attr('id'); // 활성화된 탭의 ID 확인
+
+        // 과제확인 탭일 경우에만 강의명과 주차를 불러옴
+        if (activeTabId === "tabs-과제확인") {
+            loadCourseAndWeek();
+        }
+    });
 
     // 메뉴 항목 클릭 이벤트
     $("#menu .snb_depth3 a").off("click").on("click", function(event) {
@@ -97,8 +171,7 @@ $(function() {
         tabs.tabs("refresh");  // 탭 리프레시
     });
 
-
-    var tabToActivate = $('a[data-tab=장학금관리]');
+    var tabToActivate = $('a[data-tab=수강신청]');
 
     // 현재 열린 탭이 없을 때만 기본 탭을 활성화
     if ($("#tabs ul li").length === 0) {  // 탭 목록이 비어있다면
@@ -110,4 +183,3 @@ $(function() {
         }
     }
 });
-

@@ -27,7 +27,7 @@ document.getElementById('admin-stuinfo-searchBtn').addEventListener('click', fun
                 const row = document.createElement('tr');
                 row.dataset.id = student.userNum;
                 row.innerHTML = `
-                <td><input type="checkbox" class="student-checkbox"></td>
+               <td><input type="checkbox" class="student-checkbox" data-id="${student.userNum}"></td>
                 <td>${index + 1}</td>
                 <td data-field="name" style="text-align: left;">${student.username}</td>
                 <td data-field="studentId">${student.userNum}</td>
@@ -377,5 +377,40 @@ document.getElementById('admin-stuNum-searchBtn').addEventListener('click', func
         .catch(error => {
             console.error('검색 중 오류 발생:', error);
             alert('검색 중 오류가 발생했습니다.')
+        });
+});
+
+document.getElementById('admin-stuinfo-accBtn').addEventListener('click', function () {
+    const selectedUserNums = Array.from(document.querySelectorAll('.student-checkbox:checked'))
+        .map(checkbox => checkbox.closest('tr').dataset.id);
+
+    if (selectedUserNums.length === 0) {
+        alert('학생을 선택해 주세요.');
+        return;
+    }
+
+    const token = localStorage.getItem('jwtToken');
+
+    fetch('/api/admin/student/editstatus', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(selectedUserNums)
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 200) {
+                alert('학생 상태 변경 신청 수락 성공');
+                // 상태 변경 후 테이블 업데이트 (필요시)
+                document.getElementById('admin-stuinfo-searchBtn').click(); // 조회 버튼 클릭
+            } else {
+                alert('상태 변경 신청 수락에 실패했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('서버와의 연결에 문제가 발생했습니다.');
         });
 });

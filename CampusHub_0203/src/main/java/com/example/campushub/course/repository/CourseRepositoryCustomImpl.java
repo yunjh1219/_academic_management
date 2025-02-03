@@ -67,7 +67,7 @@ public class CourseRepositoryCustomImpl implements CourseRepositoryCustom {
 			.from(course)
 			.join(user).on(course.user.eq(user))
 			.join(dept).on(user.dept.eq(dept))
-			.where(divisionEq(CourseDivision.valueOf(cond.getDivision())),
+			.where(divisionEq(CourseDivision.of(cond.getDivision())),
 				deptNameEq(cond.getDeptName()),
 				courseNameEq(cond.getCourseName()))
 			.fetch();
