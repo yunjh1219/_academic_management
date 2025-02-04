@@ -56,4 +56,63 @@ function addRealTimeProfEditing(row) {
 }
 
 //저장
+document.getElementById('admin-deptfinfo-savBtn').addEventListener('click',function (){
+    const deptName = document.getElementById('admin_deptfinfo_deptname').value; //학과이름
 
+    // 선택된 행이 있는지 확인 (수정일 경우 ID가 존재)
+    const selectedRow = document.querySelector('#admin-deptfinfo-TableBody tr.selected');  // 선택된 행 찾기
+    let url = '';
+    let method = '';
+    let deptIdInRow = null;
+
+    if (selectedRow) {
+        // 선택된 행에서 ID 가져오기
+        deptIdInRow = selectedRow.dataset.id;  // 선택된 학생의 ID
+
+        if (deptIdInRow.startsWith('new+')) {
+            // 신규 학생 (new+로 시작하는 ID)
+            url = '/api/admin/dept';
+            method = 'POST';  // 신규 추가: POST 요청
+        } else {
+            // 기존 학생 (실제 DB ID가 존재하는 경우)
+            url = `/api/admin/dept/${deptIdInRow}`;
+            method = 'PUT';  // 수정: PUT 요청
+        }
+    } else {
+        // 선택된 행이 없으면 신규로 처리
+        url = '/api/admin/dept';
+        method = 'POST';  // 신규 추가: POST 요청
+    }
+
+    //학과정보등록
+    const deptDate = {
+        deptName: deptName
+    };
+
+    const token = localStorage.getItem('jwtToken');
+
+    // 요청 보내기
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${token}`  // JWT 토큰을 Authorization 헤더에 추가
+        },
+        body: JSON.stringify(deptDate)
+    })
+        .then(response => {
+            if (response.ok) {
+                if (method === 'PUT') {
+                    alert('학과 정보가 성공적으로 수정되었습니다.');
+                } else {
+                    alert('새로운 학과 정보가 성공적으로 저장되었습니다.');
+                }
+            } else {
+                throw new Error('저장 중 오류가 발생했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('학과 정보를 저장하는 중 오류가 발생했습니다.');
+        });
+});
