@@ -1,4 +1,4 @@
 package com.example.campushub.notice.dto;
 
-public class NoticeResponseDto {
+public class NoticeEditDto {
 }

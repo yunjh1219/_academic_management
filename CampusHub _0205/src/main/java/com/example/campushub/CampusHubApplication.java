@@ -31,7 +31,7 @@ public class CampusHubApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CampusHubApplication.class, args);
 	}
-//
+
 //	@PostConstruct
 //	public void setUp() {
 //		User user = User.builder()
