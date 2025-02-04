@@ -22,7 +22,7 @@ public enum PaymentType {
 	}
 
 	public static PaymentType of(String paymentType) {
-		if (paymentType == "사전감면") return PRE_PAYMENT;
+		if (paymentType.equals("사전감면")) return PRE_PAYMENT;
 		else return POST_PAYMENT;
 	}
 

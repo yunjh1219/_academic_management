@@ -27,6 +27,19 @@ public class CourseController {
 
 	private final CourseService courseService;
 
+	//강의 생성
+	@PostMapping("/api/professor/course")
+	@ResponseStatus(HttpStatus.CREATED)
+	public SuccessResponse<Void> createCourse(@Login LoginUser loginUser, @RequestBody @Valid CourseCreateDto createDto) {
+
+		courseService.createCourse(loginUser, createDto);
+
+		return SuccessResponse.<Void>builder()
+				.status(HttpStatus.CREATED.value())
+				.message("강의 생성성공")
+				.build();
+	}
+
 	//교수 전체 + 컨디션 강의조회
 	@GetMapping("/api/professor/course/all")
 	@ResponseStatus(HttpStatus.OK)
@@ -88,18 +101,6 @@ public class CourseController {
 			.build();
 	}
 
-	//강의 생성
-	@PostMapping("/api/professor/course")
-	@ResponseStatus(HttpStatus.CREATED)
-	public SuccessResponse<Void> createCourse(@Login LoginUser loginUser, @RequestBody @Valid CourseCreateDto createDto) {
-
-		courseService.createCourse(loginUser, createDto);
-
-		return SuccessResponse.<Void>builder()
-			.status(HttpStatus.CREATED.value())
-			.message("강의 생성성공")
-			.build();
-	}
 
 	// .todo 강의 삭제를 만들까 말까 ㅋ.ㅋ
 	//강의 삭제

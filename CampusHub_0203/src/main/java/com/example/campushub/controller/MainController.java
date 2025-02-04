@@ -121,9 +121,11 @@ public class MainController {
     @GetMapping("/adminP3") //장학금 관리
     public String acad3() {return "pages/admin/administrative-management/scholarship-management";}
 
-    @GetMapping("adminP4")  //등록금 납부관리
+    @GetMapping("/adminP4")  //등록금 납부관리
     public String acad4() {return "pages/admin/administrative-management/tuition-payment-management";}
 
+    @GetMapping("/adminP5")  //등록금 납부관리
+    public String acad5() {return "pages/admin/user-management/dept-management";}
 
 
     //교수
