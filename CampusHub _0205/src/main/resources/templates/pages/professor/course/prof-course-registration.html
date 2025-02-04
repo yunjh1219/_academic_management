@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>강의 수강 등록 세부 페이지 : prof-course-registration-detail</title>
+    <script th:inline="javascript" type="text/javascript" th:src="@{/js/prof/course/prof-course-registration.js}"></script>
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>수강 > 수강관리 > 강의수강등록</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="prof_course_registration_searchBtn">조회</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="prof_course_registration_newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="prof_course_registration_delBtn">삭제</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="prof_course_registration_savBtn">저장</button>  <!-- 저장 버튼 -->
+            </div>
+        </div>
+
+        <!-- 공지사항 목록 테이블 -->
+        <div class="table-container">
+            <div class="table-title">
+                수강등록현황
+            </div>
+            <div class="table-box">
+                <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                        <th style="width: 4%;">
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th style="width: 5%;">NO</th>
+                        <th style="width: 5%;">학년</th>
+                        <th style="width: 30%;">강의명</th>
+                        <th style="width: 7%;">이수구분</th>
+                        <th style="width: 7%;">학점</th>
+                        <th style="width: 7%;">교수</th>
+                        <th style="width: 15%;">강의실</th>
+                        <th style="width: 7%;">요일</th>
+                        <th style="width: 13%;">시간</th>
+                    </tr>
+                    </thead>
+                    <tbody id="prof_course_registration_TableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 항상 보이는 edit-container -->
+        <div class="edit-container" id="editContainer">
+            <form action="#" method="post" id="editNoticeForm">
+
+                <!-- 강의명 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="prof_course_registration_name">강의명</label>
+                        <input type="text" id="prof_course_registration_name" name="courseName" class="form-control" placeholder="강의명을 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 학년 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="prof_course_registration_grade">학년</label>
+                        <input type="text" id="prof_course_registration_grade" name="grade" class="form-control" placeholder="학년을 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 학점 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="prof_course_registration_credits">학점</label>
+                        <input type="number" id="prof_course_registration_credits" name="credits" class="form-control" placeholder="학점을 입력하세요" required>
+                    </div>
+                </div>
+
+                <!-- 강의실 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="prof_course_registration_classroom">강의실</label>
+                        <input type="text" id="prof_course_registration_classroom" name="classroom" class="form-control" placeholder="강의실을 입력하세요" required>
+                    </div>
+                </div>
+
+
+
+                <!-- 이수구분 -->
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="courseType">이수구분</label>
+                        <select id="courseType" name="courseType" class="form-control" required>
+                            <option value="전공필수">전공필수</option>
+                            <option value="교양필수">교양필수</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label for="dayOfWeek">요일</label>
+                        <select id="dayOfWeek" name="dayOfWeek" class="form-control" required>
+                            <option value="월요일">월요일</option>
+                            <option value="화요일">화요일</option>
+                            <option value="수요일">수요일</option>
+                            <option value="목요일">목요일</option>
+                            <option value="금요일">금요일</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label for="classTime">시간(교시)</label>
+                        <select id="classTime" name="classTime" class="form-control" required>
+                            <option value="1">1교시</option>
+                            <option value="2">2교시</option>
+                            <option value="3">3교시</option>
+                            <option value="4">4교시</option>
+                            <option value="5">5교시</option>
+                            <option value="6">6교시</option>
+                            <option value="7">7교시</option>
+                            <option value="8">8교시</option>
+                            <option value="9">9교시</option>
+                            <option value="10">10교시</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label for="endClassTime">종료 교시</label>
+                        <select id="endClassTime" name="endClassTime" class="form-control" required>
+                            <option value="1">1교시</option>
+                            <option value="2">2교시</option>
+                            <option value="3">3교시</option>
+                            <option value="4">4교시</option>
+                            <option value="5">5교시</option>
+                            <option value="6">6교시</option>
+                            <option value="7">7교시</option>
+                            <option value="8">8교시</option>
+                            <option value="9">9교시</option>
+                            <option value="10">10교시</option>
+                        </select>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</th:block>
+</html>
