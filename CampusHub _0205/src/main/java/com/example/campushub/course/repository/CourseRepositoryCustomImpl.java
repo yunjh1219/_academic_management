@@ -44,7 +44,7 @@ public class CourseRepositoryCustomImpl implements CourseRepositoryCustom {
 		))
 			.from(course)
 			.join(user).on(course.user.eq(user))
-			.where(courseDayEq(CourseDay.of(condition.getCourseDay())),
+			.where(courseDayEq(condition.getCourseDay()),
 				courseRoomEq(condition.getRoom()))
 			.fetch();
 	}
@@ -67,7 +67,7 @@ public class CourseRepositoryCustomImpl implements CourseRepositoryCustom {
 			.from(course)
 			.join(user).on(course.user.eq(user))
 			.join(dept).on(user.dept.eq(dept))
-			.where(divisionEq(CourseDivision.of(cond.getDivision())),
+			.where(divisionEq(cond.getDivision()),
 				deptNameEq(cond.getDeptName()),
 				courseNameEq(cond.getCourseName()))
 			.fetch();
@@ -178,14 +178,14 @@ public class CourseRepositoryCustomImpl implements CourseRepositoryCustom {
 			.and(course.courseDay.eq(courseDay))
 			.and(isTimeOverlapping(startPeriod, endPeriod));
 	}
-	private BooleanExpression courseDayEq(CourseDay courseDay) {
-		return courseDay == null ? null : course.courseDay.eq(courseDay);
+	private BooleanExpression courseDayEq(String courseDay) {
+		return courseDay == null ? null : course.courseDay.eq(CourseDay.of(courseDay));
 	}
 	private BooleanExpression courseRoomEq(String room) {
 		return room == null ? null : course.room.eq(room);
 	}
-	private BooleanExpression divisionEq(CourseDivision division) {
-		return division == null ? null : course.division.eq(division);
+	private BooleanExpression divisionEq(String division) {
+		return division == null ? null : course.division.eq(CourseDivision.of(division));
 	}
 	private BooleanExpression deptNameEq(String deptName) {
 		return deptName == null ? null : course.user.dept.deptName.eq(deptName);

@@ -8,11 +8,12 @@ document.getElementById('prof-assign-check-searchBtn').addEventListener('click',
         alert('강의명과 주차를 모두 선택해주세요.');
     } else {
         // 쿼리 파라미터로 강의명과 주차를 전달
-        const url = `/api/professor/assignment/condition?courseName=${encodeURIComponent(courseName)}&week=${encodeURIComponent(week)}`;
+        const url = `/api/professor/assignment/condition?courseName=${encodeURIComponent(courseName)}&week=${encodeURIComponent(week)}&status=${encodeURIComponent(null)}`;
 
         console.log("보내는 URL:", url);  // 보내는 URL 로그로 출력
         console.log("보내는 강의명:", courseName);
         console.log("주차:", week);
+        console.log("상태:", status);
 
         const token = localStorage.getItem('jwtToken');
 

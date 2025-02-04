@@ -45,7 +45,8 @@ public class AttendanceRepositoryImpl implements AttendanceRepositoryCustom {
                 .join(attendance.nWeek, nWeek)
                 .join(nWeek.course, course2) // 두 번째 course 테이블
                 .where(userCourse.course.courseName.eq(cond.getCourseName()),
-                        nWeek.week.eq(Week.of(cond.getWeek())), nWeek.course.courseName.eq(cond.getCourseName()))
+                        nWeek.week.eq(Week.of(cond.getWeek())),
+                        nWeek.course.courseName.eq(cond.getCourseName()))
                 .fetch();
     }
 
