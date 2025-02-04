@@ -116,3 +116,95 @@ document.getElementById('admin-deptfinfo-savBtn').addEventListener('click',funct
             alert('학과 정보를 저장하는 중 오류가 발생했습니다.');
         });
 });
+
+document.getElementById('admin-deptfinfo-searchBtn').addEventListener('click',function (){
+    const  url = '/api/admin/dept/all'
+    const token = localStorage.getItem('jwtToken');
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("서버 응답 데이터:", data);
+            const tableBody = document.getElementById('admin-deptfinfo-TableBody');
+            tableBody.innerHTML = '';
+
+            data.data.forEach((dept, index) => {
+                const row = document.createElement('tr');
+                row.dataset.id = dept.userNum;
+                row.innerHTML = `
+                    <td><input type="checkbox" class="dept-checkbox"></td>
+                    <td>${index + 1}</td>
+                    <td data-field="deptName" style="text-align: left;">${dept.deptName}</td>
+            
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('학과 정보를 불러오는 중 오류가 발생했습니다.');
+        });
+});
+
+//단건조회
+document.getElementById('admin-deptfinfo-TableBody').addEventListener('click', function (event) {
+    const clickedRow = event.target.closest('tr');
+    if (clickedRow) {
+        const previouslySelectedRow = document.querySelector('#admin-deptfinfo-TableBody tr.selected');
+        if (previouslySelectedRow) {
+            previouslySelectedRow.classList.remove('selected');
+        }
+        clickedRow.classList.add('selected');
+
+        // 선택된 행의 userNum 가져오기
+        const userNum = clickedRow.querySelector('[data-field="studentId"]')?.textContent || '';
+
+        // JWT 토큰을 로컬 스토리지에서 가져오기
+        const token = localStorage.getItem('jwtToken');
+
+        // AJAX 요청으로 데이터 가져오기 (토큰을 Authorization 헤더에 추가)
+        fetch(`/api/admin/student/${userNum}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('네트워크 응답에 문제가 발생했습니다.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // 데이터 편집 창에 반영
+                if (data && data.data) { // 데이터가 존재하는지 확인
+                    const student = data.data; // 학생 정보 객체
+                    document.getElementById('name').value = student.userName || '이름없음';
+                    document.getElementById('studentId').value = student.userNum || '학번없음';
+                    document.getElementById('department').value = student.deptName || '학과없음';
+                    document.getElementById('phone').value = student.phone || '폰없음';
+                    document.getElementById('email').value = student.email || '메일없음';
+                    document.getElementById('address').value = student.address || '주소없음';
+                    document.getElementById('birthdate').value = student.birthdate || '생일없음';
+                } else {
+                    alert('학생 정보를 찾을 수 없습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('AJAX 요청 중 오류가 발생했습니다:', error);
+                alert('학생 정보를 불러오는 중 오류가 발생했습니다.');
+            });
+    }
+});

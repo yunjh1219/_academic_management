@@ -66,6 +66,7 @@ public class CourseService {
 
 		return courseRepository.findAllByProf(user.getUserNum());
 	}
+
 	//학생 본인 강의 조회
 	public List<CourseResponseDto> findAllByStud(LoginUser loginUser) {
 		User user = userRepository.findByUserNumAndType(loginUser.getUserNum(), loginUser.getType())

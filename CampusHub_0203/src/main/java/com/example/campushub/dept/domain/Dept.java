@@ -29,5 +29,9 @@ public class Dept {
         this.deptName = deptName;
     }
 
+    public void edit(String deptName) {
+
+        this.deptName = deptName;
+    }
 
 }
