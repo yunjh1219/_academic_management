@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> 헤더영역</title>
+</head>
+<!-- headerFragment 선언 -->
+<th:block th:fragment="headerFragment">
+    <header class="header">
+        <nav class="gnb">
+            <div class="logo">
+                <a class="logo">복정대학교</a>
+            </div>
+            <div class="header-auth">
+                <!-- 로그아웃 버튼에 클릭 이벤트 연결 -->
+                <button onclick="logout()">LOGOUT</button>
+            </div>
+        </nav>
+    </header>
+</th:block>
+<!-- headerFragment 선언 -->
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>기이수 성적 조회:previous-semester-grade-inquiry</title>
+    <link rel="stylesheet" href="/css/student/grade/previous-semester-grade-inquiry.css">
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>성적 > 조회 > 기이수성적조회</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="searchBtn">조회</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-title">
+                성적 내역
+            </div>
+            <div class="table-box">
+                <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                        <th style="width: 6%;">NO</th>
+                        <th style="width: 53%;">학년도</th>
+                        <th style="width: 10%;">학기</th>
+                        <th style="width: 25%;">강의명</th>
+                        <th style="width: 25%;">전공학점</th>
+                        <th style="width: 25%;">등급</th>
+                        <th style="width: 25%;">평점</th>
+                    </tr>
+                    </thead>
+                    <tbody id="noticeTablefBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-title">
+                학기별 내역
+            </div>
+            <div class="table-box">
+                <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                        <th style="width: 6%;">NO</th>
+                        <th style="width: 53%;">학년도</th>
+                        <th style="width: 10%;">학기</th>
+                        <th style="width: 25%;">강의명</th>
+                        <th style="width: 25%;">전공학점</th>
+                        <th style="width: 25%;">등급</th>
+                        <th style="width: 25%;">평점</th>
+                    </tr>
+                    </thead>
+                    <tbody id="noticeTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</th:block>
+</html>

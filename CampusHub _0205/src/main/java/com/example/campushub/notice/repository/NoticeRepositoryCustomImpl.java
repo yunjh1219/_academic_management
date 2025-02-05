@@ -3,6 +3,7 @@ package com.example.campushub.notice.repository;
 import com.example.campushub.notice.domain.NoticeType;
 import com.example.campushub.notice.dto.NoticeResponseDto;
 import com.example.campushub.notice.dto.NoticeTypeSearchCondition;
+import com.example.campushub.notice.dto.QNoticeResponseDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

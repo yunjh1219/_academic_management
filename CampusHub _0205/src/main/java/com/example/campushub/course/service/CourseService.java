@@ -2,20 +2,19 @@ package com.example.campushub.course.service;
 
 import java.util.List;
 
+import com.example.campushub.attendance.domain.Attendance;
+import com.example.campushub.attendance.domain.AttendanceStatus;
+import com.example.campushub.attendance.repository.AttendanceRepository;
 import com.example.campushub.course.domain.CourseDay;
 import com.example.campushub.course.domain.CourseDivision;
 import com.example.campushub.course.domain.CourseGrade;
 import com.example.campushub.course.dto.*;
+import com.example.campushub.global.error.exception.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.campushub.course.domain.Course;
 import com.example.campushub.course.repository.CourseRepository;
-import com.example.campushub.global.error.exception.CourseNotFoundException;
-import com.example.campushub.global.error.exception.DuplicateCourseException;
-import com.example.campushub.global.error.exception.DuplicateRoomTimeException;
-import com.example.campushub.global.error.exception.SchoolYearNotFoundException;
-import com.example.campushub.global.error.exception.UserNotFoundException;
 import com.example.campushub.nweek.domain.NWeek;
 import com.example.campushub.nweek.domain.Week;
 import com.example.campushub.nweek.repository.NweekRepository;
@@ -41,6 +40,7 @@ public class CourseService {
 	private final SchoolYearRepository schoolYearRepository;
 	private final UserCourseRepository userCourseRepository;
 	private final NweekRepository nWeekRepository;
+	private final AttendanceRepository attendanceRepository;
 
 	//교수 전체+컨디션 강의 조회
 	public List<CourseResponseDto> findAllByProfCondition(LoginUser loginUser, ProfCourseSearchCondition cond) {
@@ -83,12 +83,30 @@ public class CourseService {
 			Course course = courseRepository.findById(courseId)
 				.orElseThrow(CourseNotFoundException::new);
 
+			List<UserCourse> userCourses = userCourseRepository.findAllByUser(user);
+			boolean existsCourse = userCourses.stream()
+					.anyMatch(userCourse -> course.getCourseName().equals(userCourse.getCourse().getCourseName()));
+
+			if (existsCourse) {
+				throw new DuplicateUserCourseException();
+			}
 			UserCourse userCourse = UserCourse.builder()
 				.course(course)
 				.user(user)
 				.build();
 
 			userCourseRepository.save(userCourse);
+
+			List<NWeek> nWeeks = nWeekRepository.findByCourse(course);
+
+
+				for (NWeek nWeek : nWeeks) {
+					Attendance attendance = Attendance.builder()
+							.nWeek(nWeek)
+							.userCourse(userCourse)
+							.build();
+					attendanceRepository.save(attendance);
+				}
 		}
 
 	}
@@ -128,6 +146,7 @@ public class CourseService {
 
 			nWeekRepository.save(nWeek);
 		}
+
 	}
 
 	//강의 삭제
