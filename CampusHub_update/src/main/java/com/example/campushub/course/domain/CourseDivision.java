@@ -12,9 +12,9 @@ public enum CourseDivision {
 	private final String name;
 
 	public static CourseDivision of(String koreanName) {
-		if (koreanName.equals("전공 필수")){
+		if (koreanName.equals("전공필수")){
 			return MAJOR_REQUIRED;
-		} else if (koreanName.equals("전공 선택")) {
+		} else if (koreanName.equals("전공선택")) {
 			return MAJOR_ELECTIVE;
 		} else return GENERAL;
 	}

@@ -28,7 +28,7 @@ document.getElementById('prof_course_registration_searchBtn').addEventListener('
                     <td>${course.professorName}</td>
                     <td>${course.courseRoom}</td>
                     <td>${course.courseDay}</td>
-                    <td>${course.startPeriod} - ${course.endPeriod}</td>
+                    <td>${course.startPeriod}교시- ${course.endPeriod}교시</td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -72,6 +72,20 @@ document.getElementById('prof_course_registration_newBtn').addEventListener('cli
 });
 
 
+// 한글 → 숫자 변환 매핑
+const divisionMapping = {
+    "전공필수": 0,
+    "전공선택": 1,
+    "교양": 2
+};
+
+// 숫자 → 한글 변환 매핑 (서버에서 숫자가 올 경우 대비)
+const reverseDivisionMapping = {
+    0: "전공필수",
+    1: "전공선택",
+    2: "교양"
+};
+
 // 저장 버튼
 document.getElementById('prof_course_registration_savBtn').addEventListener('click', function () {
     const courseName = document.getElementById('prof_course_registration_name').value;
@@ -81,43 +95,31 @@ document.getElementById('prof_course_registration_savBtn').addEventListener('cli
     const courseDay = document.getElementById('dayOfWeek').value;
     const startPeriod = parseInt(document.getElementById('classTime').value, 10);
     const endPeriod = parseInt(document.getElementById('endClassTime').value, 10);
-
-    // 한글 → 숫자 변환 매핑
-    const divisionMapping = {
-        "전공필수": 0,
-        "전공선택": 1,
-        "교양": 2
-    };
-
-    // 숫자 → 한글 변환 매핑 (신규 저장 시 사용)
-    const reverseDivisionMapping = {
-        0: "전공필수",
-        1: "전공선택",
-        2: "교양"
-    };
-
     const divisionText = document.getElementById('courseType').value;
+    console.log('선택한 이수구분:', divisionText);
+
     const selectedRow = document.querySelector('#prof_course_registration_TableBody tr.selected');
 
     let url = '';
     let method = '';
-    let division;
+    let division = divisionText;
 
     if (selectedRow) {
         const courseIdInRow = selectedRow.dataset.id;
         if (courseIdInRow.startsWith('new+')) {
             url = '/api/professor/course';
             method = 'POST';
-            division = divisionText;  // 신규 저장 시 한글로 보냄
+            // division = divisionText;  // 신규 저장 시 한글로 보냄
         } else {
             url = `/api/professor/course/${courseIdInRow}`;
             method = 'PATCH';
-            division = divisionMapping[divisionText];  // 수정 시 숫자로 변환
+            // division = divisionMapping[divisionText];  // 수정 시 숫자로 변환
+            // division = divisionMapping[divisionText] !== undefined ? divisionMapping[divisionText] : divisionText;
         }
     } else {
         url = '/api/professor/course';
         method = 'POST';
-        division = divisionText;  // 신규 저장 시 한글로 보냄
+        // division = divisionText;  // 신규 저장 시 한글로 보냄
     }
 
     // 강의 데이터 객체 생성
