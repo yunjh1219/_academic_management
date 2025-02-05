@@ -123,8 +123,9 @@
                                 <h3>학사공지</h3>
                             </div>
                             <div class="date-content">
-                                <table id="department-notices">
-                                    <tbody>
+                                <table id="stu-acad-notices">
+
+                                    <tbody id="stu-main-acadnotice-TabelBody">
                                     <!-- 학과 공지사항 데이터가 여기에 삽입됩니다 -->
                                     </tbody>
                                 </table>
@@ -157,11 +158,29 @@
             </div>
 
         </div>
-
-
     </div>
-
 </div>
+
+<div id="notice-modal" class="stu-notice-modal">
+    <span id="close-modal">X</span>
+    <div class="stu-notic-modal-box">
+        <div class="notice-modal-header">
+            <div class="span-item">
+                <div class="left-group">
+                    <span id="stu-modal-noticeType"></span>
+                    <span id="stu-modal-noticeTitle"></span>
+                </div>
+                <div class="right-group">
+                    <span id="stu-modal-noticeAuth"></span>
+                    <span> │ </span>
+                    <span id="stu-modal-noticeCreatedAt"></span>
+                </div>
+            </div>
+        </div>
+        <p id="modal-content"></p>
+    </div>
+</div>
+
 
 </body>
 </html>

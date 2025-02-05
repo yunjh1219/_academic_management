@@ -3,17 +3,17 @@ document.getElementById('prof-assign-check-searchBtn').addEventListener('click',
     const courseName = document.getElementById('courseName').value;  // 강의명 셀렉트박스에서 선택된 값
     const week = document.getElementById('week').value;  // 주차 셀렉트박스에서 선택된 값
 
+
     // 강의명과 주차가 비어있지 않으면 요청을 보내고, 비어있으면 경고 메시지를 표시
     if (courseName === '' || week === '') {
         alert('강의명과 주차를 모두 선택해주세요.');
     } else {
-        // 쿼리 파라미터로 강의명과 주차를 전달
-        const url = `/api/professor/assignment/condition?courseName=${encodeURIComponent(courseName)}&week=${encodeURIComponent(week)}&status=${encodeURIComponent(null)}`;
+        // status=null로 설정
+        const url = `/api/professor/assignment/condition?courseName=${encodeURIComponent(courseName)}&week=${encodeURIComponent(week)}&status=null`;
 
-        console.log("보내는 URL:", url);  // 보내는 URL 로그로 출력
+        console.log("보내는 URL:", url);
         console.log("보내는 강의명:", courseName);
         console.log("주차:", week);
-        console.log("상태:", status);
 
         const token = localStorage.getItem('jwtToken');
 
