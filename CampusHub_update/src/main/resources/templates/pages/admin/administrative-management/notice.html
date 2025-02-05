@@ -21,7 +21,7 @@
                 <button class="query-btn" id="admin-notice-searchBtn">조회</button>
             </div>
             <div class="query-box">
-                <button class="query-btn" id="admin-notice-createBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+                <button class="query-btn" id="admin-notice-newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
             </div>
             <div class="query-box">
                 <button class="query-btn" id="admin-notice-deleteBtn">삭제</button>
@@ -77,37 +77,41 @@
                 <form action="#" method="post" id="editNoticeForm">
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="title">제목</label>
-                            <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요" required>
+                            <label for="admin_notice_title">제목</label>
+                            <input type="text" id="admin_notice_title" name="title" class="form-control" placeholder="제목을 입력하세요" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="content">내용</label>
-                            <textarea id="content" name="content" class="form-control" placeholder="내용을 입력하세요" required></textarea>
+                            <label for="admin_notice_content">내용</label>
+                            <textarea id="admin_notice_content" name="content" class="form-control" placeholder="내용을 입력하세요" required></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="file">파일첨부</label>
-                            <input type="text" id="file" name="file" class="form-control" placeholder="파일을 첨부하세요">
+                            <label for="admin_notice_file">파일첨부</label>
+                            <input type="text" id="admin_notice_file" name="file" class="form-control" placeholder="파일을 첨부하세요">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-item">
-                            <label for="createdate">작성일시</label>
-                            <input type="text" id="createdate" name="createdate" class="form-control" placeholder="작성일시" readonly> <!-- 수정 불가 -->
+                            <label for="admin_noticeType">타입</label>
+                            <input type="text" id="admin_noticeType" name="admin_noticeType" class="form-control" placeholder="학사" readonly> <!-- 수정 불가 -->
                         </div>
                         <div class="form-item">
-                            <label for="updatedate">수정일시</label>
-                            <input type="text" id="updatedate" name="updatedate" class="form-control" placeholder="수정일시" readonly> <!-- 수정 불가 -->
+                            <label for="admin_notice_createdate">작성일시</label>
+                            <input type="text" id="admin_notice_createdate" name="createdate" class="form-control" placeholder="작성일시" readonly> <!-- 수정 불가 -->
                         </div>
                         <div class="form-item">
-                            <label for="author">작성자</label>
-                            <input type="text" id="author" name="author" class="form-control" placeholder="작성자" readonly> <!-- 수정 불가 -->
+                            <label for="admin_notice_updatedate">수정일시</label>
+                            <input type="text" id="admin_notice_updatedate" name="updatedate" class="form-control" placeholder="수정일시" readonly> <!-- 수정 불가 -->
+                        </div>
+                        <div class="form-item">
+                            <label for="admin_notice_author">작성자</label>
+                            <input type="text" id="admin_notice_author" name="author" class="form-control" placeholder="작성자" readonly> <!-- 수정 불가 -->
                         </div>
                     </div>
                 </form>

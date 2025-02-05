@@ -1,4 +1,8 @@
 window.addEventListener('load', function () {
+
+    const token = localStorage.getItem('jwtToken');
+
+
     let currentYear = 2025;  // 초기 연도
     let currentMonth = 1;    // 초기 월 (1월)
 
@@ -133,23 +137,77 @@ window.addEventListener('load', function () {
             academicCalendarTable.appendChild(row);
         });
 
-        // 공지사항 테이블 채우기
-        const departmentNoticesTable = document.querySelector("#department-notices tbody");
-        departmentNoticesTable.innerHTML = "";  // 기존 공지사항 데이터 비우기
 
-        filteredNotices.forEach(notice => {
-            const row = document.createElement("tr");
 
-            // 공지사항 제목만 표시
-            const titleCell = document.createElement("td");
-            titleCell.textContent = notice.title;
 
-            // 제목에 스타일 적용
-            titleCell.classList.add("notice-title");
+        fetch(url=`/api/notice/condition?noticeType=${encodeURIComponent('학사')}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        }) .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+            .then(data => {
+                console.log("서버 응답 데이터:", data);
+                const tableBody = document.getElementById('stu-main-acadnotice-TabelBody');
+                tableBody.innerHTML = '';
 
-            row.appendChild(titleCell);
+                data.data.forEach((admin_notice, index) => {
 
-            departmentNoticesTable.appendChild(row);
-        });
+                    const formatDate = (dateString) => {
+                        const date = new Date(dateString);
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0');
+                        const day = String(date.getDate()).padStart(2, '0');
+                        return `${year}.${month}.${day}`;
+                    };
+
+                    const noticeTypeMapping = {
+                        BACHELOR: "학사",
+                        PROFESSOR: "교수"
+                    };
+
+                    const row = document.createElement('tr');
+                    row.dataset.id = admin_notice.id;
+                    row.innerHTML = `
+            <td class="notice-title" data-field="noticeTitle">${admin_notice.noticeTitle}</td>
+            <td class="notice-createdAt" data-field="noticeCreated" style="text-align: right;">${formatDate(admin_notice.createdAt)}</td>
+        `;
+
+                    // 제목 클릭 시 모달 표시
+                    row.querySelector('.notice-title').addEventListener('click', function () {
+                        // noticeType 매핑에 따른 한글 설정
+                        const noticeTypeText = noticeTypeMapping[admin_notice.noticeType] || "알 수 없는 유형";
+                        document.getElementById('stu-modal-noticeType').textContent = `[${noticeTypeText}]`;
+                        document.getElementById('stu-modal-noticeTitle').textContent = admin_notice.noticeTitle;
+                        document.getElementById('stu-modal-noticeAuth').textContent = admin_notice.userName;
+                        document.getElementById('stu-modal-noticeCreatedAt').textContent = formatDate(admin_notice.createdAt);
+                        document.getElementById('modal-content').textContent = admin_notice.noticeContent || '내용이 없습니다.';
+                        document.getElementById('notice-modal').style.display = 'block';
+
+                    });
+
+                    tableBody.appendChild(row);
+                });
+
+                // 모달 닫기
+                document.getElementById('close-modal').addEventListener('click', function () {
+                    document.getElementById('notice-modal').style.display = 'none';
+                });
+
+                // 모달 바깥 클릭 시 닫기
+                window.addEventListener('click', function (event) {
+                    const modal = document.getElementById('notice-modal');
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            })
+
     }
 });

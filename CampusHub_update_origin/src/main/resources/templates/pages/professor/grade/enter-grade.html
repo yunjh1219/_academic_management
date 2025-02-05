@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>점수 기입 : enter-grade</title>
+    <link rel="stylesheet" th:href="@{/css/professor/common.css}">
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>성적 > 성적관리 > 점수기입</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="searchBtn">조회</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="newNoticeBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="deleteBtn">삭제</button>
+            </div>
+            <div class="query-box">
+                <button class="query-btn" id="saveBtn">저장</button>  <!-- 저장 버튼 -->
+            </div>
+        </div>
+
+        <!-- 검색 및 필터 부분은 그대로 유지 -->
+        <div class="search-select-container">
+            <div class="search-container">
+                <div class="searchf-box">
+                    <select>
+                        <option>제목</option>
+                        <option>작성자</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <!-- 이름 검색 입력란 -->
+                    <input type="text" placeholder="내용입력" />
+                </div>
+                <button>검색</button>
+            </div>
+        </div>
+
+        <!-- 공지사항 목록 테이블 -->
+        <div class="table-container">
+            <div class="table-title">
+                수강학생명단
+            </div>
+            <div class="table-box">
+                <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%;">
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th style="width: 5%;">NO</th>
+                        <th style="width: 5%;">이름</th>
+                        <th style="width: 15%;">학번</th>
+                        <th style="width: 40%;">학과</th>
+                        <th style="width: 10%;">중간</th>
+                        <th style="width: 10%;">기말</th>
+                        <th style="width: 10%;">총점수</th>
+                    </tr>
+                    </thead>
+                    <tbody id="noticeTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 항상 보이는 edit-container -->
+            <div class="edit-container" id="editContainer">
+                <form action="#" method="post" id="editNoticeForm">
+                    <!-- 이름, 학번, 학과, 중간, 기말, 총점수 -->
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="이름을 입력하세요" required>
+                        </div>
+                        <div class="form-item">
+                            <label for="department">학과</label>
+                            <input type="text" id="department" name="department" class="form-control" placeholder="학과를 입력하세요" required>
+                        </div>
+                        <div class="form-item">
+                            <label for="studentId">학번</label>
+                            <input type="text" id="studentId" name="studentId" class="form-control" placeholder="학번을 입력하세요" required>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="midterm">중간</label>
+                            <input type="number" id="midterm" name="midterm" class="form-control" placeholder="중간 시험 점수" required>
+                        </div>
+                        <div class="form-item">
+                            <label for="final">기말</label>
+                            <input type="number" id="final" name="final" class="form-control" placeholder="기말 시험 점수" required>
+                        </div>
+                        <div class="form-item">
+                            <label for="totalScore">총점수</label>
+                            <input type="number" id="totalScore" name="totalScore" class="form-control" placeholder="총점수를 입력하세요" readonly> <!-- 총점수는 수정 불가 -->
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

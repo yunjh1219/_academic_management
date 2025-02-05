@@ -50,7 +50,7 @@ document.getElementById('prof-daily-att-searchBtn').addEventListener('click', fu
                             <option value="absent">결석</option>
                         </select>
                    </td>
-                    <td><input type="checkbox" class="scholarship-checkbox"></td>
+            
                 `;
                     tableBody.appendChild(row);
                 });

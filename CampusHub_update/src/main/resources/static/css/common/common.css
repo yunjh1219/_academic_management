@@ -246,7 +246,72 @@ td a:hover {
     text-decoration: underline; /* 호버 시 밑줄 추가 */
 }
 
+.time-table-title{
+    font-weight: bold;
+    font-size: 13px;
+    color: #333333;
+}
 
+.time-table-box {
+    position: relative;
+    height: 600px;
+    border-top: 2px solid blue;
+    border-bottom: 1px solid grey;
+    background-color: #dddddd;
+    width: 80%; /* 전체 박스의 너비 조정 */
+    max-width: 700px; /* 최대 너비 제한 */
+    margin: 0 auto; /* 중앙 정렬 */
+}
+
+.time-table-box table {
+    width: 100%;
+    height: 100%;
+    table-layout: fixed; /* 고정된 레이아웃 유지 */
+    border-collapse: collapse; /* 테두리 겹치기 */
+}
+
+.time-table-box th,
+.time-table-box td {
+    text-align: center;
+    padding: 4px; /* 내부 여백 줄이기 */
+    word-wrap: break-word;
+    vertical-align: middle; /* 텍스트 중앙 정렬 */
+    font-size: 12px; /* 글자 크기 줄이기 */
+}
+
+.time-table-box thead th {
+    margin: 0;
+    background-color: #4d4d4d;
+    padding: 3px 10px; /* 헤더의 패딩 줄이기 */
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ddd; /* 헤더에 경계선 추가 */
+    position: sticky; /* 스크롤 시 헤더 고정 */
+    top: 0; /* 상단 고정 */
+    color: white;
+    font-size: 12px; /* 헤더 글씨 크기 줄이기 */
+}
+
+.time-table-box td.no-border {
+    border: none;
+}
+
+.time-table-box tbody td {
+    background-color: #fff; /* 본문 배경색 */
+    height: 50px; /* 셀 높이 줄이기 */
+    font-size: 11px; /* 셀 내부 글자 크기 줄이기 */
+}
+
+/* 열(요일) 너비를 줄이기 */
+.time-table-box th:first-child,
+.time-table-box td:first-child {
+    width: 60px; /* 첫 번째 열(시간대) 너비 조정 */
+}
+
+.time-table-box th:not(:first-child),
+.time-table-box td:not(:first-child) {
+    width: 100px; /* 나머지 요일 열 너비 조정 */
+}
 
 
 
