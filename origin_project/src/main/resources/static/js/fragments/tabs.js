@@ -86,7 +86,7 @@ $(function() {
 
                 for (let i = 1; i <= 19; i++) {
                     const weekOption = document.createElement('option');
-                    weekOption.value = i;  // 주차 값 설정
+                    weekOption.value = `${i}주차`; // 주차 값 설정
                     weekOption.textContent = `${i}주차`;  // 주차 표시
                     weekSelect.appendChild(weekOption);  // week 셀렉트 박스에 옵션 추가
                 }
@@ -96,6 +96,138 @@ $(function() {
             });
 
     }
+    function admin_loadDept() {
+        const token = localStorage.getItem('jwtToken');
+        const url = "/api/admin/dept/all";
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`  // JWT 토큰을 Authorization 헤더에 추가
+            }
+        })
+            .then(response => response.json())  // 응답을 JSON 형식으로 파싱
+            .then(data => {
+                console.log('받은 데이터:', data);  // 받은 데이터 구조 확인
+
+                // data.data에서 학과 목록을 가져오기
+                const departments = data.data;  // 학과 정보는 data.data 안에 있음
+
+                const deptNameSelect = document.getElementById('deptName');
+                deptNameSelect.innerHTML = '<option value="">학과명 선택</option>';  // 셀렉트 박스 초기화
+
+                // 받은 학과 데이터로 option 추가
+                departments.forEach(department => {
+                    const option = document.createElement('option');
+                    option.textContent = department.deptName;   // 학과 ID를 value로 설정
+                    option.textContent = department.deptName;  // 학과 이름을 텍스트로 설정
+                    deptNameSelect.appendChild(option);  // option을 셀렉트 박스에 추가
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);  // 에러 발생 시 출력
+            });
+    }
+
+    function stu_loadCourse() {
+        const token = localStorage.getItem('jwtToken');
+        const url = "/api/student/course";
+
+        fetch(url, {
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`  // JWT 토큰을 Authorization 헤더에 추가
+            }
+        }) .then(response => response.json())  // 응답을 JSON 형식으로 파싱
+            .then(data => {
+                console.log('받은 데이터:', data);  // 받아온 데이터를 콘솔에 출력하여 확인
+
+                const courseNameSelect = document.getElementById('stu_assign_course');  // courseName 셀렉트 박스 ID
+                const weekSelect = document.getElementById('stu_assign_week');  // week 셀렉트 박스 ID
+                courseNameSelect.innerHTML = '';  // 셀렉트 박스 초기화
+                weekSelect.innerHTML = '';  // 주차 셀렉트 박스 초기화
+
+                // 기본 옵션 유지
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '전체';
+                defaultOption.disabled = true;  // 선택 불가능한 옵션으로 설정
+                defaultOption.selected = true;  // 기본 선택되도록 설정
+                courseNameSelect.appendChild(defaultOption);
+
+                // 강의명 데이터를 셀렉트 박스에 추가
+                const courses = data.data || [];  // data.data가 배열 형태로 존재하는지 확인
+                courses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course.courseName;  // 강의명으로 value 설정
+                    option.textContent = course.courseName;  // 강의명 표시
+                    courseNameSelect.appendChild(option);  // courseName 셀렉트 박스에 옵션 추가
+                });
+
+                // 주차 옵션 추가 (1부터 19까지)
+                const defaultWeekOption = document.createElement('option');
+                defaultWeekOption.value = '';
+                defaultWeekOption.textContent = '전체';
+                defaultWeekOption.disabled = true;
+                defaultWeekOption.selected = true;
+                weekSelect.appendChild(defaultWeekOption);
+
+                for (let i = 1; i <= 16; i++) {
+                    const weekOption = document.createElement('option');
+                    weekOption.value = `${i}주차`;   // 주차 값 설정
+                    weekOption.textContent = `${i}주차`;  // 주차 표시
+                    weekSelect.appendChild(weekOption);  // week 셀렉트 박스에 옵션 추가
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);  // 에러 발생 시 출력
+            });
+    }
+
+    function stu_loadOnlyCourse() {
+        const token = localStorage.getItem('jwtToken');
+        const url = "/api/student/course";
+
+        fetch(url, {
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`  // JWT 토큰을 Authorization 헤더에 추가
+            }
+        }) .then(response => response.json())  // 응답을 JSON 형식으로 파싱
+            .then(data => {
+                console.log('받은 데이터:', data);  // 받아온 데이터를 콘솔에 출력하여 확인
+
+                const courseNameSelect = document.getElementById('stu_course');  // courseName 셀렉트 박스 ID
+
+                courseNameSelect.innerHTML = '';  // 셀렉트 박스 초기화
+
+
+                // 기본 옵션 유지
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '전체';
+                defaultOption.disabled = true;  // 선택 불가능한 옵션으로 설정
+                defaultOption.selected = true;  // 기본 선택되도록 설정
+                courseNameSelect.appendChild(defaultOption);
+
+                // 강의명 데이터를 셀렉트 박스에 추가
+                const courses = data.data || [];  // data.data가 배열 형태로 존재하는지 확인
+                courses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course.courseName;  // 강의명으로 value 설정
+                    option.textContent = course.courseName;  // 강의명 표시
+                    courseNameSelect.appendChild(option);  // courseName 셀렉트 박스에 옵션 추가
+                });
+
+            })
+            .catch(error => {
+                console.error('Error:', error);  // 에러 발생 시 출력
+            });
+    }
+
 
     // 금일출석관리 -> 강의명과 주차를 가져오는 함수
     function att_loadCourseAndWeek() {
@@ -145,9 +277,9 @@ $(function() {
                 defaultWeekOption.selected = true;
                 weekSelect.appendChild(defaultWeekOption);
 
-                for (let i = 1; i <= 19; i++) {
+                for (let i = 1; i <= 16; i++) {
                     const weekOption = document.createElement('option');
-                    weekOption.value = i;  // 주차 값 설정
+                    weekOption.value = `${i}주차`;  // 주차 값 설정
                     weekOption.textContent = `${i}주차`;  // 주차 표시
                     weekSelect.appendChild(weekOption);  // week 셀렉트 박스에 옵션 추가
                 }
@@ -168,6 +300,15 @@ $(function() {
         }
         if (activeTabId == "tabs-금일출석관리"){
             att_loadCourseAndWeek()
+        }
+        if (activeTabId == "tabs-학생관리"){
+            admin_loadDept()
+        }
+        if (activeTabId === "tabs-과제조회"){
+            stu_loadCourse()
+        }
+        if (activeTabId === "tabs-출석조회"){
+            stu_loadOnlyCourse()  //<- 오직 강의만
         }
 
     });
@@ -232,15 +373,15 @@ $(function() {
         tabs.tabs("refresh");  // 탭 리프레시
     });
 
-    var tabToActivate = $('a[data-tab=학과공지사항]');
+    // var tabToActivate = $('a[data-tab=학사공지사항]');
 
     // 현재 열린 탭이 없을 때만 기본 탭을 활성화
-    if ($("#tabs ul li").length === 0) {  // 탭 목록이 비어있다면
-        if (tabToActivate.length > 0) {
-            // 기본 탭을 활성화
-            var tabName = tabToActivate.data("tab");
-            var url = tabToActivate.attr("href");
-            openTab(tabName, url);
-        }
-    }
+    // if ($("#tabs ul li").length === 0) {  // 탭 목록이 비어있다면
+    //     if (tabToActivate.length > 0) {
+    //         // 기본 탭을 활성화
+    //         var tabName = tabToActivate.data("tab");
+    //         var url = tabToActivate.attr("href");
+    //         openTab(tabName, url);
+    //     }
+    // }
 });

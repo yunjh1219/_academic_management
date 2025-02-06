@@ -1,63 +1,50 @@
 document.getElementById('stu-atten-searchBtn').addEventListener('click', function () {
-    const selectedCourse = document.getElementById('course-select').value; // 선택된 강의명
+    const token = localStorage.getItem('jwtToken');
+    const url = '/api/student/attendance/condition'; // API 경로
+    const courseName = document.getElementById('stu_course').value; // 선택된 강의명
 
-    // 선택되지 않았을 경우 경고 메시지 표시 및 함수 종료
-    if (!selectedCourse) {
-        alert('강의를 선택해주세요.');
-        return;
-    }
+    // URL 인코딩된 값을 디코딩
+    const decodedCourseName = decodeURIComponent(courseName);
 
-    const url = '/api/course'; // API 경로
+    const params = new URLSearchParams();
+    if (decodedCourseName) params.append('courseName', decodedCourseName);
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('stu-atten-TableBody');
-            if (tableBody) {
-                tableBody.innerHTML = ''; // 기존 데이터 초기화
+    // 요청 URL 및 파라미터 로그 찍기
+    const requestUrl = `${url}?${params.toString()}`;
+    console.log('보낸 요청 URL:', requestUrl);  // 요청 URL 로그
+    console.log('디코딩된 강의명:', decodedCourseName);  // 디코딩된 강의명 로그
 
-                // 선택된 강의명으로 데이터 필터링
-                const filteredData = data.filter(course => course.courseName === selectedCourse);
-
-                // 필터링된 데이터를 테이블에 출력
-                filteredData.forEach((course, index) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td data-field="index">${index + 1}</td>
-                        <td data-field="courseDay">${course.schoolYear}</td> <!-- 수업연도 -->
-                        <td data-field="courseName">${course.courseName}</td> <!-- 결석일자 -->
-                        <td data-field="room">${course.room}</td> <!-- 강의실 -->
-                    `;
-                    tableBody.appendChild(row);
-                });
-
-                // 데이터가 없을 경우
-                if (filteredData.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4">선택된 강의에 해당하는 데이터가 없습니다.</td></tr>`;
-                }
-            } else {
-                console.error('tableBody 요소를 찾을 수 없습니다.');
+    fetch(requestUrl, {
+        method: 'GET',  // GET 방식으로 요청
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`  // JWT 토큰을 Authorization 헤더에 추가
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+            return response.json();
+        })
+        .then(data => {
+            console.log("서버 응답 데이터:", data);
+            const tableBody = document.getElementById('stu-atten-TableBody');
+            tableBody.innerHTML = '';
+
+            data.data.forEach((atten, index) => {
+                const row = document.createElement('tr');
+                row.dataset.id = atten.userNum;
+                row.innerHTML = `
+                   <td>${index + 1}</td>
+                   <td data-field="studentId">${atten.week}</td>
+                   <td data-field="department">${atten.status}</td>
+                `;
+                tableBody.appendChild(row);
+            });
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('데이터를 불러오는 데 실패했습니다.');
+            alert('출석 정보를 불러오는 중 오류가 발생했습니다.');
         });
-});
-
-// 서버에서 코스명 데이터를 가져와 <select>에 추가
-$(function () {
-    $.ajax({
-        url: '/api/names', // 강의명 가져오는 API 경로
-        type: 'GET',
-        success: function (courseNames) {
-            const $select = $('#course-select');
-            courseNames.forEach(name => {
-                $select.append(`<option value="${name}">${name}</option>`);
-            });
-        },
-        error: function () {
-            alert('강의 데이터를 불러오는 데 실패했습니다.');
-        }
-    });
 });

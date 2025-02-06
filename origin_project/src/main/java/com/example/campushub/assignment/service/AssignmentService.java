@@ -92,7 +92,7 @@ public class AssignmentService {
 		List<String> courseNames = userCourses.stream()
 			.map(userCourse -> userCourse.getCourse().getCourseName())
 			.toList();
-		return assignmentRepository.findAllAssigmentByCond(condition, courseNames);
+		return assignmentRepository.findAllAssigmentByCond(condition, courseNames, user.getUserNum());
 	}
 	//과제 단건 조회
 	public AssignmentResponse findAssignment(LoginUser loginUser, Long assignmentId) {

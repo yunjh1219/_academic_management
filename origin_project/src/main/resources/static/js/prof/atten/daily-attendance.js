@@ -44,10 +44,10 @@ document.getElementById('prof-daily-att-searchBtn').addEventListener('click', fu
                     <td data-field="userNum">${prof_daily_att.userNum}</td> <!-- 학번 -->
                     <!-- 드롭다운 추가 -->
                     <td>
-                       <select class="attendance-status">
-                            <option value="present">출석</option>
-                            <option value="late">지각</option>
-                            <option value="absent">결석</option>
+                       <select id="attendance-status" class="attendance-status">
+                            <option value="출석">출석</option>
+                            <option value="지각">지각</option>
+                            <option value="결석">결석</option>
                         </select>
                    </td>
             
@@ -60,4 +60,66 @@ document.getElementById('prof-daily-att-searchBtn').addEventListener('click', fu
                 alert('과제 정보를 불러오는 중 오류가 발생했습니다.');
             });
     }
+});
+
+
+//저장
+document.getElementById('prof-daily-att-saveBtn').addEventListener('click', function() {
+    const token = localStorage.getItem('jwtToken');
+    const tableBody = document.getElementById('prof-daily-att-TableBody');
+    const rows = tableBody.querySelectorAll('tr');  // 테이블 행들 가져오기
+    const prof_stu_atten_Data = [];  // 데이터 저장할 배열
+    const courseName = document.getElementById('prof_att_courseName').value;
+    const week = document.getElementById('prof_att_week').value;
+
+    const params = new URLSearchParams();
+    if (courseName) params.append('courseName', courseName);
+    if (week) params.append('week',week);
+
+    const url = '/api/professor/attendance/condition';
+
+    // 요청 URL 및 파라미터 로그 찍기
+    const requestUrl = `${url}?${params.toString()}`;
+
+    rows.forEach(row => {
+        const userName = row.querySelector('[data-field="userName"]').textContent;  // 이름
+        const userNum = row.querySelector('[data-field="userNum"]').textContent;  // 학번
+        const status = row.querySelector('.attendance-status').value;  // 출석 상태 드롭다운 값
+
+
+        console.log("보내는 강의명:", courseName);
+
+        // 출석 상태 데이터를 객체로 저장
+        const studentData = {
+            userName: userName,
+            userNum: userNum,
+            status: status
+        };
+
+        prof_stu_atten_Data.push(studentData);  // 배열에 추가
+    });
+
+    console.log('내가 보낸 요청:', requestUrl);
+    console.log('내가 보낸 강의명:', courseName);
+
+    fetch(requestUrl,  {
+        method: 'POST',  // POST 방식으로 요청
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`  // JWT 토큰을 Authorization 헤더에 추가
+        },
+        body: JSON.stringify(prof_stu_atten_Data)  // 데이터 배열을 JSON 형식으로 전송
+    })
+        .then(response => response.json())  // 서버 응답 처리
+        .then(data => {
+            console.log('서버 응답:', data);  // 응답 데이터 확인
+
+            console.log('내가 보낸 요청:', requestUrl);
+            console.log('내가 보낸 강의명:', courseName);
+            alert('출석 정보가 저장되었습니다.');
+        })
+        .catch(error => {
+            console.error('Error:', error);  // 에러 발생 시 출력
+            alert('출석 정보를 저장하는 중 오류가 발생했습니다.');
+        });
 });

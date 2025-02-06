@@ -103,7 +103,7 @@ public class CourseRepositoryCustomImpl implements CourseRepositoryCustom {
 			course.courseName,
 			course.division,
 			course.creditScore,
-			user.userName,
+			course.user.userName,
 			course.room,
 			course.courseDay,
 			course.startPeriod,
@@ -158,6 +158,18 @@ public class CourseRepositoryCustomImpl implements CourseRepositoryCustom {
 			.from(course)
 			.where(isSameRoomCondition(createDto.getRoom(), CourseDay.of(createDto.getCourseDay()), createDto.getStartPeriod(), createDto.getEndPeriod()))
 			.fetchFirst() != null; // 데이터가 존재하면 true 반환
+	}
+
+	//요일 시간 중복 조건
+	@Override
+	public boolean existsByDayAndTime(CourseCreateDto createDto, String userNum) {
+		return queryFactory
+				.selectOne()
+				.from(course)
+				.where(course.user.userNum.eq(userNum),
+						isTimeOverlapping(createDto.getStartPeriod(), createDto.getEndPeriod()),
+						course.courseDay.eq(CourseDay.of(createDto.getCourseDay())))
+				.fetchFirst() != null;
 	}
 
 

@@ -3,6 +3,7 @@ package com.example.campushub.assignment.repository;
 import static com.example.campushub.assignment.domain.QAssignment.*;
 import static com.example.campushub.course.domain.QCourse.*;
 import static com.example.campushub.nweek.domain.QNWeek.*;
+import static com.example.campushub.studentassignment.domain.QStudentAssignment.studentAssignment;
 import static com.example.campushub.user.domain.QUser.*;
 
 import java.util.List;
@@ -33,20 +34,23 @@ public class AssignmentRepositoryCustomImpl implements AssignmentRepositoryCusto
 
 	//과제 전체 + 컨디션 조회 (학생)
 	@Override
-	public List<AssignmentFindAllResponse> findAllAssigmentByCond(AssignmentSearchCondition condition, List<String> courseNames) {
+	public List<AssignmentFindAllResponse> findAllAssigmentByCond(AssignmentSearchCondition condition, List<String> courseNames, String userNum) {
 		return queryFactory.select(new QAssignmentFindAllResponse(
 				assignment.id,
 				nWeek.week,
 				course.courseName,
 				user.userName,
+				studentAssignment.status,
 				assignment.limitDate,
 				assignment.createDate
 			))
 			.from(assignment)
 			.join(nWeek).on(assignment.nWeek.eq(nWeek))
+				.join(studentAssignment).on(studentAssignment.assignment.eq(assignment))
 			.join(course).on(nWeek.course.eq(course))
 			.join(user).on(course.user.eq(user))
-			.where(dynamicWhereCondition(condition, courseNames))
+			.where(dynamicWhereCondition(condition, courseNames),
+					studentAssignment.userCourse.user.userNum.eq(userNum))
 			.fetch();
 	}
 
@@ -77,10 +81,10 @@ public class AssignmentRepositoryCustomImpl implements AssignmentRepositoryCusto
 		BooleanExpression baseCondition = course.courseName.in(courseNames);
 
 		if (condition.getCourseName() != null) {
-			baseCondition = baseCondition.and(courseNameEq(condition.getCourseName()));
+			baseCondition = course.courseName.eq(condition.getCourseName());
 		}
 		if (condition.getWeek() != null) {
-			baseCondition = baseCondition.and(weekEq(Week.of(condition.getWeek())));
+			baseCondition = baseCondition.and(nWeek.week.eq(Week.of(condition.getWeek())));
 		}
 
 		return baseCondition;

@@ -32,16 +32,46 @@ public class StudentAssignmentController {
     }
 
 
-    //학생 과제 전체 조회
-    @GetMapping("/api/professor/assignment/condition")
-    @ResponseStatus(HttpStatus.OK)
-    public SuccessResponse<List<StudentAssignmentResponse>> getAllStudentsAssignment(@Login LoginUser loginUser, StudentAssigmentSearchCondition cond){
-        return SuccessResponse.<List<StudentAssignmentResponse>>builder()
-                .status(200)
-                .data(studentAssignmentService.getAllStudentAssignment(loginUser,cond))
-                .message("학생이 제출한 과제 조회 성공")
+//    //학생 과제 전체 조회
+//    @GetMapping("/api/professor/assignment/condition")
+//    @ResponseStatus(HttpStatus.OK)
+//    public SuccessResponse<List<StudentAssignmentResponse>> getAllStudentsAssignment(@Login LoginUser loginUser, @ModelAttribute StudentAssigmentSearchCondition cond){
+//        System.out.println("courseName: " + cond.getCourseName());
+//        System.out.println("week: " + cond.getWeek());
+//        System.out.println("status: " + cond.getStatus());
+//        return SuccessResponse.<List<StudentAssignmentResponse>>builder()
+//                .status(200)
+//                .data(studentAssignmentService.getAllStudentAssignment(loginUser,cond))
+//                .message("학생이 제출한 과제 조회 성공")
+//                .build();
+//    }
+@GetMapping("/api/professor/assignment/condition")
+@ResponseStatus(HttpStatus.OK)
+public SuccessResponse<List<StudentAssignmentResponse>> getAllStudentsAssignment(@Login LoginUser loginUser,
+//                                                                                 @ModelAttribute StudentAssigmentSearchCondition cond,
+                                                                                 @RequestParam String courseName,
+                                                                                 @RequestParam String week,
+                                                                                 @RequestParam String status){
+
+        StudentAssigmentSearchCondition cond = StudentAssigmentSearchCondition.builder()
+                .courseName(courseName)
+                .week(week)
+                .status(status)
                 .build();
-    }
+
+
+
+    // status가 "null"이면 실제 null로 변환
+//    if ("null".equals(cond.getStatus())) {
+//        cond.setStatus(null);
+//    }
+
+    return SuccessResponse.<List<StudentAssignmentResponse>>builder()
+            .status(200)
+            .data(studentAssignmentService.getAllStudentAssignment(loginUser, cond))
+            .message("학생이 제출한 과제 조회 성공")
+            .build();
+}
 
     //학생 과제 단건 조회
     @GetMapping("/api/professor/assignment/condition/{assignmentId}")

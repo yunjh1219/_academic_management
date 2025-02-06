@@ -35,7 +35,7 @@ public class AttendanceController {
     @PostMapping("/api/professor/attendance/condition")
     @ResponseStatus(HttpStatus.CREATED)
     public SuccessResponse<Void> decideAttendance(@Login LoginUser loginUser,
-                                                  @RequestBody @Valid List<AttendanceRequestDto> requestDto,
+                                                  @RequestBody List<AttendanceRequestDto> requestDto,
                                                     AttendanceSearchCondition cond) {
 
         attendanceService.createAttendance(loginUser,requestDto,cond);
@@ -50,7 +50,7 @@ public class AttendanceController {
     //강의별 출석 통계 조회(학생)
     @GetMapping("/api/professor/attendance/allcondition")
     @ResponseStatus(HttpStatus.OK)
-    public SuccessResponse<List<AttendanceSummaryDto>> findAllAttendance(@Login LoginUser loginUser, AttendanceSearchCourseCondition cond) {
+    public SuccessResponse<List<AttendanceSummaryDto>> findAllAttendance(@Login LoginUser loginUser, @ModelAttribute AttendanceSearchCourseCondition cond) {
         return SuccessResponse.<List<AttendanceSummaryDto>>builder()
                 .status(200)
                 .message("강의별 출석 통계 조회 성공")
@@ -62,11 +62,11 @@ public class AttendanceController {
     //본인 출석조회(학생)
     @GetMapping("/api/student/attendance/condition")
     @ResponseStatus(HttpStatus.OK)
-    public SuccessResponse<List<AttendanceUserDto>> getMyAttendance(@Login LoginUser loginUser, AttendanceSearchCondition cond) {
+    public SuccessResponse<List<AttendanceUserDto>> getMyAttendance(@Login LoginUser loginUser, @RequestParam String courseName) {
         return SuccessResponse.<List<AttendanceUserDto>>builder()
                 .status(200)
                 .message("사용자 강의별 출석 조회 성공")
-                .data(attendanceService.userAttendance(loginUser,cond))
+                .data(attendanceService.userAttendance(loginUser,courseName))
                 .build();
     }
 

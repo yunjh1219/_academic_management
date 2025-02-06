@@ -7,6 +7,7 @@ import com.example.campushub.course.dto.*;
 public interface CourseRepositoryCustom {
 
 	boolean existsByRoomAndTime(CourseCreateDto createDto);
+	boolean existsByDayAndTime(CourseCreateDto createDto, String userNum);
 
 	List<CourseResponseDto> findAllByProfCondition(ProfCourseSearchCondition condition);
 	List<CourseResponseDto> findAllByStudCondition(StudCourseSearchCondition cond);

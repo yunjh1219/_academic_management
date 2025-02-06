@@ -9,6 +9,6 @@ import com.example.campushub.assignment.dto.AssignmentSearchCondition;
 
 public interface AssignmentRepositoryCustom {
 
-	List<AssignmentFindAllResponse> findAllAssigmentByCond(AssignmentSearchCondition condition, List<String> courseNames);
+	List<AssignmentFindAllResponse> findAllAssigmentByCond(AssignmentSearchCondition condition, List<String> courseNames, String userNum);
 	Optional<AssignmentResponse> getAssignmentById(Long id);
 }

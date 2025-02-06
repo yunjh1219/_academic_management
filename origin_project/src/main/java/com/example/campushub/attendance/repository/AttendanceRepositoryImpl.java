@@ -1,8 +1,12 @@
 package com.example.campushub.attendance.repository;
 
+import com.example.campushub.attendance.domain.Attendance;
+import com.example.campushub.attendance.domain.QAttendance;
 import com.example.campushub.attendance.dto.*;
 import com.example.campushub.course.domain.QCourse;
+import com.example.campushub.nweek.domain.NWeek;
 import com.example.campushub.nweek.domain.Week;
+import com.example.campushub.usercourse.domain.UserCourse;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -12,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.campushub.attendance.domain.QAttendance.attendance;
 import static com.example.campushub.course.domain.QCourse.course;
@@ -87,7 +92,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepositoryCustom {
 
     //학생이 출석 조회
     @Override
-    public List<AttendanceUserDto> findUserAttendance(AttendanceSearchCondition atten, String userNum) {
+    public List<AttendanceUserDto> findUserAttendance(String coursename, String userNum) {
 
         QCourse course1 = new QCourse("course1");
         QCourse course2 = new QCourse("course2");
@@ -101,16 +106,32 @@ public class AttendanceRepositoryImpl implements AttendanceRepositoryCustom {
                 .join(userCourse.user,user)
                 .join(userCourse.course,course1)
                 .join(nWeek.course,course2)
-                .where(userCourse.course.courseName.eq(atten.getCourseName()),
+                .where(userCourse.course.courseName.eq(coursename),
                         userCourse.user.userNum.eq(userNum),
-                        nWeek.course.courseName.eq(atten.getCourseName()))
-                .orderBy(nWeek.week.desc())
+                        nWeek.course.courseName.eq(coursename))
                 .fetch();
     }
 
+    @Override
+    public Optional<Attendance> findByNWeekAndUserCourse(NWeek nWeek, UserCourse userCourse) {
+        return Optional.ofNullable(
+                queryFactory
+                        .selectFrom(attendance)
+                        .where(
+                                attendance.nWeek.eq(nWeek),
+                                attendance.userCourse.eq(userCourse)
+                        )
+                        .fetchOne()
+        );
+    }
 
-    private BooleanExpression eqCourseName(String courseName) {
-        return courseName == null ? null : course.courseName.eq(courseName);
+
+
+    private BooleanExpression eqUserCourseName(String courseName) {
+        return courseName == null ? null : userCourse.course.courseName.eq(courseName);
+    }
+    private BooleanExpression eqNweekCourseName(String courseName) {
+        return courseName == null ? null : nWeek.course.courseName.eq(courseName);
     }
 
     private Expression<String> getWeekStatus(Week week) {

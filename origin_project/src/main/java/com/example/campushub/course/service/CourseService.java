@@ -8,17 +8,12 @@ import com.example.campushub.course.domain.CourseDay;
 import com.example.campushub.course.domain.CourseDivision;
 import com.example.campushub.course.domain.CourseGrade;
 import com.example.campushub.course.dto.*;
+import com.example.campushub.global.error.exception.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.campushub.course.domain.Course;
 import com.example.campushub.course.repository.CourseRepository;
-import com.example.campushub.global.error.exception.CourseNotFoundException;
-import com.example.campushub.global.error.exception.DuplicateCourseException;
-import com.example.campushub.global.error.exception.DuplicateRoomTimeException;
-import com.example.campushub.global.error.exception.DuplicateUserCourseException;
-import com.example.campushub.global.error.exception.SchoolYearNotFoundException;
-import com.example.campushub.global.error.exception.UserNotFoundException;
 import com.example.campushub.nweek.domain.NWeek;
 import com.example.campushub.nweek.domain.Week;
 import com.example.campushub.nweek.repository.NweekRepository;
@@ -91,9 +86,26 @@ public class CourseService {
 			boolean existsCourse = userCourses.stream()
 				.anyMatch(userCourse -> course.getCourseName().equals(userCourse.getCourse().getCourseName()));
 
+			boolean existsDay = userCourses.stream()
+					.anyMatch(userCourse -> course.getCourseDay().equals(userCourse.getCourse().getCourseDay()));
+
+			boolean existsTimeConflict = userCourses.stream()
+					.anyMatch(userCourse -> {
+						Course existingCourse = userCourse.getCourse();
+						return course.getCourseDay().equals(existingCourse.getCourseDay()) &&
+								(course.getStartPeriod() < existingCourse.getEndPeriod() && course.getEndPeriod() > existingCourse.getStartPeriod());
+					});
+
 			if (existsCourse) {
 				throw new DuplicateUserCourseException();
 			}
+
+			if (existsDay && existsTimeConflict) {
+				throw new DuplicateUserCourseException();
+			}
+
+
+
 
 			UserCourse userCourse = UserCourse.builder()
 				.course(course)
@@ -129,6 +141,10 @@ public class CourseService {
 		//강의실 중복 조건
 		if (courseRepository.existsByRoomAndTime(createDto)) {
 			throw new DuplicateRoomTimeException();
+		}
+		//요일시간 중복 조건
+		if (courseRepository.existsByDayAndTime(createDto, user.getUserNum())) {
+			throw new DuplicateDayTimeException();
 		}
 
 		//학년도 학기 가져오기(학년도 엔티티중 iscurrent가 true인 엔티티 가져오기)

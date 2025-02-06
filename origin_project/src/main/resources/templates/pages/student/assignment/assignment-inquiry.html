@@ -6,9 +6,8 @@
 <head>
   <meta charset="UTF-8">
   <title>과제조회: Assignment Inquiry</title>
+  <script th:src="@{/js/student/assignment-inquiry/assignment-inquiry.js}"></script>
 </head>
-<th:block layout:fragment="content">
-
   <div class="content">
 
     <div class="content-title">
@@ -16,10 +15,10 @@
     </div>
     <div class="query-container">
       <div class="query-box">
-        <button class="query-btn" id="searchBtn">조회</button>
+        <button class="query-btn" id="stu_assign_serachBtn">조회</button>
       </div>
       <div class="query-box">
-        <button class="query-btn" id="saveBtn">제출</button>  <!-- 저장 버튼 -->
+        <button class="query-btn" id="stu_assign_saveBtn">제출</button>  <!-- 저장 버튼 -->
       </div>
     </div>
 
@@ -27,15 +26,11 @@
     <div class="search-select-container">
       <div class="search-container">
         <div class="searchf-box">
-          <select>
-            <option>강의명</option>
-            <option>작성자</option>
+          <select id="stu_assign_course">
           </select>
         </div>
         <div class="searchf-box">
-          <select>
-            <option>주차</option>
-            <option>작성자</option>
+          <select id="stu_assign_week">
           </select>
         </div>
       </div>
@@ -62,7 +57,7 @@
             <th style="width: 25%;">등록날짜</th>
           </tr>
           </thead>
-          <tbody id="noticeTableBody">
+          <tbody id="stu_assign_TableBody">
           </tbody>
         </table>
       </div>
@@ -133,7 +128,4 @@
 
 
   </div>
-</div>
-
-</th:block>
 </html>

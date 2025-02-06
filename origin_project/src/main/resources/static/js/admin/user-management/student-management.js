@@ -23,19 +23,34 @@ document.getElementById('admin-stuinfo-searchBtn').addEventListener('click', fun
             const tableBody = document.getElementById('admin-stuinfo-TableBody');
             tableBody.innerHTML = '';
 
+            // 한글로 변환할 매핑 객체
+            const typeMapping = {
+                "STUDENT": "학생",
+                "PROFESSOR": "교수",
+                "ADMIN": "관리자"
+            };
+
+            const statusMapping = {
+                "BREAK": "휴학",
+                "ENROLLED": "재학",
+                "RETURN_PENDING": "복학대기",
+                "BREAK_PENDING": "휴학대기",
+                "EMPLOYED": "재직"
+            };
+
             data.data.forEach((student, index) => {
                 const row = document.createElement('tr');
                 row.dataset.id = student.userNum;
                 row.innerHTML = `
-               <td><input type="checkbox" class="student-checkbox" data-id="${student.userNum}"></td>
-                <td>${index + 1}</td>
-                <td data-field="name" style="text-align: left;">${student.username}</td>
-                <td data-field="studentId">${student.userNum}</td>
-                <td data-field="department">${student.deptName}</td>
-                <td data-field="type">${student.type}</td>
-                <td data-field="status">${student.status}</td>
-                <td data-field="remarks"></td>
-            `;
+                   <td><input type="checkbox" class="student-checkbox" data-id="${student.userNum}"></td>
+                   <td>${index + 1}</td>
+                   <td data-field="name" style="text-align: left;">${student.username}</td>
+                   <td data-field="studentId">${student.userNum}</td>
+                   <td data-field="department">${student.deptName}</td>
+                   <td data-field="type">${typeMapping[student.type] || student.type}</td> <!-- 한글 변환 -->
+                   <td data-field="status">${statusMapping[student.status] || student.status}</td> <!-- 한글 변환 -->
+                   <td data-field="remarks"></td>
+                `;
                 tableBody.appendChild(row);
             });
         })
@@ -44,6 +59,81 @@ document.getElementById('admin-stuinfo-searchBtn').addEventListener('click', fun
             alert('학생 정보를 불러오는 중 오류가 발생했습니다.');
         });
 });
+
+
+// '조회' 버튼 클릭 시 학생 정보 목록을 불러오는 함수
+document.getElementById('admin-stuNum-searchBtn').addEventListener('click', function () {
+    const url = '/api/admin/students/condition'; // 학생 정보 목록을 가져올 URL
+
+
+    const token = localStorage.getItem('jwtToken');
+
+    // 입력된 학과와 학번 가져오기
+    const deptName = document.getElementById('deptName').value;
+    const stuNum = document.getElementById('stuNum').value;
+
+    const params = new URLSearchParams();
+    if (deptName) params.append('deptName', deptName);
+    if (stuNum) params.append('stuNum', stuNum);
+
+    console.log("요청 학과",deptName);
+    console.log("요청 학번",stuNum);
+
+    fetch(`${url}?${params.toString()}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("서버 응답 데이터:", data);
+            const tableBody = document.getElementById('admin-stuinfo-TableBody');
+            tableBody.innerHTML = '';
+
+            // 한글로 변환할 매핑 객체
+            const typeMapping = {
+                "STUDENT": "학생",
+                "PROFESSOR": "교수",
+                "ADMIN": "관리자"
+            };
+
+            const statusMapping = {
+                "BREAK": "휴학",
+                "ENROLLED": "재학",
+                "RETURN_PENDING": "복학대기",
+                "BREAK_PENDING": "휴학대기",
+                "EMPLOYED": "재직"
+            };
+
+            data.data.forEach((student, index) => {
+                const row = document.createElement('tr');
+                row.dataset.id = student.userNum;
+                row.innerHTML = `
+                   <td><input type="checkbox" class="student-checkbox" data-id="${student.userNum}"></td>
+                   <td>${index + 1}</td>
+                   <td data-field="name" style="text-align: left;">${student.username}</td>
+                   <td data-field="studentId">${student.userNum}</td>
+                   <td data-field="department">${student.deptName}</td>
+                   <td data-field="type">${typeMapping[student.type] || student.type}</td> <!-- 한글 변환 -->
+                   <td data-field="status">${statusMapping[student.status] || student.status}</td> <!-- 한글 변환 -->
+                   <td data-field="remarks"></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('학생 정보를 불러오는 중 오류가 발생했습니다.');
+        });
+});
+
 
 //단건조회
 document.getElementById('admin-stuinfo-TableBody').addEventListener('click', function (event) {
@@ -322,63 +412,7 @@ document.getElementById('admin-stuinfo-delBtn').addEventListener('click', functi
     }
 });
 
-document.getElementById('admin-stuNum-searchBtn').addEventListener('click', function () {
-    // 입력된 학번을 가져오기
-    const studentId = document.getElementById('stuNum').value.trim();
 
-    // 학번이 비어있으면 경고 메시지
-    if (!studentId) {
-        alert('학번을 입력하세요.');
-        return;
-    }
-
-    // 학번을 서버로 요청
-    fetch(`/api/admin/student/${studentId}`, {  // URL에서 {userNum}을 studentId로 바꿈
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`  // JWT 토큰 추가
-        }
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('학생 정보를 찾을 수 없습니다.');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('서버 응답 데이터:', data);  // 서버에서 받은 데이터 출력
-
-            const tableBody = document.getElementById('admin-stuinfo-TableBody');
-            tableBody.innerHTML = '';  // 이전 검색 결과 지우기
-
-            // 학생 데이터가 있을 경우 테이블에 추가
-            if (data && data.data) {
-                const student = data.data;  // 학생 정보
-                const row = document.createElement('tr');
-                row.dataset.id = student.userNum;
-
-                row.innerHTML = `
-                <td><input type="checkbox" class="student-checkbox"></td>
-                <td>1</td>  <!-- 첫 번째 검색된 학생, 고정값 1로 표시 -->
-                <td data-field="name" style="text-align: left;">${student.userName}</td>
-                <td data-field="studentId">${student.userNum}</td>
-                <td data-field="department">${student.deptName}</td>
-                <td data-field="type">${student.type}</td>
-                <td data-field="status">${student.status}</td>
-                <td data-field="remarks"></td>
-            `;
-
-                tableBody.appendChild(row);  // 테이블에 행 추가
-            } else {
-                alert('학생 정보를 찾을 수 없습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('검색 중 오류 발생:', error);
-            alert('검색 중 오류가 발생했습니다.')
-        });
-});
 
 document.getElementById('admin-stuinfo-accBtn').addEventListener('click', function () {
     const selectedUserNums = Array.from(document.querySelectorAll('.student-checkbox:checked'))

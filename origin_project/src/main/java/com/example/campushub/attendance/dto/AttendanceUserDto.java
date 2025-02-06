@@ -19,7 +19,7 @@ public class AttendanceUserDto {
  @QueryProjection
     public AttendanceUserDto(Week week, AttendanceStatus status) {
      this.week = week.getName();
-     this.status = status.getKoreanName();
+     this.status = (status != null) ? status.getKoreanName() : null;
  }
 }
 

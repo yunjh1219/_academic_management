@@ -1,64 +1,100 @@
 // 강의 조회
-document.getElementById('stu-MyCourses-SearchBtn').addEventListener('click', function() {
+document.getElementById('stu-MyCourses-SearchBtn').addEventListener('click', function () {
+
+    // 선택한 강의 테이블 본문 초기화
+    const tableBody = document.getElementById('stu-Course-Registrations-TableBody');
+    if (tableBody) {
+        tableBody.innerHTML = '';  // 기존 데이터 제거
+    }
+
     const url = '/api/student/course/all';
+    const myCourseUrl = '/api/student/course';
     const token = localStorage.getItem('jwtToken');
 
-    // 요청 URL을 콘솔에 출력
-    console.log(`Sending request to: ${url}`);
-
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('데이터를 보자==========:', data);  // 데이터를 콘솔에 출력해서 확인
-
-            const tableBody = document.getElementById('stu-cousreAllTableBody');
-            if (tableBody) {  // tableBody가 null이 아닌지 확인
-                tableBody.innerHTML = '';  // 기존 데이터 제거
-
-                // 'data' 배열을 직접 처리
-                if (Array.isArray(data.data)) {  // data.data 배열이 있는지 확인
-                    data.data.forEach((course, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                        <td><input type="checkbox" class="course-checkbox" data-id="${course.id}" data-course-grade="${course.courseGrade}" data-course-name="${course.courseName}" data-course-division="${course.courseDivision}" data-credit-score="${course.creditScore}" data-professor-name="${course.professorName}" data-course-room="${course.courseRoom}" data-course-day="${course.courseDay}" data-course-time="${course.startPeriod}교시 ~ ${course.endPeriod}교시"></td>
-                        <td data-field="index">${index + 1}</td>
-                        <td data-field="courseGrade">${course.courseGrade}</td>  <!-- 학년 -->       
-                        <td data-field="courseName">${course.courseName}</td> <!-- 강의명 --> 
-                        <td data-field="courseDivision">${course.courseDivision}</td> <!-- 이수구분 --> 
-                        <td data-field="creditScore">${course.creditScore}</td> <!-- 학점 --> 
-                        <td data-field="professorName">${course.professorName}</td> <!-- 담당교수 --> 
-                        <td data-field="courseRoom">${course.courseRoom}</td> <!-- 강의실 --> 
-                        <td data-field="courseDay">${course.courseDay}</td> <!-- 요일 -->  
-                        <td data-field="courseTime">${course.startPeriod}교시 ~ ${course.endPeriod}교시</td>  <!-- 교시 범위 표시 -->
-                    `;
-                        tableBody.appendChild(row);
-                    });
-                } else {
-                    console.error('courses 배열이 존재하지 않거나 형식이 잘못되었습니다.', data);
-                    alert('데이터 형식에 문제가 있습니다.');
-                }
-            } else {
-                console.error('tableBody 요소를 찾을 수 없습니다.');
+    Promise.all([
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('데이터를 불러오는 데 실패했습니다.');
-        });
+        }).then(response => response.json()),
+        fetch(myCourseUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+    ]).then(([allCoursesData, myCourseData]) => {
+
+        const tableBody = document.getElementById('stu-cousreAllTableBody');
+        if (tableBody) {
+            tableBody.innerHTML = '';  // 기존 데이터 제거
+
+            console.log("allCoursesData=", allCoursesData);
+            console.log("mycousrseData=", myCourseData);
+
+            // 본인 강의의 id들을 배열로 저장
+            const myCourseIds = new Set(myCourseData.data.map(course => course.id));
+
+            // 'allCoursesData.data' 배열을 순회하여 행 추가
+            allCoursesData.data.forEach((course, index) => {
+                const row = document.createElement('tr');
+
+                // 본인 강의는 회색 배경 설정
+                const isMyCourse = myCourseIds.has(course.id);
+                // 본인 강의는 회색 배경 설정
+                row.style.backgroundColor = isMyCourse ? ' #f0f0f0' : '';  // 본인 강의는 회색 배경 (#d3d3d3)
+
+                row.innerHTML = `
+                    <td>
+                        <input type="checkbox" class="course-checkbox" data-id="${course.id}" data-course-grade="${course.courseGrade}" data-course-name="${course.courseName}" data-course-division="${course.courseDivision}" data-credit-score="${course.creditScore}" data-professor-name="${course.professorName}" data-course-room="${course.courseRoom}" data-course-day="${course.courseDay}" data-course-time="${course.startPeriod}교시 ~ ${course.endPeriod}교시" 
+                        ${isMyCourse ? 'disabled' : ''}>
+                    </td>
+                    <td data-field="index">${index + 1}</td>
+                    <td data-field="courseGrade">${course.courseGrade}</td>
+                    <td data-field="courseName">${course.courseName}</td>
+                    <td data-field="courseDivision">${course.courseDivision}</td>
+                    <td data-field="creditScore">${course.creditScore}</td>
+                    <td data-field="professorName">${course.professorName}</td>
+                    <td data-field="courseRoom">${course.courseRoom}</td>
+                    <td data-field="courseDay">${course.courseDay}</td>
+                    <td data-field="courseTime">${course.startPeriod}교시 ~ ${course.endPeriod}교시</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+
+            // 전체 선택/해제 체크박스 처리
+            const selectAllCheckbox = document.getElementById('selectAll');
+            if (selectAllCheckbox) {
+                selectAllCheckbox.addEventListener('change', function () {
+                    const checkboxes = tableBody.querySelectorAll('.course-checkbox');
+                    checkboxes.forEach(checkbox => {
+                        if (!checkbox.disabled) {
+                            checkbox.checked = selectAllCheckbox.checked;  // 전체 체크/해제
+                        }
+                    });
+                });
+            }
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+        alert('데이터를 불러오는 데 문제가 발생했습니다.');
+    });
 });
+
 
 // 강의 추가 버튼 클릭
 document.getElementById('stu-AddCourse-CoursesBtn').addEventListener('click', function() {
     const selectedCourses = document.querySelectorAll('.course-checkbox:checked');  // 체크된 강의들
     const courseRegistrationsTableBody = document.getElementById('stu-Course-Registrations-TableBody');
 
+    console.log('선택된 강의들:', selectedCourses);
+
     if (courseRegistrationsTableBody) {
+
         // 이미 등록된 강의 ID를 추적하기 위한 Set
         const registeredCourseIds = new Set();  // registeredCourseIds를 이곳에서 정의합니다.
 
@@ -84,7 +120,7 @@ document.getElementById('stu-AddCourse-CoursesBtn').addEventListener('click', fu
 
             // 이미 등록된 강의는 중복으로 추가하지 않음
             if (registeredCourseIds.has(courseId)) {
-                console.log(`강의 ${courseName}는 이미 등록되어 있습니다.`);
+                alert(`강의 ${courseName}는 이미 등록되어 있습니다.`);
                 return;  // 중복된 강의는 추가하지 않음
             }
 
@@ -101,7 +137,7 @@ document.getElementById('stu-AddCourse-CoursesBtn').addEventListener('click', fu
                 <td data-field="courseRoom">${courseRoom}</td>  <!-- 강의실 -->
                 <td data-field="courseDay">${courseDay}</td>  <!-- 요일 -->
                 <td data-field="courseTime">${courseTime}</td>  <!-- 시간 -->
-                <td><button class="cancel-btn">취소</button></td> <!-- 취소 버튼 -->
+                <td><button class="cancel-btn">해제</button></td> <!-- 취소 버튼 -->
             `;
 
             // 취소 버튼 클릭 시 해당 행 제거
@@ -137,8 +173,6 @@ document.addEventListener('click', function(event) {
         // 수강 신청할 강의 ID 목록 (현재 하나의 강의만 신청하므로 배열로 전달)
         const courseIdsToRegister = [courseId];  // List<Long> 형식에 맞게 배열로 감싸서 전송
 
-        console.log('Selected course ID:', courseId);
-        console.log('Course IDs to register:', courseIdsToRegister);
 
         const token = localStorage.getItem('jwtToken');  // JWT 토큰 가져오기
         console.log('JWT Token:', token);
@@ -175,3 +209,4 @@ document.addEventListener('click', function(event) {
             });
     }
 });
+

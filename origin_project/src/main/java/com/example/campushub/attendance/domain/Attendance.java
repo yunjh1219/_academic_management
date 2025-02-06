@@ -61,4 +61,7 @@ public class Attendance {
 			return ;
 		}
 	}
+	public void edit(AttendanceStatus status) {
+		this.status = status;
+	}
 }

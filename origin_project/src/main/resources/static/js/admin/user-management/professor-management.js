@@ -22,6 +22,22 @@ document.getElementById('admin-profinfo-searchBtn').addEventListener('click',fun
             const tableBody = document.getElementById('admin-profinfo-TableBody');
             tableBody.innerHTML = '';
 
+            // 한글로 변환할 매핑 객체
+            const typeMapping = {
+                "STUDENT": "학생",
+                "PROFESSOR": "교수",
+                "ADMIN": "관리자"
+            };
+
+            const statusMapping = {
+                "BREAK": "휴학",
+                "ENROLLED": "재학",
+                "RETURN_PENDING": "복학대기",
+                "BREAK_PENDING": "휴학대기",
+                "EMPLOYED": "재직"
+            };
+
+
             data.data.forEach((professor, index) => {
                 const row = document.createElement('tr');
                 row.dataset.id = professor.userNum;
@@ -31,8 +47,8 @@ document.getElementById('admin-profinfo-searchBtn').addEventListener('click',fun
                 <td data-field="name" style="text-align: left;">${professor.username}</td>
                 <td data-field="profId">${professor.userNum}</td>
                 <td data-field="department">${professor.deptName}</td>
-                <td data-field="type">${professor.type}</td>
-                <td data-field="status">${professor.status}</td>
+                <td data-field="type">${typeMapping[professor.type] || professor.type}</td>
+                <td data-field="status">${statusMapping[professor.status] || professor.status}</td>
                 <td data-field="remarks"></td>
             `;
                 tableBody.appendChild(row);
