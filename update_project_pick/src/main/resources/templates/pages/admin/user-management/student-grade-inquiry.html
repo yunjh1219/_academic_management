@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>학생금학기성적조회: student-grade-inquiry</title>
+</head>
+<th:block layout:fragment="content">
+
+    <div class="content">
+
+        <div class="content-title">
+            <h5>사용자관리 > 학생 > 학생금학기성적조회</h5>
+        </div>
+        <div class="query-container">
+            <div class="query-box">
+                <button class="query-btn" id="searchBtn">조회</button>
+            </div>
+        </div>
+
+        <div class="search-select-container">
+            <div class="select-container">
+                <div class="select-box">
+                    <select>
+                        <option>학과1</option>
+                        <option>학과2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <!-- 이름 검색 입력란 -->
+                    <input type="text" placeholder="이름/학번" />
+                </div>
+                <button>검색</button>
+            </div>
+        </div>
+        <!-- 폼 시작 -->
+
+        <!-- 공지사항 목록 테이블 -->
+        <div class="table-container">
+            <div class="table-title">
+                학생성적
+            </div>
+            <div class="table-box">
+                <table>
+                    <thead>
+                    <tr>
+                        <th style="width: 13%;">학년도</th>
+                        <th style="width: 7%;">학기</th>
+                        <th style="width: 40%;">학과</th>
+                        <th style="width: 15%;">학번</th>
+                        <th style="width: 10%;">이름</th>
+                        <th style="width: 5%;">평점</th>
+                        <th style="width: 10%;">백분율</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block>
+                        <td>2024학년도</td>
+                        <td>1학기</td>
+                        <td>컴퓨터소프트웨어공학과</td>
+                        <td>2470065</td>
+                        <td>전영욱</td>
+                        <td>4.5</td>
+                        <td>99.9</td>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+
+
+    </div>
+</th:block>
+</html>

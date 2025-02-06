@@ -15,7 +15,9 @@ function logout() {
             if (response.ok) {
                 // 로그아웃 성공 시 처리 (예: 로그인 페이지로 리디렉션)
                 alert('로그아웃 성공');
+                localStorage.removeItem('jwtToken');
                 window.location.href = '/api/login'; // 로그인 페이지로 리디렉션
+                // 로컬 스토리지에서 JWT 토큰 삭제
             } else {
                 // 로그아웃 실패 시 처리
                 alert('로그아웃 실패');

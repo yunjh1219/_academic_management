@@ -1,0 +1,186 @@
+
+
+#login-container{
+    position: relative;
+    background: url("/img/background/login-background.jpg");
+    filter: brightness(1.2) saturate(1.5); /* 배경 이미지 밝기 및 채도 조정 */
+    background-size: cover; /* 배경 이미지 크기 */
+    background-position: center; /* 배경 이미지 위치 */
+    background-repeat: no-repeat; /* 배경 이미지 반복하지 않음 */
+    height: 100vh; /* 전체 화면을 채우도록 설정 */
+    width: 100%;
+}
+
+.login-form-container{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+
+    top: 0;
+    right: 180px; /* 우측에 배치 */
+    height: 100vh; /* 전체 화면을 채우도록 설정 */
+    width: 340px;
+
+    align-items: center;
+}
+
+/*====[ 로그인폼 탑 ]=========================================================================*/
+
+.login-box-top-background{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(65, 105, 225, 0.9); /* 파란색 배경 (투명도 85%) */
+    top: 0;
+    width: 100%; /* 부모 요소의 너비를 채우도록 설정 */
+    height: 2000px;
+
+    border-bottom-left-radius: 45px; /* 왼쪽 아래 모서리 둥글게 */
+    border-bottom-right-radius: 45px; /* 오른쪽 아래 모서리 둥글게 */
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+    overflow: hidden;
+    justify-content: center; /* 수직 중앙 */
+}
+
+.login-box-title{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* 이미지 컨테이너 */
+.image-container {
+    display: flex;
+    justify-content: center; /*수평중앙*/
+    margin-bottom: 70px;
+}
+
+.image-container img {
+    width: 200px;
+}
+
+/* h1과 a 태그는 수직 중앙 정렬 */
+.text-container {
+    display: flex;
+    flex-direction: column; /* 수직 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    justify-content: flex-end;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* 제목 스타일 */
+.login-box-title h1 {
+    font-size: 30px;
+    color: white;
+    margin: 0;
+}
+
+.login-box-title a {
+    min-width: 210px;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 3px;
+    color: rgba(65, 105, 225);
+    text-decoration: none;
+    background-color: white;
+    margin: 0;
+}
+
+
+/*====[ 로그인폼 ]=========================================================================*/
+.login-box-middle{
+    position: relative;
+    display: flex;
+    width: 290px;
+    min-height: 265px;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+    background-color: orange;
+}
+
+#login-form{
+    position: relative;
+    border-top-right-radius: 10px;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding: 0 30px;
+
+    box-shadow: 0 0 7px rgba(0, 123, 255, 0.8); /* 중앙에서 퍼지는 그림자 효과 */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* 우측 정렬 */
+    justify-content: center; /* 수직 중앙 */
+    gap: 10px;
+}
+
+.login-form-type{
+    width: 80px;
+    padding: 3px 0;
+}
+
+#login-btn {
+    outline: none;
+    width: 100%; /* 너비 100% */
+    height: 45px; /* 버튼 높이 */
+    background-color: #007bff; /* 파란색 버튼 */
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px; /* 버튼 글자 크기 */
+    font-weight: bold;
+    cursor: pointer;
+    display: block; /* 버튼 크기 제대로 설정 */
+    box-sizing: border-box; /* 테두리 및 패딩 포함 크기 */
+    line-height: normal; /* 줄 간격 초기화 */
+}
+
+
+#login-btn:hover {
+    background-color: #0056b3;
+}
+
+#userNum, #password{
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: 100%; /* 너비 100%로 설정 */
+    background-color: #d0d0d0;
+    border: 1px solid gray;
+    box-sizing: border-box; /* 테두리와 패딩을 포함하여 너비 계산 */
+}
+
+.find-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 13px;
+}
+
+.find-container a{
+    color: black;
+}
+
+/*====[ 로그인폼 바텀 ]=========================================================================*/
+
+.login-box-bottom-background{
+    position: relative;
+    background-color: rgba(65, 105, 225, 0.9); /* 파란색 배경 (투명도 85%) */
+    bottom: 0;
+    width: 100%; /* 부모 요소의 너비를 채우도록 설정 */
+    max-width: 360px; /* 최대 너비 제한 */
+    height: 100%;
+
+    border-top-left-radius: 45px; /* 왼쪽 아래 모서리 둥글게 */
+    border-top-right-radius: 45px; /* 오른쪽 아래 모서리 둥글게 */
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+}

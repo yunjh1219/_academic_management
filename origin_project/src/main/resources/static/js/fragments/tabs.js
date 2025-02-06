@@ -240,7 +240,7 @@ $(function() {
             method: 'GET',  // GET 방식으로 요청
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`  // JWT 토큰을 Authorization 헤더에 추가
+                'Authorization': 'Bearer ${token}'  // JWT 토큰을 Authorization 헤더에 추가
             }
         })
             .then(response => response.json())  // 응답을 JSON 형식으로 파싱
