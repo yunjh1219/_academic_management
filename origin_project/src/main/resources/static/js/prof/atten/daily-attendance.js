@@ -1,4 +1,4 @@
-//조회
+//조회 cond 되는거
 document.getElementById('prof-daily-att-searchBtn').addEventListener('click', function() {
     // 선택된 강의명과 주차 가져오기
     const courseName = document.getElementById('prof_att_courseName').value;  // 강의명 셀렉트박스에서 선택된 값

@@ -2,12 +2,13 @@ package com.example.campushub.course.dto;
 
 import com.example.campushub.course.domain.CourseDivision;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StudCourseSearchCondition {
 	private String division;
 	private String deptName;

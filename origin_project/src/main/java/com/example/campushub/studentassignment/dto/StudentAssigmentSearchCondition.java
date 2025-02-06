@@ -4,14 +4,11 @@ import com.example.campushub.nweek.domain.Week;
 import com.example.campushub.studentassignment.domain.SubmitStatus;
 
 import jakarta.annotation.Nullable;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StudentAssigmentSearchCondition {
 
 	private String courseName;

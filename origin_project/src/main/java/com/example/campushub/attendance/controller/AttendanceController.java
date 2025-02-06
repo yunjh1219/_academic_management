@@ -23,6 +23,8 @@ public class AttendanceController {
     @GetMapping("/api/professor/attendance/condition")
     @ResponseStatus(HttpStatus.OK)
     public SuccessResponse<List<AttendanceResponseDto>> findUserAttendanceByCourse(@Login LoginUser loginUser, AttendanceSearchCondition cond) {
+        System.out.println(cond.getCourseName());
+        System.out.println(cond.getWeek());
         return SuccessResponse.<List<AttendanceResponseDto>>builder()
                 .status(200)
                 .message("강의별 출석 조회 성공")

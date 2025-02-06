@@ -1,0 +1,105 @@
+
+
+#login-container{
+    position: relative;
+    background: url("/img/background/login-background.jpg");
+    filter: brightness(1.2) saturate(1.5); /* 배경 이미지 밝기 및 채도 조정 */
+    background-size: cover; /* 배경 이미지 크기 */
+    background-position: center; /* 배경 이미지 위치 */
+    background-repeat: no-repeat; /* 배경 이미지 반복하지 않음 */
+    height: 100vh; /* 전체 화면을 채우도록 설정 */
+    width: 100%;
+}
+
+.login-form-container{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+
+    top: 0;
+    right: 200px; /* 우측에 배치 */
+    height: 100vh; /* 전체 화면을 채우도록 설정 */
+    width: 360px;
+
+    align-items: center;
+}
+
+/*====[ 로그인폼 탑 ]=========================================================================*/
+
+.login-box-top-background{
+    position: relative;
+    background-color: rgba(65, 105, 225, 0.9); /* 파란색 배경 (투명도 85%) */
+    top: 0;
+    width: 360px;
+    height: 430px;
+
+    border-bottom-left-radius: 45px; /* 왼쪽 아래 모서리 둥글게 */
+    border-bottom-right-radius: 45px; /* 오른쪽 아래 모서리 둥글게 */
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+}
+
+
+/*====[ 로그인폼 ]=========================================================================*/
+.login-box-middle{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+#login-form{
+    position: relative;
+    border-top-right-radius: 10px;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    align-items: center;
+}
+
+
+.login-form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: 100%; /* 너비 100%로 설정 */
+    background-color: #d0d0d0;
+    border: 1px solid gray;
+    box-sizing: border-box; /* 테두리와 패딩을 포함하여 너비 계산 */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 포커스 시 그림자 효과 */
+}
+
+#login-btn{
+    height: 30px;
+    width: 100%; /* 너비 100%로 설정 */
+}
+
+.find-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/*====[ 로그인폼 바텀 ]=========================================================================*/
+
+.login-box-bottom-background{
+    position: relative;
+    background-color: rgba(65, 105, 225, 0.9); /* 파란색 배경 (투명도 85%) */
+    top: 0;
+    width: 360px;
+    height: 220px;
+
+    border-top-left-radius: 45px; /* 왼쪽 아래 모서리 둥글게 */
+    border-top-right-radius: 45px; /* 오른쪽 아래 모서리 둥글게 */
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+}

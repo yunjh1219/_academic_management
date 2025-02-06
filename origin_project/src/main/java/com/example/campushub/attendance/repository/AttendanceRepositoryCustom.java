@@ -15,7 +15,6 @@ public interface AttendanceRepositoryCustom {
 
     List<AttendanceResponseDto> findAllByCondition(AttendanceSearchCondition atten);
 
-    // List<AllAttendanceResponseDto> findCourseByCondition(AttendanceSearchCourseCondition cond);
     List<AttendanceSummaryDto> findAttendanceByCondition(AttendanceSearchCourseCondition cond);
 
     List<AttendanceUserDto> findUserAttendance(String courseName, String userNum);

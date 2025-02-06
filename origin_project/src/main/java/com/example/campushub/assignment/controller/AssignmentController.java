@@ -37,14 +37,7 @@ public class AssignmentController {
     //과제 조회 (학생)
     @GetMapping("/api/student/assignment/condition")
     @ResponseStatus(HttpStatus.OK)
-    public SuccessResponse<List<AssignmentFindAllResponse>> getAllAssignments(@Login LoginUser loginUser,
-                                                                              @RequestParam String courseName,
-                                                                              @RequestParam String week){
-
-        AssignmentSearchCondition cond = AssignmentSearchCondition.builder()
-                .courseName(courseName)
-                .week(week)
-                .build();
+    public SuccessResponse<List<AssignmentFindAllResponse>> getAllAssignments(@Login LoginUser loginUser, AssignmentSearchCondition cond){
 
         return SuccessResponse.<List<AssignmentFindAllResponse>>builder()
                 .status(200)

@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box; /* 모든 요소에 대해 box-sizing을 border-box로 설정 */
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}

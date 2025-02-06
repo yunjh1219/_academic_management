@@ -1,20 +1,20 @@
+//조회 cond 안되는거
 document.getElementById('stu_assign_serachBtn').addEventListener('click',function (){
 
     const token = localStorage.getItem('jwtToken');
-    const url = '/api/student/assignment/condition';
+
 
     // 입력된 학과와 학번 가져오기
     const courseName = document.getElementById('stu_assign_course').value;
     const week = document.getElementById('stu_assign_week').value;
 
-    const params = new URLSearchParams();
-    if (courseName) params.append('courseName', courseName);
-    if (week) params.append('week', week);
+    console.log('강의명courseName:',courseName);
+    console.log('주차week:',week);
 
-    console.log('courseName:',courseName);
-    console.log('week:', week);
+    const url = `/api/student/assignment/condition?courseName=${encodeURIComponent(courseName)}&week=${encodeURIComponent(week)}`;
 
-    fetch(`${url}?${params.toString()}`,  {
+
+    fetch(url,  {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -28,7 +28,7 @@ document.getElementById('stu_assign_serachBtn').addEventListener('click',functio
             return response.json();
         })
         .then(data => {
-            console.log('요청 URL:', `${url}?${params.toString()}`);
+            console.log('요청 URL:', url);
             console.log("서버 응답 데이터:", data);
             const tableBody = document.getElementById('stu_assign_TableBody');
             tableBody.innerHTML = '';
