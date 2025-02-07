@@ -1,11 +1,18 @@
 package com.example.campushub.schoolyear.domain;
 
-public enum Semester {
-	first_semester, second_semester;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-	// TODO.
-	public static Semester of(Long number) {
-		if (number == 1) return first_semester;
+@Getter
+@RequiredArgsConstructor
+public enum Semester {
+	first_semester("1학기"), second_semester("2학기");
+
+	private final String name;
+
+
+	public static Semester of(String number) {
+		if (number.equals("1학기")) return first_semester;
 		else return second_semester;
 	}
 

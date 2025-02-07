@@ -1,6 +1,9 @@
 package com.example.campushub.tuition.dto;
 
 
+import com.example.campushub.scholarship.domain.PaymentType;
+import com.example.campushub.user.domain.Type;
+import com.example.campushub.usertuition.domain.PaymentStatus;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,13 +23,13 @@ public class TuitionFindAllResponse {
 
     @Builder
     @QueryProjection
-    public TuitionFindAllResponse(String username, String userNum, String deptName, String userType,
-                                  String paymentStatus, LocalDate paymentDate) {
+    public TuitionFindAllResponse(String username, String userNum, String deptName, Type userType,
+                                  PaymentStatus paymentStatus, LocalDate paymentDate) {
         this.username = username;
         this.userNum = userNum;
         this.deptName = deptName;
-        this.userType = userType;
-        this.paymentStatus = paymentStatus;
+        this.userType = userType.getKey();
+        this.paymentStatus = paymentStatus.getName();
         this.paymentDate = paymentDate;
     }
 }

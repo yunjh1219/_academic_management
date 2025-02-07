@@ -6,8 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>휴학신청: leave-of-absence-application</title>
+    <script th:src="@{/js/student/registration/leave-of-absence-application.js}"></script>
 </head>
-<body>
+<th:block layout:fragment="content">
 <div class="tabsconfig">
     <div class="H2depth0101">
         <div class="content-title">
@@ -27,11 +28,11 @@
 
             <!-- 신청하기 버튼 추가 -->
             <div class="apply-button">
-                <button class="btn-apply">신청하기</button>
+                <button class="stu-leave-btn-apply" id="stu-leave-btn-apply">신청하기</button>
             </div>
 
         </div>
     </div>
 </div>
-</body>
+</th:block>
 </html>

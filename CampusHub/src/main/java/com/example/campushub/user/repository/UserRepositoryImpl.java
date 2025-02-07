@@ -39,7 +39,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 		))
 			.from(user)
 			.join(dept).on(user.dept.eq(dept))
-			.where(statusEq(condition.getStatus()),
+			.where(statusEq(getStatusFromCondition(condition.getStatus())),
 				userNumEq(condition.getUserNum()),
 				deptNameEq(condition.getDeptName()),
 				user.type.eq(Type.STUDENT))
@@ -74,7 +74,9 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 			user.grade,
 			user.email,
 			user.phone,
-			user.address
+			user.address,
+			user.type,
+			user.status
 		))
 			.from(user)
 			.join(dept).on(dept.id.eq(user.dept.id))
@@ -95,7 +97,9 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 			user.grade,
 			user.email,
 			user.phone,
-			user.address
+			user.address,
+			user.type,
+			user.status
 		))
 			.from(user)
 			.join(dept).on(dept.id.eq(user.dept.id))
@@ -105,6 +109,16 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 		return Optional.ofNullable(fetchOne);
 	}
 
+	private Status getStatusFromCondition(String status) {
+		if (status == null) {
+			return null; // status가 null일 경우 null 반환
+		}
+		try {
+			return Status.of(status); // 값이 있으면 Status로 변환
+		} catch (IllegalArgumentException e) {
+			return null; // invalid status 값이 들어오면 null 반환
+		}
+	}
 
 
 	private BooleanExpression statusEq(Status status) {

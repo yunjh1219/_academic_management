@@ -12,15 +12,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AttendanceSearchCondition {
     private String courseName;
-    private Week week;
+    private String week;
 
     @Builder
-    public AttendanceSearchCondition(String courseName, Week week) {
+    public AttendanceSearchCondition(String courseName, String week) {
         this.courseName = courseName;
         this.week = week;
     }
 
-    public static AttendanceSearchCondition of(String courseName, Week week) {
+    public static AttendanceSearchCondition of(String courseName, String week) {
         return AttendanceSearchCondition.builder()
                 .courseName(courseName)
                 .week(week)

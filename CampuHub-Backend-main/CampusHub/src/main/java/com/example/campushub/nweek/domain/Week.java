@@ -1,6 +1,0 @@
-package com.example.campushub.nweek.domain;
-
-public enum Week {
-	FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH, SEVENTH, EIGHTH, NINTH,
-	TENTH, ELEVENTH, TWELFTH, THIRTEENTH, FOURTEENTH, FIFTEENTH, SIXTEENTH
-}

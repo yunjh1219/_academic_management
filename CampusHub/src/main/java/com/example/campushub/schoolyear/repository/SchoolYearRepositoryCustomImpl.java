@@ -20,10 +20,10 @@ public class SchoolYearRepositoryCustomImpl implements SchoolYearRepositoryCusto
 
 	private final JPAQueryFactory queryFactory;
 
-	//is_current 가 true고 원하는 semester 학년도 조회
 	@Override
 	public SchoolYearResponseDto getCurrentSchoolYear() {
 		SchoolYearResponseDto fetchOne = queryFactory.select(new QSchoolYearResponseDto(
+			schoolYear.id,
 			schoolYear.year,
 			schoolYear.semester,
 			schoolYear.is_current
@@ -33,5 +33,9 @@ public class SchoolYearRepositoryCustomImpl implements SchoolYearRepositoryCusto
 			.fetchOne();
 		return fetchOne;
 	}
+
+
+
+
 
 }

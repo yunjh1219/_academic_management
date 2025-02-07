@@ -1,6 +1,7 @@
 package com.example.campushub.scholarship.service;
 
 
+import com.example.campushub.global.error.exception.SchoolYearNotFoundException;
 import com.example.campushub.global.error.exception.UserNotFoundException;
 import com.example.campushub.scholarship.domain.Scholarship;
 import com.example.campushub.scholarship.dto.GetMyScholarshipDto;
@@ -9,8 +10,8 @@ import com.example.campushub.scholarship.dto.ScholarshipResponseDto;
 import com.example.campushub.scholarship.dto.ScholarshipSearchCondition;
 import com.example.campushub.scholarship.repository.ScholarshipRepository;
 import com.example.campushub.schoolyear.domain.SchoolYear;
+import com.example.campushub.schoolyear.domain.Semester;
 import com.example.campushub.schoolyear.repository.SchoolYearRepository;
-import com.example.campushub.user.domain.Type;
 import com.example.campushub.user.domain.User;
 import com.example.campushub.user.dto.LoginUser;
 import com.example.campushub.user.dto.UserFindOneSimpleDto;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.List;
 
 @Service
@@ -45,24 +47,19 @@ public class ScholarshipService {
 
 // 장학금 등록 서비스
     @Transactional
-    public void createScholarship(ScholarshipCreateDto createDto , LoginUser loginUser) {//+userfindonesimpledto simdto
+    public void createScholarship(ScholarshipCreateDto createDto , LoginUser loginUser) {
 
         //관리자인지 검증
-       User admin =  userRepository.findByUserNumAndType(loginUser.getUserNum(), loginUser.getType())
+       userRepository.findByUserNumAndType(loginUser.getUserNum(), loginUser.getType())
                 .orElseThrow(UserNotFoundException::new);
 
-        User student = userRepository.findByUserNum(createDto.getUserNum())//simdtp.getUserNum()
+        User student = userRepository.findByUserNum(createDto.getUserNum())
                 .orElseThrow(UserNotFoundException::new);
 
-        SchoolYear schoolYear = SchoolYear.builder()
-                .year(createDto.getSchoolYear().getYear())
-                .semester(createDto.getSchoolYear().getSemester())
-                        .build();
+        SchoolYear schoolYear = schoolYearRepository.findBySemesterAndYear(
+            Semester.of(createDto.getSemester()), Year.parse(createDto.getYear()))
+            .orElseThrow(SchoolYearNotFoundException::new);
 
-        schoolYearRepository.save(schoolYear);
-
-
-        // 장학금명 , 지급구분, 장학금액
         Scholarship scholarship = createDto.toEntity();
 
         scholarshipRepository.save(scholarship);
@@ -106,12 +103,12 @@ public class ScholarshipService {
 
 
 
-    //사용자의 장학금 삭제
+////    사용자의 장학금 삭제
 //    @Transactional
 //    public void deleteScholarship(String userNum , LoginUser loginUser){
 //        // 요청한 사용자가 ADMIN인지?
 //        User user = userRepository.findByUserNumAndType(loginUser.getUserNum(),"ADMIN")
-//                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
+//                .orElseThrow(;
 //        // 삭제 대상 사용자
 //        User deleteuser = userRepository.findByUserNum(userNum)
 //                        .orElseThrow(() -> new IllegalArgumentException("삭제할려는 사용자를 찾을 수 없습니다"));

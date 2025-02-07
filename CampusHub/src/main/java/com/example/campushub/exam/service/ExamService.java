@@ -9,6 +9,7 @@ import com.example.campushub.exam.dto.ExamScoreInputRequest;
 import com.example.campushub.exam.dto.ExamScoreUpdateResponse;
 import com.example.campushub.exam.dto.ExamSearchCondition;
 import com.example.campushub.exam.repository.ExamRepository;
+import com.example.campushub.global.error.exception.CourseNotFoundException;
 import com.example.campushub.global.error.exception.UserNotFoundException;
 import com.example.campushub.user.domain.Type;
 import com.example.campushub.user.dto.LoginUser;
@@ -40,7 +41,8 @@ public class ExamService {
          userRepository.findByUserNumAndType(loginUser.getUserNum(), loginUser.getType())
                 .orElseThrow(UserNotFoundException::new);
 
-        Course course = courseRepository.findCourseByCourseName(cond.getCourseName());
+        Course course = courseRepository.findByCourseName(cond.getCourseName())
+            .orElseThrow(CourseNotFoundException::new);
 
         List<UserCourse> userCourses = userCourseRepository.findAllByCourse(course);
 

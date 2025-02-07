@@ -55,7 +55,6 @@
 //        SchoolYear schoolYear = schoolYearRepository.save(createSchoolYear(Semester.first_semester));
 //
 //        SemesterScheduleRequest request = SemesterScheduleRequest.builder()
-//                .schoolYearId(schoolYear.getId())
 //                .schedule(Schedule.COURSE_APPLY)
 //                .startDate(LocalDateTime.of(2025, 1, 1, 9, 0))
 //                .endDate(LocalDateTime.of(2025, 1, 1, 18, 0))

@@ -9,9 +9,8 @@ import com.example.campushub.course.domain.Course;
 import com.example.campushub.user.domain.User;
 
 public interface CourseRepository extends JpaRepository<Course, Long> , CourseRepositoryCustom {
-    Course findCourseByCourseName(String courseName);
 	boolean existsByCourseName(String courseName);
-
+	Optional<Course> findByCourseName(String courseName);
 	Optional<Course> findByCourseNameAndUser(String courseName, User user);
 
 }

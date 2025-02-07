@@ -13,10 +13,10 @@ public class TuitionSearchCondition {
 
     private String deptName;
     private String userNum;
-    private PaymentStatus paymentStatus;
+    private String paymentStatus;
 
     @Builder
-    public TuitionSearchCondition(String deptName, String userNum, PaymentStatus paymentStatus) {
+    public TuitionSearchCondition(String deptName, String userNum, String paymentStatus) {
         this.deptName = deptName;
         this.userNum = userNum;
         this.paymentStatus = paymentStatus;

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class SemesterScheduleRequest {
     // ID (SchoolYear ID)
-     private Long schoolYearId;
+
     private Schedule schedule;
     //
     private LocalDateTime startDate;
@@ -19,8 +19,7 @@ public class SemesterScheduleRequest {
     private String eventName;
     @Builder
     @QueryProjection
-    public SemesterScheduleRequest(Long schoolYearId, Schedule schedule, LocalDateTime startDate, LocalDateTime endDate, boolean dateCheck, String eventName) {
-        this.schoolYearId = schoolYearId; // SchoolYear ID
+    public SemesterScheduleRequest( Schedule schedule, LocalDateTime startDate, LocalDateTime endDate, boolean dateCheck, String eventName) {
          this.schedule = schedule;
         this.startDate = startDate;
         this.endDate = endDate;

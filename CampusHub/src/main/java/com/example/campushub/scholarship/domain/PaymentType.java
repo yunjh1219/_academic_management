@@ -1,18 +1,27 @@
 package com.example.campushub.scholarship.domain;
 
-public enum PaymentType {
-	POST_PAYMENT,
-	OTHER_PAYMENT;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-	// 문자열을 Enum으로 변환하는 메소드
-	public static PaymentType fromString(String type) {
-		switch (type) {
-			case "POST_PAYMENT":
-				return POST_PAYMENT;
-			case "OTHER_PAYMENT":
-				return OTHER_PAYMENT;
-			default:
-				throw new IllegalArgumentException("Unknown payment type: " + type);
+@RequiredArgsConstructor
+@Getter
+public enum PaymentType {
+
+	PRE_PAYMENT("사전감면"), POST_PAYMENT("사후감면");
+
+	private final String name;
+
+	public static PaymentType fromName(String key) {
+		for (PaymentType paymentType : PaymentType.values()) {
+			if (paymentType.name.equals(key)) {
+				return paymentType;
+			}
 		}
+		return null;
 	}
+	public static PaymentType of(String paymentType) {
+		if (paymentType.equals("사전감면")) return PRE_PAYMENT;
+		else return POST_PAYMENT;
+	}
+
 }

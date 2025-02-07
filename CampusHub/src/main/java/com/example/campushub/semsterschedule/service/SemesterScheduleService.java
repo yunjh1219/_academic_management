@@ -34,13 +34,8 @@ public class SemesterScheduleService {
         userRepository.findByUserNumAndType(loginUser.getUserNum(),loginUser.getType())
                 .orElseThrow(UserNotFoundException::new);
 
-
-    SchoolYear schoolYear = schoolYearRepository.findById(Math.toIntExact(request.getSchoolYearId()))
-            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 학년도 입니다"));
-
         //일정 저장
         SemesterSchedule semesterSchedule = SemesterSchedule.builder()
-                .schoolYear(schoolYear)
                 .schedule(request.getSchedule())
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
@@ -62,6 +57,7 @@ public class SemesterScheduleService {
     public List<SemesterScheduleResponse> getSchedulesByDate(LocalDateTime date,LoginUser loginUser) {
         userRepository.findByUserNumAndType(loginUser.getUserNum(),loginUser.getType())
                 .orElseThrow(UserNotFoundException::new);
-        return semesterScheduleRepository.findSchedulesByDate(date); }
+        return semesterScheduleRepository.findSchedulesByDate(date);
+    }
 
 }

@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class SemesterScheduleResponse {
      private Long semesterScheduleId;
 
-    private Long schoolYearId;
     private Schedule schedule;
 
     private LocalDateTime startDate;
@@ -20,10 +19,11 @@ public class SemesterScheduleResponse {
     private String eventName;
     @Builder
     @QueryProjection
-    public SemesterScheduleResponse(Long semesterScheduleId, Long schoolYearId, Schedule schedule, LocalDateTime startDate, LocalDateTime endDate, boolean dateCheck, String eventName) {
+    public SemesterScheduleResponse(Long semesterScheduleId, Schedule schedule, LocalDateTime startDate, LocalDateTime endDate, boolean dateCheck, String eventName) {
         this.semesterScheduleId = semesterScheduleId;
-         this.schoolYearId = schoolYearId;
         this.schedule = schedule;
         this.startDate = startDate;
-        this.endDate = endDate; this.dateCheck = dateCheck; this.eventName = eventName;
+        this.endDate = endDate;
+        this.dateCheck = dateCheck;
+        this.eventName = eventName;
     } }

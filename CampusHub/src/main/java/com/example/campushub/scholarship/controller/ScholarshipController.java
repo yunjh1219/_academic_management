@@ -30,7 +30,7 @@ public class ScholarshipController {
     //장학금 조회 (관리자)
     @GetMapping("/api/admin/scholarship/condition")
     @ResponseStatus(HttpStatus.OK)
-    public SuccessResponse<List<ScholarshipResponseDto>> findScholarships(@Login LoginUser loginUser,ScholarshipSearchCondition condition, Model model) {
+    public SuccessResponse<List<ScholarshipResponseDto>> findScholarships(@Login LoginUser loginUser,ScholarshipSearchCondition condition) {
         return SuccessResponse.<List<ScholarshipResponseDto>>builder()
                 .status(200)
                 .message("장학금 학생 조회 성공")
@@ -42,11 +42,9 @@ public class ScholarshipController {
     @PostMapping("/api/admin/scholarship")
     @ResponseStatus(HttpStatus.CREATED)
     public SuccessResponse<Void> signupScholarship(@Login LoginUser loginUser,
-                                                   @RequestBody @Valid ScholarshipCreateDto createDto,
-//                                                   @RequestParam String userNum,
-                                                   HttpServletRequest request) {
+                                                   @RequestBody @Valid ScholarshipCreateDto createDto) {
 
-//        UserFindOneSimpleDto userInfo = scholarshipService.getUserSimpleInfo(userNum);
+
 
         scholarshipService.createScholarship(createDto,loginUser);
 
@@ -59,9 +57,9 @@ public class ScholarshipController {
     }
 
     //장학금 등록 학번페이지 (이름 ,학과 자동조회)
-    @GetMapping("/api/admin/scholarship/userfind")
+    @GetMapping("/api/admin/scholarship/{userNum}")
     @ResponseStatus(HttpStatus.OK)
-    public SuccessResponse<UserFindOneSimpleDto> getUserInfo(String userNum){
+    public SuccessResponse<UserFindOneSimpleDto> getUserInfo(@PathVariable String userNum){
 
         UserFindOneSimpleDto userInfo = scholarshipService.getUserSimpleInfo(userNum);
 

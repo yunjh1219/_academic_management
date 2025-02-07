@@ -32,6 +32,26 @@ public class CampusHubApplication {
 		SpringApplication.run(CampusHubApplication.class, args);
 	}
 
-
+//	@PostConstruct
+//	public void setUp() {
+//		User user = User.builder()
+//			.userName("김관리")
+//			.userNum("1234")
+//			.password(passwordEncoder.encode("1234"))
+//			.role(Role.ADMIN)
+//			.type(Type.ADMIN)
+//			.build();
+//
+//		Dept dept = Dept.builder()
+//			.deptName("컴퓨터공학과")
+//			.build();
+//
+//		AccessToken accessToken = jwtProvider.createToken(user.getUserNum(), user.getType(), user.getRole()).getAccessToken();
+//
+//		log.info("Access token: {}", accessToken.getData());
+//
+//		userRepository.save(user);
+//		deptRepository.save(dept);
+//	}
 
 }

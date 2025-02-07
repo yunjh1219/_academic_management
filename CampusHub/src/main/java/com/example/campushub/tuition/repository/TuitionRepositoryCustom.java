@@ -12,4 +12,5 @@ public interface TuitionRepositoryCustom {
     List<TuitionFindAllResponse> findAllByCondition(TuitionSearchCondition cond);
     Optional<TuitionStudentResponse> findStudentTuitionDetail(String userNum);
     void updatePaymentStatusToWaiting(String userNum);
+
 }

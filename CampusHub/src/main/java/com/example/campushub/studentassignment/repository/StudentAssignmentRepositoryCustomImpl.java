@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.campushub.assignment.dto.QAssignmentResponse;
+import com.example.campushub.nweek.domain.Week;
 import com.example.campushub.studentassignment.domain.QStudentAssignment;
 import com.example.campushub.studentassignment.domain.StudentAssignment;
 import com.example.campushub.studentassignment.domain.SubmitStatus;
@@ -59,7 +60,7 @@ public class StudentAssignmentRepositoryCustomImpl implements StudentAssignmentR
 			.join(user).on(userCourse.user.eq(user))
 			.join(dept).on(user.dept.eq(dept))
 			.where(course.courseName.eq(cond.getCourseName()),
-				(nWeek.week.eq(cond.getWeek())),
+				(nWeek.week.eq(Week.of(cond.getWeek()))),
 				submitStatusEq(cond.getStatus()))
 			.fetch();
 
@@ -90,8 +91,8 @@ public class StudentAssignmentRepositoryCustomImpl implements StudentAssignmentR
 
 		return Optional.ofNullable(fetchOne);
 	}
-	private BooleanExpression submitStatusEq(SubmitStatus status) {
-		return status == null ? null : studentAssignment.status.eq(status);
+	private BooleanExpression submitStatusEq(String status) {
+		return status == null ? null : studentAssignment.status.eq(SubmitStatus.of(status));
 	}
 
 }

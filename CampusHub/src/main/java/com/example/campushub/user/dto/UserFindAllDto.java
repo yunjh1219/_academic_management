@@ -16,7 +16,7 @@ public class UserFindAllDto {
 	private String userNum;
 	private String username;
 	private String deptName;
-	private Type type;
+	private String type;
 	private Status status;
 
 	@Builder
@@ -26,7 +26,7 @@ public class UserFindAllDto {
 		this.userNum = userNum;
 		this.username = username;
 		this.deptName = deptName;
-		this.type = type;
+		this.type = type.getKey();
 		this.status = status;
 	}
 }

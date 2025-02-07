@@ -21,11 +21,4 @@ public class ExamEditDto {
         this.finalExamScore = finalExamScore;
         this.totalScore = midExamScore + finalExamScore;
     }
-//
-//    @Builder
-//    public void edit(int midExamScore, int finalExamScore, int totalScore) {
-//        this.midExamScore = midExamScore;
-//        this.finalExamScore = finalExamScore;
-//        this.totalScore = midExamScore + finalExamScore; // 총 점수 계산
-//    }
 }

@@ -1,21 +1,15 @@
 package com.example.campushub.notice.repository;
 
-import com.example.campushub.notice.dto.NoticeListAll;
-import com.example.campushub.notice.dto.NoticeResponseDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.example.campushub.notice.dto.NoticeFindAllResponse;
+import com.example.campushub.notice.dto.NoticeResponse;
+import com.example.campushub.notice.dto.NoticeTypeSearchCondition;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface NoticeRepositoryCustom {
 
-    // 공지사항 전체 조회(관리자)
-    List<NoticeListAll> findAllByAdmin(String title, String createdBy);
-
-    // 공지사항 전체 조회
-    Page<NoticeListAll> findAllByCondition(String title, String createdBy, Pageable pageable);
-
-    // 공지사항 세부 조회
-    NoticeResponseDto findNoticeDetailById(Long id);
+    List<NoticeFindAllResponse> findAllByTypeCondition(NoticeTypeSearchCondition condition);
+    Optional<NoticeResponse> getNoticeById(Long id);
 
 }

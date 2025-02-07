@@ -1,15 +1,15 @@
 package com.example.campushub.global.error.exception;
 
-public class SchoolyearNotFoundException extends ApiException {
+public class SchoolYearNotFoundException extends ApiException {
 
     private static final String MESSAGE = "학년도와 학기를 찾을 수 없습니다";
 
 
-    public SchoolyearNotFoundException() {
+    public SchoolYearNotFoundException() {
         super(MESSAGE);
     }
 
-    public SchoolyearNotFoundException(String fieldName, String message) {
+    public SchoolYearNotFoundException(String fieldName, String message) {
         super(MESSAGE);
         addValidation(fieldName, message);
     }

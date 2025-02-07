@@ -1,11 +1,7 @@
 package com.example.campushub.dept.domain;
 
-import com.example.campushub.user.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -29,5 +25,9 @@ public class Dept {
         this.deptName = deptName;
     }
 
+    public void edit(String deptName) {
+
+        this.deptName = deptName;
+    }
 
 }

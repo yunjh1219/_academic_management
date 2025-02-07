@@ -12,17 +12,19 @@ import lombok.NoArgsConstructor;
 public class CourseCalenderDto {
 
     private String courseName;
-    private CourseDay courseDay;
+    private String courseDay;
     private int startPeriod;
     private int endPeriod;
+    private String room;
 
 
     @Builder
     @QueryProjection
-    public CourseCalenderDto(String courseName, CourseDay courseDay, int startPeriod, int endPeriod) {
+    public CourseCalenderDto(String courseName, CourseDay courseDay, int startPeriod, int endPeriod, String room) {
         this.courseName = courseName;
-        this.courseDay = courseDay;
+        this.courseDay = courseDay.getName();
         this.startPeriod = startPeriod;
         this.endPeriod = endPeriod;
+        this.room = room;
     }
 }

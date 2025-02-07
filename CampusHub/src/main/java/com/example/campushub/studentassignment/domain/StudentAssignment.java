@@ -32,6 +32,7 @@ public class StudentAssignment {
 	private String assignmentTitle;
 	private String assignmentContent;
 	private LocalDate submitDate;
+	@Enumerated(EnumType.STRING)
 	private SubmitStatus status;
 	private int assignmentScore;
 	//첨부파일

@@ -21,11 +21,11 @@ public class CourseCreateDto {
 	@NotBlank(message = "강의실을 입력해주세요")
 	private String room;
 	@NotBlank(message = "이수구분을 선택해주세요")
-	private CourseDivision division;
+	private String division;
 	@NotBlank(message = "요일을 선택해주세요")
-	private CourseDay courseDay;
+	private String courseDay;
 	@NotBlank(message = "학년을 선택해주세요")
-	private CourseGrade courseGrade;
+	private String courseGrade;
 	@NotBlank(message = "시작 시간을 입력해주세요")
 	private int startPeriod;
 	@NotBlank(message = "종료시간을 입력해주세요")
@@ -42,7 +42,7 @@ public class CourseCreateDto {
 	private int finalScore;
 
 	@Builder
-	public CourseCreateDto(String courseName, String room, CourseDivision division, CourseDay courseDay,CourseGrade courseGrade, int startPeriod, int endPeriod,
+	public CourseCreateDto(String courseName, String room, String division, String courseDay, String courseGrade, int startPeriod, int endPeriod,
 		int credits, int attScore, int assignScore, int midScore, int finalScore) {
 		this.courseName = courseName;
 		this.room = room;
@@ -62,9 +62,9 @@ public class CourseCreateDto {
 		return Course.builder()
 			.courseName(courseName)
 			.room(room)
-			.division(division)
-			.courseDay(courseDay)
-			.courseGrade(courseGrade)
+			.division(CourseDivision.of(division))
+			.courseDay(CourseDay.of(courseDay))
+			.courseGrade(CourseGrade.of(courseGrade))
 			.user(user)
 			.schoolYear(schoolYear)
 			.startPeriod(startPeriod)

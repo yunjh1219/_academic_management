@@ -19,9 +19,12 @@ public class Course {
     private Long id;
     private String courseName;
     private String room;
+    @Enumerated(EnumType.STRING)
     private CourseDivision division;
     @Column(name = "course_day")
+    @Enumerated(EnumType.STRING)
     private CourseDay courseDay;
+    @Enumerated(EnumType.STRING)
     private CourseGrade courseGrade;
 
     //교수와 강의 매핑(비식별 관계)

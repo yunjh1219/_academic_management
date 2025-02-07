@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import com.example.campushub.global.error.exception.IsNotPendingStatusException;
+import com.example.campushub.global.error.exception.StudentStatusNotMatchExecption;
 import com.example.campushub.user.domain.Type;
 import com.example.campushub.user.dto.*;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class UserService {
 	public void updateUserStatus(LoginUser loginUser, List<String> userNums) {
 		//관리자 확인
 		userRepository.findByUserNumAndType(loginUser.getUserNum(), loginUser.getType())
-			.orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 없습니다."));
+				.orElseThrow(UserNotFoundException::new);
 
 		List<User> users = userRepository.findAllByUserNums(userNums);
 
@@ -96,7 +97,7 @@ public class UserService {
 			.orElseThrow(UserNotFoundException::new);
 
 		if (!user.isApplyStatus()) {
-			throw new IllegalArgumentException("ERROR");
+			throw new StudentStatusNotMatchExecption();
 		}
 		user.updateStatus();
 

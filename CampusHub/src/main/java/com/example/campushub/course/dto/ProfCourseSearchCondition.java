@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProfCourseSearchCondition {
-	private CourseDay courseDay;
+	private String courseDay;
 	private String room;
 
 	@Builder
-	public ProfCourseSearchCondition(CourseDay courseDay, String room) {
+	public ProfCourseSearchCondition(String courseDay, String room) {
 		this.courseDay = courseDay;
 		this.room = room;
 	}

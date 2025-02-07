@@ -38,7 +38,7 @@ public class ExamController {
        //  강의별 학생 성적 기입
     @PostMapping("/api/professor/exam/{userCourseId}")
     @ResponseStatus(HttpStatus.OK)
-    public SuccessResponse<Void> createExams(@Login LoginUser loginUser, @RequestBody ExamScoreInputRequest examRequest, @PathVariable Long userCourseId) {
+    public SuccessResponse<Void> createExams(@Login LoginUser loginUser, @RequestBody @Valid ExamScoreInputRequest examRequest, @PathVariable Long userCourseId) {
 
         examService.updateExamScore(loginUser,examRequest, userCourseId);
 

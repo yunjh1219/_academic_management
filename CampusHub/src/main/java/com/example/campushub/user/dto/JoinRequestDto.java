@@ -41,12 +41,12 @@ public class JoinRequestDto {
 	@NotBlank(message = "학번을 입력해주세요")
 	private String userNum;
 	@NotBlank(message = "직책을 입력해주세요")
-	private Type type;
+	private String type;
 	@NotBlank(message = "비밀번호를 입력해주세요")
 	private String password = "1234";
 
 	@Builder
-	public JoinRequestDto(String userName, LocalDateTime birthday, String dept, String email, String phone, String address, String userNum, Type type) {
+	public JoinRequestDto(String userName, LocalDateTime birthday, String dept, String email, String phone, String address, String userNum, String type) {
 		this.userName = userName;
 		this.birthday = birthday;
 		this.deptName = dept;

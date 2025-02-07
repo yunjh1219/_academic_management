@@ -44,6 +44,7 @@ public class SemesterScheduleController {
                 .build();
     }
 
+    //학사 등록
     @PostMapping("/api/admin/semesterschedule")
     @ResponseStatus(HttpStatus.OK)
     public SuccessResponse<Void> createSemesterSchedule(@Login LoginUser loginUser, @RequestBody @Valid SemesterScheduleRequest request){

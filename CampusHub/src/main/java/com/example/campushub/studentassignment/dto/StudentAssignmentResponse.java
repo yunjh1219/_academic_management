@@ -20,7 +20,7 @@ public class StudentAssignmentResponse {
 	private String deptName;
 	private LocalDate submitDate;
 	private int assignmentGrade;
-	private SubmitStatus status;
+	private String status;
 
 	@Builder
 	@QueryProjection
@@ -32,6 +32,6 @@ public class StudentAssignmentResponse {
 		this.deptName = deptName;
 		this.submitDate = submitDate;
 		this.assignmentGrade = assignmentGrade;
-		this.status = status;
+		this.status = status.getMessage();
 	}
 }

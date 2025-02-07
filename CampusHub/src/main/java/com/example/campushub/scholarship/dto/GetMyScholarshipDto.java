@@ -10,27 +10,27 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.Year;
 
 @Getter
 @NoArgsConstructor
 public class GetMyScholarshipDto {
 
-    @DateTimeFormat(pattern = "yyyy")
-    private LocalDate year;
-    private Semester semester;
+    private String year;
+    private String semester;
     private String scholarshipName;
-    private PaymentType type;
+    private String type;
     private int amount;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate confDate;
 
     @Builder
     @QueryProjection
-    public GetMyScholarshipDto(LocalDate year, Semester semester, String scholarshipName, PaymentType type, int amount, LocalDate confDate) {
-        this.year = year;
-        this.semester = semester;
+    public GetMyScholarshipDto(Year year, Semester semester, String scholarshipName, PaymentType type, int amount, LocalDate confDate) {
+        this.year = year.toString();
+        this.semester = semester.getName();
         this.scholarshipName = scholarshipName;
-        this.type = type;
+        this.type = type.getName();
         this.amount = amount;
         this.confDate = confDate;
     }

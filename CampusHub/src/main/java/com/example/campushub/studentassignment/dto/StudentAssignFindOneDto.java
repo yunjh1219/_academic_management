@@ -12,24 +12,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentAssignFindOneDto {
 	private String courseName;
-	private Week week;
+	private String week;
 	private String  userName;
 	private String userNum;
 	private String deptName;
-	private SubmitStatus status;
+	private String submitStatus;
 	private String title;
 	private String content;
 
 	@Builder
 	@QueryProjection
 	public StudentAssignFindOneDto(String courseName, Week week, String userName, String userNum, String deptName,
-		SubmitStatus status, String title, String content) {
+		SubmitStatus submitStatus, String title, String content) {
 		this.courseName = courseName;
-		this.week = week;
+		this.week = week.getName();
 		this.userName = userName;
 		this.userNum = userNum;
 		this.deptName = deptName;
-		this.status = status;
+		this.submitStatus = submitStatus.getMessage();
 		this.title = title;
 		this.content = content;
 	}

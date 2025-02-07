@@ -1,7 +1,6 @@
 package com.example.campushub.assignment.domain;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import com.example.campushub.nweek.domain.NWeek;
 
@@ -24,15 +23,15 @@ public class Assignment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "nweek_id")
 	private NWeek nWeek;
-	private String explain;
+	private String assignExplain;
 	private LocalDate createDate;
 	private LocalDate limitDate;
 	//첨부파일
 
 	@Builder
-	public Assignment(NWeek nWeek, String explain,LocalDate createDate, LocalDate limitDate) {
+	public Assignment(NWeek nWeek, String assignExplain,LocalDate createDate, LocalDate limitDate) {
 		this.nWeek = nWeek;
-		this.explain = explain;
+		this.assignExplain = assignExplain;
 		this.createDate = createDate;
 		this.limitDate = limitDate;
 	}

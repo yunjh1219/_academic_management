@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 public class UserSearchCondition {
 	private String deptName;
 	private String userNum;
-	private Status status;
+	private String status;
 
 	@Builder
-	public UserSearchCondition(String deptName, String userNum, Status status) {
+	public UserSearchCondition(String deptName, String userNum, String status) {
 		this.deptName = deptName;
 		this.userNum = userNum;
 		this.status = status;

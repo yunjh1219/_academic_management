@@ -1,16 +1,12 @@
 package com.example.campushub.user.service;
 
+import com.example.campushub.global.error.exception.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.campushub.dept.domain.Dept;
 import com.example.campushub.dept.repository.DeptRepository;
-import com.example.campushub.global.error.exception.DuplicateUserNumException;
-import com.example.campushub.global.error.exception.InvalidDeptException;
-import com.example.campushub.global.error.exception.InvalidSigningInformation;
-import com.example.campushub.global.error.exception.InvalidTokenException;
-import com.example.campushub.global.error.exception.UserNotFoundException;
 import com.example.campushub.global.security.JwtProvider;
 import com.example.campushub.global.security.RefreshToken;
 import com.example.campushub.global.security.Token;
@@ -57,16 +53,6 @@ public class AuthService {
 		user.updateRefreshToken(token.getRefreshToken().getData());
 
 		return token;
-	}
-
-
-	//로그아웃
-	@Transactional
-	public void logout(LoginUser loginUser) {
-		User user = userRepository.findByUserNum(loginUser.getUserNum())
-				.orElseThrow(UserNotFoundException::new);
-
-		user.invalidateRefreshToken();
 	}
 
 	//학생 등록
@@ -123,6 +109,15 @@ public class AuthService {
 		return token;
 	}
 
+	//로그아웃
+	@Transactional
+	public void logout(LoginUser loginUser) {
+		User user = userRepository.findByUserNum(loginUser.getUserNum())
+			.orElseThrow(UserNotFoundException::new);
+
+		user.invalidateRefreshToken();
+	}
+
 	//비밀번호 변경
 	@Transactional
 	public void changePassword(LoginUser loginUser, PasswordChangeRequest request) {
@@ -130,7 +125,7 @@ public class AuthService {
 			.orElseThrow(UserNotFoundException::new);
 
 		if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
-			throw new IllegalArgumentException("기존 비밀번호가 일치하지 않습니다.");
+			throw new NotMatchPasswordException();
 		}
 
 		user.changePassword(passwordEncoder.encode(request.getNewPassword()));
