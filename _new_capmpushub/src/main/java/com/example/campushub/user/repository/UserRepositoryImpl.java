@@ -6,8 +6,7 @@ import static com.example.campushub.user.domain.QUser.*;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.campushub.user.domain.QUser;
-import com.example.campushub.user.domain.User;
+
 import com.example.campushub.user.dto.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

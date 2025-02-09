@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+        xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>공지사항 : notice</title>
     <script th:src="@{/js/admin/administrative-management/notice.js}"></script>
-    <script th:src="@{/js/prof/notice/notice.js}"></script>
 </head>
 
 
     <div class="content">
 
         <div class="content-title">
-            <h5>행정관리 > 공지 > 학사공지사항</h5>
+            <h5>행정관리 > 공지사항 > 공지사항 관리</h5>
         </div>
         <div class="query-container">
             <div class="query-box">
@@ -80,6 +78,19 @@
                             <input type="text" id="admin_notice_title" name="title" class="form-control" placeholder="제목을 입력하세요" required>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="form-item">
+                            <label for="admin_noticeType">구분</label>
+                            <select id="noticeType" style="min-width: 70px; margin-right: 5px" required>
+                                <option value="" disabled selected>구분</option>
+                                <option value="school">학교</option>
+                                <option value="department">학과</option>
+                            </select>
+                            <select id="admin_noticeType" style="min-width: 70px; margin-right: 5px" required>
+                            </select>
+                            <input type="text" id="admin_noticeDept" name="deptName" class="form-control" style="min-width: 200px" placeholder="학과를 입력하세요" required disabled> <!-- 초기에는 비활성화 -->
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="form-item">
@@ -96,22 +107,19 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="form-item">
-                            <label for="admin_noticeType">타입</label>
-                            <input type="text" id="admin_noticeType" name="admin_noticeType" class="form-control" placeholder="학사" readonly> <!-- 수정 불가 -->
-                        </div>
-                        <div class="form-item">
-                            <label for="admin_notice_createdate">작성일시</label>
-                            <input type="text" id="admin_notice_createdate" name="createdate" class="form-control" placeholder="작성일시" readonly> <!-- 수정 불가 -->
-                        </div>
-                        <div class="form-item">
-                            <label for="admin_notice_updatedate">수정일시</label>
-                            <input type="text" id="admin_notice_updatedate" name="updatedate" class="form-control" placeholder="수정일시" readonly> <!-- 수정 불가 -->
-                        </div>
-                        <div class="form-item">
-                            <label for="admin_notice_author">작성자</label>
-                            <input type="text" id="admin_notice_author" name="author" class="form-control" placeholder="작성자" readonly> <!-- 수정 불가 -->
-                        </div>
+
+                            <div class="form-item">
+                                <label for="admin_notice_createdate">작성일시</label>
+                                <input type="text" id="admin_notice_createdate" name="createdate" class="form-control" placeholder="작성일시" readonly> <!-- 수정 불가 -->
+                            </div>
+                            <div class="form-item">
+                                <label for="admin_notice_updatedate">수정일시</label>
+                                <input type="text" id="admin_notice_updatedate" name="updatedate" class="form-control" placeholder="수정일시" readonly> <!-- 수정 불가 -->
+                            </div>
+                            <div class="form-item">
+                                <label for="admin_notice_author">작성자</label>
+                                <input type="text" id="admin_notice_author" name="author" class="form-control" placeholder="작성자" readonly> <!-- 수정 불가 -->
+                            </div>
                     </div>
                 </form>
             </div>

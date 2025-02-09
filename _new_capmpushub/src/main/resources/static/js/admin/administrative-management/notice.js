@@ -1,43 +1,80 @@
+//저장
 document.getElementById('admin-notice-saveBtn').addEventListener('click',function (){
 
-    const noticeTitle = document.getElementById('admin_notice_title').value;
-    const noticeContent = document.getElementById('admin_notice_content').value;
-
-
     const token = localStorage.getItem('jwtToken');
-    const url = '/api/notice/create'
+    const urlType = document.getElementById('noticeType').value;
 
-    // 데이터 객체 생성
-    const adminNoticeData = {
-        noticeTitle: noticeTitle,
-        noticeContent: noticeContent,
-        noticeType: '학사'
-    };
+    if(urlType === "school"){
 
-    console.log('요청 URL:', url);
-    console.log('요청 본문:', JSON.stringify(adminNoticeData));
+        const url = '/api/admin/notice'
+        const noticeType = document.getElementById('admin_noticeType').value;
+        const noticeTitle = document.getElementById('admin_notice_title').value;
+        const noticeContent = document.getElementById('admin_notice_content').value;
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(adminNoticeData)
-    })
-        .then(response => {
-            if (response.ok) {
-                alert('새로운 공지사항이 성공적으로 저장되었습니다.');
-            } else {
-                throw new Error('저장 중 오류가 발생했습니다.');
-            }
+        const NoticeData = {
+            noticeType: noticeType,
+            noticeTitle: noticeTitle,
+            noticeContent:noticeContent
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(NoticeData)
         })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('공지사항 정보를 저장하는 중 오류가 발생했습니다.');
-        });
+            .then(response => {
+                if (response.ok) {
+                    alert('새로운 공지사항이 성공적으로 저장되었습니다.');
+                } else {
+                    throw new Error('저장 중 오류가 발생했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('공지사항 정보를 저장하는 중 오류가 발생했습니다.');
+            });
+
+    }else {
+
+        const deptNoticeCreateUrl = '/api/admin/deptnotice'
+        const deptNoticeType = document.getElementById('admin_noticeType').value;
+        const deptName = document.getElementById('admin_noticeDept').value;
+        const noticeTitle = document.getElementById('admin_notice_title').value;
+        const noticeContent = document.getElementById('admin_notice_content').value;
+
+        const DeptNoticeData = {
+            deptNoticeType: deptNoticeType,
+            deptName: deptName,
+            noticeTitle: noticeTitle,
+            noticeContent: noticeContent
+        };
+
+        fetch(deptNoticeCreateUrl, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(DeptNoticeData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('새로운 학과 공지사항이 성공적으로 저장되었습니다.');
+                } else {
+                    throw new Error('학과 공지사항 저장 중 오류가 발생했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('학과 공지사항 정보를 저장하는 중 오류가 발생했습니다.');
+            });
+    }
 })
 
+//조회
 document.getElementById('admin-notice-searchBtn').addEventListener('click', function () {
     const token = localStorage.getItem('jwtToken');
     const noticeType = '학사';
@@ -221,3 +258,52 @@ function formatTime(dateTime) {
 
     return `${year}.${month}.${day} ${hours}:${minutes}`;
 }
+
+const adminOptions = {
+    school: [
+        { value: "", text: "전체"},
+        { value: "학사", text: "학사" },
+        { value: "일반", text: "일반" },
+        { value: "입찰", text: "입찰" },
+        { value: "채용", text: "채용" }
+    ],
+    department: [
+        { value: "", text: "전체"},
+        { value: "학부", text: "학부" },
+        { value: "장학", text: "장학" },
+        { value: "공통", text: "공통" }
+    ]
+};
+
+const noticeTypeSelect = document.getElementById("noticeType");
+const adminNoticeTypeSelect = document.getElementById("admin_noticeType");
+const adminNoticeDeptInput = document.getElementById("admin_noticeDept");
+
+// 옵션 초기화 및 추가 함수
+function updateAdminNoticeTypeOptions(selectedType) {
+    adminNoticeTypeSelect.innerHTML = ""; // 기존 옵션 제거
+
+    if (!selectedType || !adminOptions[selectedType]) return;
+
+    adminOptions[selectedType].forEach(option => {
+        const optElement = document.createElement("option");
+        optElement.value = option.value;
+        optElement.textContent = option.text;
+        adminNoticeTypeSelect.appendChild(optElement);
+    });
+}
+
+// 입력 필드 활성화/비활성화 함수
+function toggleDeptInput(selectedType) {
+    if (selectedType === "department") {
+        adminNoticeDeptInput.disabled = false; // department 선택 시 입력 가능
+    } else {
+        adminNoticeDeptInput.disabled = true; // 다른 경우에는 입력 불가
+    }
+}
+
+// 이벤트 리스너 등록
+noticeTypeSelect.addEventListener("change", (event) => {
+    updateAdminNoticeTypeOptions(event.target.value);
+    toggleDeptInput(event.target.value); // noticeType 값에 따라 입력 필드 활성화/비활성화
+});
