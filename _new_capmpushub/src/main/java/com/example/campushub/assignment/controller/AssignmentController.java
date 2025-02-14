@@ -22,7 +22,7 @@ public class AssignmentController {
     private final AssignmentService assignmentService;
 
 
-    //과제 등록
+    //과제 등록 이건머지
     @PostMapping("/api/professor/assignment/create")
     @ResponseStatus(HttpStatus.OK)
     public SuccessResponse<Void> createAssignment(@Login LoginUser loginUser, @RequestBody AssignmentCreateRequest request){
