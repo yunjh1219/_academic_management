@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Login_Page</title>
+  <link rel="stylesheet" th:href="@{/css/pages/common/common.css}">
+  <link rel="stylesheet" th:href="@{/css/pages/common/login.css}">
+  <script th:src="@{/js/pages/common/login.js}" defer></script> <!-- 외부 JS 파일 연결 -->
+</head>
+<body>
+
+<div id="login-container">
+  <div class="login-form-container">
+
+    <div class="login-box-top-background">
+        <div class="login-box-title">
+            <div class="image-container">
+                <img src="/img/logo/uni-logo.png">
+            </div>
+            <div class="text-container">
+                <h1>복정대학교</h1>
+                <a>BOKJEUNG PORTAL SERVICE</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-box-middle">
+      <form id="login-form" onsubmit="handleLogin(event)">
+
+
+          <select id="login-form-typeSelect" name="type" class="login-form-type" required>
+            <option value="" disabled selected>사용자</option>
+            <option value="STUDENT">학생</option>
+            <option value="PROFESSOR">교수</option>
+            <option value="ADMIN">관리자</option>
+          </select>
+          <input type="text" id="userNum" name="userNum" placeholder="아이디" required>
+          <input type="password" id="password" name="password" placeholder="비밀번호" required>
+          <button type="submit" id="login-btn">로그인</button>
+          <div class="find-container">
+            <a th:href="@{/findID}">아이디 찾기</a>
+            <a th:href="@{/findPW}">비밀번호 찾기</a>
+          </div>
+
+
+      </form>
+    </div>
+
+    <div class="login-box-bottom-background">
+
+    </div>
+
+
+
+  </div>
+</div>
+
+</body>
+</html>

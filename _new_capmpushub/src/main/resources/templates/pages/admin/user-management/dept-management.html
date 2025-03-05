@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>학과정보관리 : dept-management</title>
+  <script th:src="@{/js/admin/user-management/dept-management.js}"></script>
+</head>
+
+
+  <div class="content">
+
+    <div class="content-title">
+      <h5>사용자관리 > 부서 > 부서정보관리</h5>
+    </div>
+
+    <div class="query-container">
+      <div class="query-box">
+        <button class="query-btn" id="admin-deptfinfo-searchBtn">조회</button>
+      </div>
+      <div class="query-box">
+        <button class="query-btn" id="admin-deptfinfo-newBtn">신규</button>  <!-- 신규 버튼 클릭 시 폼 표시 -->
+      </div>
+      <div class="query-box">
+        <button class="query-btn" id="admin-deptfinfo-delBtn">삭제</button>
+      </div>
+      <div class="query-box">
+        <button class="query-btn" id="admin-deptfinfo-savBtn">저장</button>  <!-- 저장 버튼 -->
+      </div>
+    </div>
+
+
+    <div class="table-container">
+      <div class="table-title">
+        학과명단
+      </div>
+      <div class="table-box">
+        <table>
+          <thead>
+          <tr>
+            <th style="width: 3%;">
+              <input type="checkbox" id="selectAll">
+            </th>
+            <th style="width: 1%;">No</th>
+            <th style="width: 80%;">학과명</th>
+          </tr>
+          </thead>
+          <tbody id="admin-deptfinfo-TableBody">
+
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- 항상 보이는 edit-container -->
+      <div class="edit-container" id="editContainer">
+        <form action="#" method="post" id="editProfManaForm">
+
+          <!-- 이름 -->
+          <div class="form-group">
+            <div class="form-item">
+              <label for="admin_deptfinfo_deptname">이름</label>
+              <input type="text" id="admin_deptfinfo_deptname" name="name" class="form-control" placeholder="이름을 입력하세요" required>
+            </div>
+          </div>
+
+
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</html>
